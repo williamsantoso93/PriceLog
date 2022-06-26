@@ -16,6 +16,12 @@
 		E022B3032863705900E9437F /* PriceLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B3022863705900E9437F /* PriceLogTests.swift */; };
 		E022B30D2863705900E9437F /* PriceLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B30C2863705900E9437F /* PriceLogUITests.swift */; };
 		E022B30F2863705900E9437F /* PriceLogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B30E2863705900E9437F /* PriceLogUITestsLaunchTests.swift */; };
+		E0EC8CEF2868A065005CEB7B /* CategoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC8CEE2868A065005CEB7B /* CategoryScreen.swift */; };
+		E0EC8CF52868A53E005CEB7B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC8CF42868A53E005CEB7B /* Model.swift */; };
+		E0EC8CF72868A995005CEB7B /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC8CF62868A995005CEB7B /* MockData.swift */; };
+		E0EC8CF92868AFB9005CEB7B /* ProductScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC8CF82868AFB9005CEB7B /* ProductScreen.swift */; };
+		E0EC8CFB2868B0EC005CEB7B /* ProductTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC8CFA2868B0EC005CEB7B /* ProductTypeScreen.swift */; };
+		E0EC8CFD2868BA90005CEB7B /* ProductPriceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC8CFC2868BA90005CEB7B /* ProductPriceScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +54,12 @@
 		E022B3082863705900E9437F /* PriceLogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PriceLogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E022B30C2863705900E9437F /* PriceLogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogUITests.swift; sourceTree = "<group>"; };
 		E022B30E2863705900E9437F /* PriceLogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E0EC8CEE2868A065005CEB7B /* CategoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryScreen.swift; sourceTree = "<group>"; };
+		E0EC8CF42868A53E005CEB7B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		E0EC8CF62868A995005CEB7B /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		E0EC8CF82868AFB9005CEB7B /* ProductScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductScreen.swift; sourceTree = "<group>"; };
+		E0EC8CFA2868B0EC005CEB7B /* ProductTypeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTypeScreen.swift; sourceTree = "<group>"; };
+		E0EC8CFC2868BA90005CEB7B /* ProductPriceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPriceScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +112,9 @@
 			children = (
 				E022B2EC2863705800E9437F /* PriceLogApp.swift */,
 				E022B2EE2863705800E9437F /* ContentView.swift */,
+				E0EC8CF22868A079005CEB7B /* Model */,
+				E0EC8CF32868A080005CEB7B /* ViewModel */,
+				E0EC8CF02868A069005CEB7B /* View */,
 				E022B2F02863705900E9437F /* Assets.xcassets */,
 				E022B2F52863705900E9437F /* Persistence.swift */,
 				E022B2F72863705900E9437F /* PriceLog.xcdatamodeld */,
@@ -131,6 +146,41 @@
 				E022B30E2863705900E9437F /* PriceLogUITestsLaunchTests.swift */,
 			);
 			path = PriceLogUITests;
+			sourceTree = "<group>";
+		};
+		E0EC8CF02868A069005CEB7B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E0EC8CF12868A074005CEB7B /* Screen */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E0EC8CF12868A074005CEB7B /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				E0EC8CEE2868A065005CEB7B /* CategoryScreen.swift */,
+				E0EC8CF82868AFB9005CEB7B /* ProductScreen.swift */,
+				E0EC8CFA2868B0EC005CEB7B /* ProductTypeScreen.swift */,
+				E0EC8CFC2868BA90005CEB7B /* ProductPriceScreen.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		E0EC8CF22868A079005CEB7B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E0EC8CF42868A53E005CEB7B /* Model.swift */,
+				E0EC8CF62868A995005CEB7B /* MockData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E0EC8CF32868A080005CEB7B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,8 +315,14 @@
 			files = (
 				E022B2F62863705900E9437F /* Persistence.swift in Sources */,
 				E022B2EF2863705800E9437F /* ContentView.swift in Sources */,
+				E0EC8CEF2868A065005CEB7B /* CategoryScreen.swift in Sources */,
 				E022B2F92863705900E9437F /* PriceLog.xcdatamodeld in Sources */,
 				E022B2ED2863705800E9437F /* PriceLogApp.swift in Sources */,
+				E0EC8CFB2868B0EC005CEB7B /* ProductTypeScreen.swift in Sources */,
+				E0EC8CF72868A995005CEB7B /* MockData.swift in Sources */,
+				E0EC8CFD2868BA90005CEB7B /* ProductPriceScreen.swift in Sources */,
+				E0EC8CF52868A53E005CEB7B /* Model.swift in Sources */,
+				E0EC8CF92868AFB9005CEB7B /* ProductScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,8 +487,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortraitUpsideDown;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -460,8 +517,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortraitUpsideDown;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
