@@ -7,12 +7,9 @@
 
 import SwiftUI
 
-class CategoryViewModel: ObservableObject {
-    @Published var categories: [Category] = categoriesMock
-}
-
 struct CategoryScreen: View {
     @StateObject private var viewModel = CategoryViewModel()
+    @State private var isShowAddCategory: Bool = false
     
     private let gridColumns: [GridItem] = [
         GridItem(.flexible()),
@@ -26,7 +23,7 @@ struct CategoryScreen: View {
                 LazyVGrid(columns: gridColumns, alignment: .leading) {
                     ForEach(viewModel.categories) { category in
                         NavigationLink {
-                            ProductTypeScreen()
+                            ProductScreen()
                         } label: {
                             CategoryCellView(title: category.name)
                         }
@@ -38,6 +35,18 @@ struct CategoryScreen: View {
             }
             .searchable(text: .constant(""), placement: .automatic, prompt: "Cereal")
             .navigationTitle("Category")
+            .sheet(isPresented: $isShowAddCategory) {
+                AddCategoryScreen()
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .automatic) {
+                    Button {
+                        isShowAddCategory.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
         }
     }
 }
@@ -58,5 +67,18 @@ struct CategoryCellView: View {
             Text(title)
         }
         .cornerRadius(10)
+//        .contextMenu {
+//            Button {
+//                print("Change country setting")
+//            } label: {
+//                Label("Edit", systemImage: "pencil")
+//            }
+//            
+//            Button(role: .destructive) {
+//                print("Enable geolocation")
+//            } label: {
+//                Label("Delete", systemImage: "trash")
+//            }
+//        }
     }
 }

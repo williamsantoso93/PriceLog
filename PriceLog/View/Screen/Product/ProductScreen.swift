@@ -7,12 +7,9 @@
 
 import SwiftUI
 
-class ProductViewModel: ObservableObject {
-    @Published var products: [Product] = productsMock
-}
-
 struct ProductScreen: View {
     @StateObject private var viewModel = ProductViewModel()
+    @State private var isShowAddProduct: Bool = false
     
     private let gridColumns: [GridItem] = [
         GridItem(.flexible()),
@@ -37,6 +34,18 @@ struct ProductScreen: View {
         }
         .searchable(text: .constant(""), placement: .automatic, prompt: "Cereal")
         .navigationTitle("Cereal")
+        .sheet(isPresented: $isShowAddProduct) {
+            AddProductScreen()
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .automatic) {
+                Button {
+                    isShowAddProduct.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
+        }
     }
 }
 
