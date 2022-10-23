@@ -41,20 +41,24 @@ struct ProductDetailPriceScreen: View {
                     }
                     
                     ForEach(viewModel.prices) { price in
-                        ProductPricesCell(price: price)
-                            .contextMenu {
-                                Button {
-                                    print("Change country setting")
-                                } label: {
-                                    Label("Edit", systemImage: "pencil")
+                        Button {
+                            isShowAddProductDetail.toggle()
+                        } label: {
+                            ProductPricesCell(price: price)
+                                .contextMenu {
+                                    Button {
+                                        print("Change country setting")
+                                    } label: {
+                                        Label("Edit", systemImage: "pencil")
+                                    }
+                                    
+                                    Button(role: .destructive) {
+                                        print("Enable geolocation")
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
                                 }
-                                
-                                Button(role: .destructive) {
-                                    print("Enable geolocation")
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                            }
+                        }
                     }
                 }
             }

@@ -36,13 +36,47 @@ struct ProductType: Identifiable {
     }
 }
 
-enum UnitType: String {
-    case kg = "Kg"
-    case g = "g"
-    case m = "mtr"
-    case pax = "pax"
-    case ml = "ml"
-    case l = "l"
+enum UnitType: String, CaseIterable {
+    case kg
+    case g
+    case m
+    case pax
+    case ml
+    case l
+    case pc
+    case unit
+    case set
+    
+    func getTitle(by value: Double = 0) -> String {
+        var tempTitle = self.rawValue
+        switch self {
+        case .m:
+            tempTitle = "mtr"
+        case .kg, .pax, .l, .pc, .unit, .set:
+            tempTitle = tempTitle.capitalized(with: nil)
+        default:
+            break
+        }
+        
+        var isNeedPrural = value > 1
+        switch self {
+        case .pc, .unit, .set:
+            tempTitle = "\(tempTitle)\(isNeedPrural ? "s" : "")"
+        default:
+            break
+        }
+        
+        return tempTitle
+    }
+    
+    func getValueTitle() -> String {
+        switch self {
+        case .pax, .pc, .unit, .set:
+            return "Qty"
+        default:
+            return "Weight"
+        }
+    }
 }
 
 struct Price: Identifiable {
