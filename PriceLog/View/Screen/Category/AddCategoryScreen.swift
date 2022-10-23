@@ -9,10 +9,17 @@ import SwiftUI
 
 struct AddCategoryScreen: View {
     @Environment(\.dismiss) var dismiss
+    @ObservedObject var viewModel: AddCategoryViewModel
     
-    let isEdit: Bool = false
+    let onSave: ((Category?) -> Void)?
+    
+    init(viewModel: AddCategoryViewModel = AddCategoryViewModel(), onSave: ((Category?) -> Void)? = nil) {
+        self.viewModel = viewModel
+        self.onSave = onSave
+    }
+    
     private var screenTitle: String {
-        (isEdit ? "Edit" : "Add") + " Category"
+        (viewModel.isEdit ? "Edit" : "Add") + " Category"
     }
     
     @State private var title: String = ""
@@ -21,10 +28,10 @@ struct AddCategoryScreen: View {
         NavigationStack {
             Form {
                 Section {
-                    TextFieldLabel(label: "Title", text: $title)
+                    TextFieldLabel(label: "Title", text: $viewModel.title)
                 }
                 
-                if isEdit {
+                if viewModel.isEdit {
                     Section {
                         Button("Delete", role: .destructive) {
                             //TODO: delete action
@@ -37,9 +44,10 @@ struct AddCategoryScreen: View {
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        //TODO: save action
-                        
-                        dismiss()
+                        viewModel.save { category in
+                            onSave?(category)
+                            dismiss()
+                        }
                     } label: {
                         Text("Save")
                     }

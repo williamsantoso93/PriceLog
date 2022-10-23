@@ -9,22 +9,22 @@ import Foundation
 
 struct Category: Identifiable {
     var id: UUID = UUID()
-    var name: String
-    var image: String //TODO: change type
-    var products: [Product]
+    var name: String = ""
+    var image: String? //TODO: change type
+    var products: [Product] = []
 }
 
 struct Product: Identifiable {
     var id: UUID = UUID()
-    var name: String
-    var image: String //TODO: change type
-    var types: [ProductType]
+    var name: String = ""
+    var image: String? //TODO: change type
+    var types: [ProductType] = []
 }
 
 struct ProductType: Identifiable {
     var id: UUID = UUID()
     var name: String
-    var image: String //TODO: change type
+    var image: String? //TODO: change type
     var unit: Int
     var unitType: UnitType
     var prices: [Price]
@@ -58,7 +58,7 @@ enum UnitType: String, CaseIterable {
             break
         }
         
-        var isNeedPrural = value > 1
+        let isNeedPrural = value > 1
         switch self {
         case .pc, .unit, .set:
             tempTitle = "\(tempTitle)\(isNeedPrural ? "s" : "")"
