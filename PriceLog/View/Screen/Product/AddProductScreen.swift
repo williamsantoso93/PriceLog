@@ -9,37 +9,38 @@ import SwiftUI
 
 struct AddProductScreen: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject var viewModel: AddProductViewModel
     
-    let isEdit: Bool = false
-    private var screenTitle: String {
-        (isEdit ? "Edit" : "Add") + " Product"
+    let onSave: ((Product?) -> Void)?
+    let onDelete: (() -> Void)?
+    
+    init(viewModel: AddProductViewModel = AddProductViewModel(), onSave: ((Product?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+        self.viewModel = viewModel
+        self.onSave = onSave
+        self.onDelete = onDelete
     }
     
-    @State private var productTitle: String = ""
-    
-    @State private var categorySelection: Int = 0
-    //TODO: change to actual data
-    private let categories: [String] = [
-        "Drink",
-        "Food"
-    ]
+    private var screenTitle: String {
+        (viewModel.isEdit ? "Edit" : "Add") + " Product"
+    }
     
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    TextFieldLabel(label: "Title", text: $productTitle)
-                    Picker("Category", selection: $categorySelection) {
-                        ForEach(categories.indices, id: \.self) { index in
-                            Text(categories[index])
+                    TextFieldLabel(label: "Title", text: $viewModel.name)
+                    Picker("Category", selection: $viewModel.categorySelection) {
+                        ForEach(viewModel.categories.indices, id: \.self) { index in
+                            Text(viewModel.categories[index])
                         }
                     }
                 }
                 
-                if isEdit {
+                if viewModel.isEdit {
                     Section {
                         Button("Delete", role: .destructive) {
-                            //TODO: delete action
+                            onDelete?()
+                            dismiss()
                         }
                     }
                 }
@@ -49,9 +50,10 @@ struct AddProductScreen: View {
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        //TODO: save action
-                        
-                        dismiss()
+                        viewModel.save { product in
+                            onSave?(product)
+                            dismiss()
+                        }
                     } label: {
                         Text("Save")
                     }

@@ -23,11 +23,11 @@ struct Product: Identifiable {
 
 struct ProductType: Identifiable {
     var id: UUID = UUID()
-    var name: String
+    var name: String = ""
     var image: String? //TODO: change type
-    var unit: Int
-    var unitType: UnitType
-    var prices: [Price]
+    var unit: Int = 0
+    var unitType: UnitType = .kg
+    var prices: [Price] = []
     
     var lowestPrice: Price? {
         prices.sorted {

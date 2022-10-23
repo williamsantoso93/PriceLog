@@ -16,6 +16,7 @@
 		E022B3032863705900E9437F /* PriceLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B3022863705900E9437F /* PriceLogTests.swift */; };
 		E022B30D2863705900E9437F /* PriceLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B30C2863705900E9437F /* PriceLogUITests.swift */; };
 		E022B30F2863705900E9437F /* PriceLogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B30E2863705900E9437F /* PriceLogUITestsLaunchTests.swift */; };
+		E04F8CA5290592EC0028B228 /* CategoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04F8CA4290592EC0028B228 /* CategoryCellView.swift */; };
 		E06D05C2286FF7E40081B70F /* AddProductTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */; };
 		E06D05C4286FF9410081B70F /* TextFieldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C3286FF9410081B70F /* TextFieldLabel.swift */; };
 		E0B99F3A2869E1610001ECCA /* AddCategoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B99F392869E1610001ECCA /* AddCategoryScreen.swift */; };
@@ -71,6 +72,7 @@
 		E022B3082863705900E9437F /* PriceLogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PriceLogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E022B30C2863705900E9437F /* PriceLogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogUITests.swift; sourceTree = "<group>"; };
 		E022B30E2863705900E9437F /* PriceLogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E04F8CA4290592EC0028B228 /* CategoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellView.swift; sourceTree = "<group>"; };
 		E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductTypeScreen.swift; sourceTree = "<group>"; };
 		E06D05C3286FF9410081B70F /* TextFieldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLabel.swift; sourceTree = "<group>"; };
 		E0B99F392869E1610001ECCA /* AddCategoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryScreen.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			children = (
 				E06D05C3286FF9410081B70F /* TextFieldLabel.swift */,
 				E0C42EFA286FFDF2005FE0C9 /* NumberFieldLabel.swift */,
+				E04F8CA4290592EC0028B228 /* CategoryCellView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				E022B2F62863705900E9437F /* Persistence.swift in Sources */,
 				E0C42F0628700064005FE0C9 /* ProductTypeCellView.swift in Sources */,
 				E0C42F08287001A1005FE0C9 /* ProductPricesCell.swift in Sources */,
+				E04F8CA5290592EC0028B228 /* CategoryCellView.swift in Sources */,
 				E022B2EF2863705800E9437F /* ContentView.swift in Sources */,
 				E0EC8CEF2868A065005CEB7B /* CategoryScreen.swift in Sources */,
 				E0B99F3A2869E1610001ECCA /* AddCategoryScreen.swift in Sources */,

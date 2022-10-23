@@ -25,7 +25,7 @@ struct CategoryScreen: View {
                         let category = viewModel.categories[index]
                         
                         NavigationLink {
-                            ProductScreen()
+                            ProductScreen(viewModel: ProductViewModel(category: category))
                         } label: {
                             CategoryCellView(
                                 title: category.name,
@@ -55,6 +55,9 @@ struct CategoryScreen: View {
                         if let category = category {
                             viewModel.setSavedCategory(category: category)
                         }
+                    },
+                    onDelete: {
+                        viewModel.deleteCategory()
                     }
                 )
             }
@@ -77,40 +80,3 @@ struct CategoryScreen_Previews: PreviewProvider {
     }
 }
 
-struct CategoryCellView: View {
-    let title: String
-    let onEdit: (() -> Void)?
-    let onDelete: (() -> Void)?
-    
-    init(title: String, onEdit: (() -> Void)? = nil, onDelete: (() -> Void)? = nil) {
-        self.title = title
-        self.onEdit = onEdit
-        self.onDelete = onDelete
-    }
-    
-    var body: some View {
-        ZStack {
-            Color.gray
-                .frame(height: 100)
-            Text(title)
-        }
-        .cornerRadius(10)
-        .contextMenu {
-            if let onEdit = onEdit {
-                Button {
-                    onEdit()
-                } label: {
-                    Label("Edit", systemImage: "pencil")
-                }
-            }
-            
-            if let onDelete = onDelete {
-                Button(role: .destructive) {
-                    onDelete()
-                } label: {
-                    Label("Delete", systemImage: "trash")
-                }
-            }
-        }
-    }
-}

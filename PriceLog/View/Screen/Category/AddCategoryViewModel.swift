@@ -8,15 +8,16 @@
 import Foundation
 
 class AddCategoryViewModel: ObservableObject {
-    @Published var title: String = ""
     var category: Category?
+    
+    @Published var name: String = ""
     
     var isEdit: Bool = false
     
     init(category: Category? = nil) {
         if let category = category {
             self.category = category
-            self.title = category.name
+            self.name = category.name
             isEdit = true
         } else {
             self.category = Category()
@@ -24,8 +25,8 @@ class AddCategoryViewModel: ObservableObject {
     }
     
     func save(completion: (Category?) -> Void) {
-        if !title.isEmpty {
-            category?.name = title
+        if !name.isEmpty {
+            category?.name = name
             
             //TODO: save action
             completion(category)

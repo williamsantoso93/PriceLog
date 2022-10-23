@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProductScreen: View {
-    @StateObject private var viewModel = ProductViewModel()
+    @StateObject private var viewModel: ProductViewModel
     @State private var isShowAddProduct: Bool = false
     
     private let gridColumns: [GridItem] = [
@@ -17,14 +17,29 @@ struct ProductScreen: View {
         GridItem(.flexible())
     ]
     
+    init(viewModel: ProductViewModel) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
+    
     var body: some View {
         ScrollView {
             LazyVGrid(columns: gridColumns, alignment: .leading) {
-                ForEach(viewModel.products) { product in
+                ForEach(viewModel.products.indices, id: \.self) { index in
+                    let product = viewModel.products[index]
+                    
                     NavigationLink {
                         ProductTypeScreen()
                     } label: {
-                        CategoryCellView(title: product.name)
+                        CategoryCellView(
+                            title: product.name,
+                            onEdit: {
+                                viewModel.selectedProductIndex = index
+                                isShowAddProduct.toggle()
+                            }, onDelete: {
+                                viewModel.selectedProductIndex = index
+                                viewModel.deleteProduct()
+                            }
+                        )
                     }
                 }
             }
@@ -34,8 +49,20 @@ struct ProductScreen: View {
         }
         .searchable(text: .constant(""), placement: .automatic, prompt: "Cereal")
         .navigationTitle("Cereal")
-        .sheet(isPresented: $isShowAddProduct) {
-            AddProductScreen()
+        .sheet(isPresented: $isShowAddProduct, onDismiss: {
+            viewModel.selectedProductIndex = nil
+        }) {
+            AddProductScreen(
+                viewModel: AddProductViewModel(product: viewModel.selectedProduct),
+                onSave: { product in
+                    if let product = product {
+                        viewModel.setSavedProduct(product: product)
+                    }
+                },
+                onDelete: {
+                    viewModel.deleteProduct()
+                }
+            )
         }
         .toolbar {
             ToolbarItemGroup(placement: .automatic) {
@@ -52,7 +79,7 @@ struct ProductScreen: View {
 struct ProductScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProductScreen()
+            ProductScreen(viewModel: ProductViewModel(category: categoriesMock[0]))
         }
     }
 }

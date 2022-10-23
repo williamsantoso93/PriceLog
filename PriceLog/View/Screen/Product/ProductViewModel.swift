@@ -8,5 +8,35 @@
 import Foundation
 
 class ProductViewModel: ObservableObject {
-    @Published var products: [Product] = productsMock
+    @Published var category: Category
+    var products: [Product] {
+        category.products
+    }
+    var selectedProductIndex: Int?
+    var selectedProduct: Product? {
+        guard let selectedProductIndex = selectedProductIndex, products.indices.contains(selectedProductIndex) else {
+            return nil
+        }
+        return products[selectedProductIndex]
+    }
+    
+    init(category: Category) {
+        self.category = category
+    }
+    
+    func setSavedProduct(product: Product) {
+        if let selectedProductIndex = selectedProductIndex, products.indices.contains(selectedProductIndex) {
+            category.products[selectedProductIndex] = product
+        } else {
+            category.products.append(product)
+        }
+    }
+    
+    func deleteProduct() {
+        guard let selectedProductIndex = selectedProductIndex, category.products.indices.contains(selectedProductIndex) else {
+            return
+        }
+        
+        category.products.remove(at: selectedProductIndex)
+    }
 }

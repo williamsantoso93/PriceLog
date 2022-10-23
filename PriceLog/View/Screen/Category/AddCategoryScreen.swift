@@ -12,10 +12,12 @@ struct AddCategoryScreen: View {
     @ObservedObject var viewModel: AddCategoryViewModel
     
     let onSave: ((Category?) -> Void)?
+    let onDelete: (() -> Void)?
     
-    init(viewModel: AddCategoryViewModel = AddCategoryViewModel(), onSave: ((Category?) -> Void)? = nil) {
+    init(viewModel: AddCategoryViewModel = AddCategoryViewModel(), onSave: ((Category?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
         self.viewModel = viewModel
         self.onSave = onSave
+        self.onDelete = onDelete
     }
     
     private var screenTitle: String {
@@ -28,13 +30,14 @@ struct AddCategoryScreen: View {
         NavigationStack {
             Form {
                 Section {
-                    TextFieldLabel(label: "Title", text: $viewModel.title)
+                    TextFieldLabel(label: "Name", text: $viewModel.name)
                 }
                 
                 if viewModel.isEdit {
                     Section {
                         Button("Delete", role: .destructive) {
-                            //TODO: delete action
+                            onDelete?()
+                            dismiss()
                         }
                     }
                 }
