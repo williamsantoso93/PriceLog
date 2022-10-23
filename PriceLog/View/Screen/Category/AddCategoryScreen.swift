@@ -10,17 +10,36 @@ import SwiftUI
 struct AddCategoryScreen: View {
     @Environment(\.dismiss) var dismiss
     
+    let isEdit: Bool = false
+    private var screenTitle: String {
+        (isEdit ? "Edit" : "Add") + " Category"
+    }
+    
+    @State private var title: String = ""
+    
     var body: some View {
         NavigationStack {
             Form {
-                TextFieldLabel(label: "Title", text: .constant(""))
+                Section {
+                    TextFieldLabel(label: "Title", text: $title)
+                }
+                
+                if isEdit {
+                    Section {
+                        Button("Delete", role: .destructive) {
+                            //TODO: delete action
+                        }
+                    }
+                }
             }
-            .navigationTitle("Add Category")
+            .navigationTitle(screenTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
+                        //TODO: save action
                         
+                        dismiss()
                     } label: {
                         Text("Save")
                     }

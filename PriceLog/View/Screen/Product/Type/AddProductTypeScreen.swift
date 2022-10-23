@@ -9,6 +9,12 @@ import SwiftUI
 
 struct AddProductTypeScreen: View {
     @Environment(\.dismiss) private var dismiss
+    
+    let isEdit: Bool = false
+    private var screenTitle: String {
+        (isEdit ? "Edit" : "Add") + " Product Type"
+    }
+    
     @State private var name: String = ""
     @State private var unitSelection: UnitType = .kg
     
@@ -31,13 +37,15 @@ struct AddProductTypeScreen: View {
                     TextFieldLabel(label: unitSelection.getValueTitle(), text: $valueString)
                 }
                 
-                Section {
-                    Button("Delete", role: .destructive) {
-                        
+                if isEdit {
+                    Section {
+                        Button("Delete", role: .destructive) {
+                            //TODO: delete action
+                        }
                     }
                 }
             }
-            .navigationTitle("Add Product Type")
+            .navigationTitle(screenTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
