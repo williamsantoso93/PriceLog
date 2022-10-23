@@ -15,7 +15,7 @@ struct PriceLogApp: App {
         WindowGroup {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            CategoryScreen()
+//            CategoryScreen()
         }
     }
 }

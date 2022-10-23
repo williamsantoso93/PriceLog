@@ -15,10 +15,10 @@ let categoriesMock: [Category] = [
 ]
 
 let productsMock: [Product] = [
-    Product(name: "Coco Crunch", image: "", type: productTypesMock),
-    Product(name: "Milo", image: "", type: productTypesMock),
-    Product(name: "Honey Star", image: "", type: productTypesMock),
-    Product(name: "Corn Flex", image: "", type: productTypesMock)
+    Product(name: "Coco Crunch", image: "", types: productTypesMock),
+    Product(name: "Milo", image: "", types: productTypesMock),
+    Product(name: "Honey Star", image: "", types: productTypesMock),
+    Product(name: "Corn Flex", image: "", types: productTypesMock)
 ]
 
 let productTypesMock: [ProductType] = [

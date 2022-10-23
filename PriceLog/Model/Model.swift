@@ -18,7 +18,7 @@ struct Product: Identifiable {
     var id: UUID = UUID()
     var name: String
     var image: String //TODO: change type
-    var type: [ProductType]
+    var types: [ProductType]
 }
 
 struct ProductType: Identifiable {
@@ -50,7 +50,7 @@ struct Price: Identifiable {
     var createdDate: Date
     var updatedDate: Date
     var place: Place
-    var value: Int
+    var value: Double
 }
 
 struct Place: Identifiable {

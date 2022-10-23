@@ -25,7 +25,7 @@ struct CategoryScreen: View {
                         NavigationLink {
                             ProductScreen()
                         } label: {
-                            CategoryCellView(title: category.name)
+                            CategoryCellView(title: category.name ?? "")
                         }
                     }
                 }
