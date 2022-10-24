@@ -36,10 +36,10 @@ struct AddProductScreen: View {
 //                    }
                 }
                 
-                if viewModel.isEdit {
+                if let onDelete = onDelete {
                     Section {
                         Button("Delete", role: .destructive) {
-                            onDelete?()
+                            onDelete()
                             dismiss()
                         }
                     }

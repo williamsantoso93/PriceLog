@@ -38,10 +38,10 @@ struct AddProductTypeScreen: View {
                     TextFieldLabel(label: viewModel.unitType.getValueTitle(), text: $viewModel.unitString)
                 }
                 
-                if viewModel.isEdit {
+                if let onDelete = onDelete {
                     Section {
                         Button("Delete", role: .destructive) {
-                            onDelete?()
+                            onDelete()
                             dismiss()
                         }
                     }

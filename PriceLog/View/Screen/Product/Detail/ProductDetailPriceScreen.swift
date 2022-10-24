@@ -20,7 +20,7 @@ struct ProductDetailPriceScreen: View {
             Rectangle()
                 .frame(height: 300)
             
-            VStack(alignment: .leading, spacing: 40.0) {
+            VStack(alignment: .leading, spacing: 20.0) {
                 VStack(alignment: .leading) {
                     Text(viewModel.title)
                     
@@ -28,6 +28,17 @@ struct ProductDetailPriceScreen: View {
                         Image(systemName: "scalemass")
                         
                         Text("\(viewModel.unit.splitDigit(maximumFractionDigits: 2)) \(viewModel.unitName)")
+                    }
+                }
+                
+                if let lowestPrice = viewModel.lowestPrice {
+                    VStack {
+                        HStack {
+                            Text("Lowest Price")
+                            
+                            Spacer()
+                        }
+                        ProductPricesCell(price: lowestPrice)
                     }
                 }
                 
@@ -44,20 +55,18 @@ struct ProductDetailPriceScreen: View {
                         }
                     }
                     
-                    ForEach(viewModel.prices) { price in
+                    ForEach(viewModel.prices.indices, id: \.self) { index in
+                        let price = viewModel.prices[index]
+                        
                         Button {
+                            viewModel.selectedPriceIndex = index
                             isShowAddProductDetail.toggle()
                         } label: {
                             ProductPricesCell(price: price)
                                 .contextMenu {
-                                    Button {
-                                        print("Change country setting")
-                                    } label: {
-                                        Label("Edit", systemImage: "pencil")
-                                    }
-                                    
                                     Button(role: .destructive) {
-                                        print("Enable geolocation")
+                                        viewModel.selectedPriceIndex = index
+                                        viewModel.deletePrice()
                                     } label: {
                                         Label("Delete", systemImage: "trash")
                                     }
@@ -68,8 +77,20 @@ struct ProductDetailPriceScreen: View {
             }
             .padding(.horizontal, 12)
         }
-        .sheet(isPresented: $isShowAddProductDetail) {
-            AddProductDetailScreen()
+        .sheet(isPresented: $isShowAddProductDetail, onDismiss: {
+            viewModel.selectedPriceIndex = nil
+        }) {
+            AddProductDetailScreen(
+                viewModel: AddProductDetailPriceViewModel(price: viewModel.selectedPrice),
+                onSave: { price in
+                    if let price = price {
+                        viewModel.setSavedPrice(price: price)
+                    }
+                },
+                onDelete: {
+                    viewModel.deletePrice()
+                }
+            )
         }
         .navigationBarTitleDisplayMode(.inline)
     }

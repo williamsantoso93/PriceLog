@@ -93,10 +93,11 @@ enum UnitType: String, CaseIterable {
 
 struct Price: Identifiable {
     var id: UUID = UUID()
-    var createdDate: Date
-    var updatedDate: Date
-    var place: Place
-    var value: Double
+    var createdDate: Date = Date()
+    var updatedDate: Date = Date()
+    var place: Place = Place()
+    var value: Double = 0
+    var date: Date = Date()
     
     var keywords: String {
         [
@@ -110,5 +111,5 @@ struct Price: Identifiable {
 
 struct Place: Identifiable {
     var id: UUID = UUID()
-    var name: String
+    var name: String = ""
 }

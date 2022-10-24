@@ -19,7 +19,7 @@ struct ProductPricesCell: View {
             VStack(alignment: .trailing) {
                 Text(price.place.name)
                 
-                Text("\(price.updatedDate.toString())")
+                Text("\(price.date.toString())")
             }
         }
         .padding()

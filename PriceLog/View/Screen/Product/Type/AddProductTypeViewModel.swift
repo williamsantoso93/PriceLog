@@ -9,12 +9,13 @@ import Foundation
 
 class AddProductTypeViewModel: ObservableObject {
     var type: ProductType?
+    
     @Published var name: String = ""
     @Published var unitType: UnitType = .kg
     
     @Published var unitString: String = ""
     private var unit: Double {
-        Double(unitString) ?? 0
+        unitString.toDouble() ?? 0
     }
     
     var isEdit: Bool = false
@@ -35,7 +36,7 @@ class AddProductTypeViewModel: ObservableObject {
     }
     
     func save(completion: (ProductType?) -> Void) {
-        if !name.isEmpty {
+        if !name.isEmpty, !unitString.isEmpty {
             type?.name = name
             type?.unitType = unitType
             type?.unit = unit

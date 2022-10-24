@@ -35,6 +35,10 @@ class ProductDetailPriceViewModel: ObservableObject {
         return prices[selectedPriceIndex]
     }
     
+    var lowestPrice: Price? {
+        selectedType.lowestPrice
+    }
+    
     init(product: Product, selectedTypeIndex: Int) {
         self.product = product
         self.selectedTypeIndex = selectedTypeIndex

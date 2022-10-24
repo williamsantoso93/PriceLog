@@ -33,10 +33,10 @@ struct AddCategoryScreen: View {
                     TextFieldLabel(label: "Name", text: $viewModel.name)
                 }
                 
-                if viewModel.isEdit {
+                if let onDelete = onDelete {
                     Section {
                         Button("Delete", role: .destructive) {
-                            onDelete?()
+                            onDelete()
                             dismiss()
                         }
                     }

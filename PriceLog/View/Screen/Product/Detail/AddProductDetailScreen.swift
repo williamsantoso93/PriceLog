@@ -9,45 +9,40 @@ import SwiftUI
 
 struct AddProductDetailScreen: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject var viewModel: AddProductDetailPriceViewModel
     
-    let isEdit: Bool = false
+    let onSave: ((Price?) -> Void)?
+    let onDelete: (() -> Void)?
+    
+    init(viewModel: AddProductDetailPriceViewModel = AddProductDetailPriceViewModel(), onSave: ((Price?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+        self.viewModel = viewModel
+        self.onSave = onSave
+        self.onDelete = onDelete
+    }
+    
     private var screenTitle: String {
-        (isEdit ? "Edit" : "Add") + " Product Detail"
+        (viewModel.isEdit ? "Edit" : "Add") + " Product Detail"
     }
-    
-    @State private var priceString: String = ""
-    private var price: Double {
-        Double(priceString) ?? 0
-    }
-    
-    @State private var locationSelection: Int = 0
-    //TODO: change to actual data
-    private let locations: [String] = [
-        "Superindo",
-        "Indomaret"
-    ]
-    
-    @State private var date: Date = Date()
-    
     
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    NumberFieldLabel(label: "Price", text: $priceString)
+                    NumberFieldLabel(label: "Price", text: $viewModel.priceString)
                     
-                    Picker("Location", selection: $locationSelection) {
-                        ForEach(locations.indices, id: \.self) { index in
-                            Text(locations[index])
+                    Picker("Location", selection: $viewModel.locationSelection) {
+                        ForEach(viewModel.locations.indices, id: \.self) { index in
+                            Text(viewModel.locations[index])
                         }
                     }
-                    DatePicker("Date", selection: $date, displayedComponents: .date)
+                    DatePicker("Date", selection: $viewModel.date, displayedComponents: .date)
                 }
                 
-                if isEdit {
+                if let onDelete = onDelete {
                     Section {
                         Button("Delete", role: .destructive) {
-                            //TODO: delete action
+                            onDelete()
+                            dismiss()
                         }
                     }
                 }
@@ -57,9 +52,10 @@ struct AddProductDetailScreen: View {
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        //TODO: save action
-                        
-                        dismiss()
+                        viewModel.save { price in
+                            onSave?(price)
+                            dismiss()
+                        }
                     } label: {
                         Text("Save")
                     }
@@ -78,6 +74,6 @@ struct AddProductDetailScreen: View {
 
 struct AddProductDetailScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddProductDetailScreen()
+        AddProductDetailScreen(viewModel: AddProductDetailPriceViewModel(price: pricesMock[0][2]))
     }
 }
