@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ProductTypeScreen: View {
-    @StateObject private var viewModel = ProductTypeViewModel()
+    @StateObject private var viewModel: ProductTypeViewModel
     @State private var isShowAddProductType: Bool = false
+    
+    init(viewModel: ProductTypeViewModel) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         ZStack {
@@ -19,20 +23,24 @@ struct ProductTypeScreen: View {
             
             ScrollView {
                 VStack {
-                    ForEach(viewModel.productTypes) { productType in
+                    ForEach(viewModel.types.indices, id:\.self) { index in
+                        let type = viewModel.types[index]
+                        
                         NavigationLink {
                             ProductDetailPriceScreen()
                         } label: {
-                            ProductTypeCellView(type: productType)
+                            ProductTypeCellView(type: type)
                         }
                     }
                 }
                 .padding(.horizontal, 12)
             }
         }
-        .searchable(text: .constant(""), placement: .automatic, prompt: "Cereal")
-        .navigationTitle("Coco Crunch")
-        .sheet(isPresented: $isShowAddProductType) {
+        .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
+        .navigationTitle(viewModel.productName)
+        .sheet(isPresented: $isShowAddProductType, onDismiss: {
+            viewModel.selectedTypeIndex = nil
+        }) {
             AddProductTypeScreen()
         }
         .toolbar {
@@ -50,7 +58,7 @@ struct ProductTypeScreen: View {
 struct ProductDetailScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProductTypeScreen()
+            ProductTypeScreen(viewModel: ProductTypeViewModel(product: categoriesMock[0].products[0]))
         }
     }
 }
