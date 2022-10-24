@@ -25,6 +25,7 @@ let productTypesMock: [ProductType] = [
     ProductType(name: "Kecil", image: "", unit: 200, unitType: .g, prices: pricesMock[0]),
     ProductType(name: "Sedang", image: "", unit: 300, unitType: .kg, prices: pricesMock[1]),
     ProductType(name: "Besar", image: "", unit: 400, unitType: .l, prices: pricesMock[2]),
+    ProductType(name: "Besar", image: "", unit: 450.05, unitType: .l, prices: pricesMock[2]),
 ]
 
 let pricesMock: [[Price]] = [

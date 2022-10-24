@@ -37,7 +37,7 @@ struct ProductTypeCellView: View {
                     HStack(alignment: .center) {
                         Image(systemName: "scalemass")
                         
-                        Text("\(type.unit.splitDigit(maximumFractionDigits: 2)) \(type.unitType.rawValue)")
+                        Text("\(type.unit.splitDigit(maximumFractionDigits: 2)) \(type.unitType.getTitle(by: type.unit))")
                     }
                 }
                 
@@ -84,7 +84,7 @@ struct ProductTypeCellView: View {
 struct ProductTypeCellView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ProductTypeCellView(type: productTypesMock[0])
+            ProductTypeCellView(type: productTypesMock[1])
         }
         .padding()
     }

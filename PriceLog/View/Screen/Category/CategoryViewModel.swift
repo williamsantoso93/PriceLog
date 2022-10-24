@@ -8,7 +8,7 @@
 import Foundation
 
 class CategoryViewModel: ObservableObject {
-    private var _categories: [Category] = categoriesMock
+    @Published private var _categories: [Category] = categoriesMock
     
     @Published var searchText: String = ""
     

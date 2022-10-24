@@ -15,10 +15,10 @@ struct PriceLogApp: App {
         WindowGroup {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-//            CategoryScreen()
-            NavigationStack {
-                ProductTypeScreen(viewModel: ProductTypeViewModel(product: categoriesMock[0].products[0]))
-            }
+            CategoryScreen()
+//            NavigationStack {
+//                ProductTypeScreen(viewModel: ProductTypeViewModel(product: categoriesMock[0].products[0]))
+//            }
         }
     }
 }

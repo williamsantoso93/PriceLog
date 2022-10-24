@@ -8,7 +8,7 @@
 import Foundation
 
 class ProductViewModel: ObservableObject {
-    private var category: Category
+    @Published private var category: Category
     var categoryName: String {
         category.name
     }

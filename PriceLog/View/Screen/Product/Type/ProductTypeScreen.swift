@@ -50,7 +50,17 @@ struct ProductTypeScreen: View {
         .sheet(isPresented: $isShowAddProductType, onDismiss: {
             viewModel.selectedTypeIndex = nil
         }) {
-            AddProductTypeScreen()
+            AddProductTypeScreen(
+                viewModel: AddProductTypeViewModel(type: viewModel.selectedType),
+                onSave: { type in
+                    if let type = type {
+                        viewModel.setSavedType(type: type)
+                    }
+                },
+                onDelete: {
+                    viewModel.deleteType()
+                }
+            )
         }
         .toolbar {
             ToolbarItemGroup(placement: .automatic) {

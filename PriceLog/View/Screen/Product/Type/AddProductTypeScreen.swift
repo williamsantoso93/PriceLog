@@ -9,18 +9,19 @@ import SwiftUI
 
 struct AddProductTypeScreen: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject var viewModel: AddProductTypeViewModel
     
-    let isEdit: Bool = false
-    private var screenTitle: String {
-        (isEdit ? "Edit" : "Add") + " Product Type"
+    let onSave: ((ProductType?) -> Void)?
+    let onDelete: (() -> Void)?
+    
+    init(viewModel: AddProductTypeViewModel = AddProductTypeViewModel(), onSave: ((ProductType?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+        self.viewModel = viewModel
+        self.onSave = onSave
+        self.onDelete = onDelete
     }
     
-    @State private var name: String = ""
-    @State private var unitSelection: UnitType = .kg
-    
-    @State private var valueString: String = ""
-    private var value: Double {
-        Double(valueString) ?? 0
+    private var screenTitle: String {
+        (viewModel.isEdit ? "Edit" : "Add") + " Product Type"
     }
     
     
@@ -28,19 +29,20 @@ struct AddProductTypeScreen: View {
         NavigationStack {
             Form {
                 Section {
-                    TextFieldLabel(label: "Name", text: $name)
-                    Picker("Unit", selection: $unitSelection) {
-                        ForEach(UnitType.allCases, id: \.self) { unit in
-                            Text("\(unit.getTitle(by: value))")
+                    TextFieldLabel(label: "Name", text: $viewModel.name)
+                    Picker("Unit", selection: $viewModel.unitType) {
+                        ForEach(UnitType.allCases, id: \.self) { unitType in
+                            Text(viewModel.getUnitTitle(unitType: unitType))
                         }
                     }
-                    TextFieldLabel(label: unitSelection.getValueTitle(), text: $valueString)
+                    TextFieldLabel(label: viewModel.unitType.getValueTitle(), text: $viewModel.unitString)
                 }
                 
-                if isEdit {
+                if viewModel.isEdit {
                     Section {
                         Button("Delete", role: .destructive) {
-                            //TODO: delete action
+                            onDelete?()
+                            dismiss()
                         }
                     }
                 }
@@ -50,7 +52,10 @@ struct AddProductTypeScreen: View {
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        dismiss()
+                        viewModel.save { type in
+                            onSave?(type)
+                            dismiss()
+                        }
                     } label: {
                         Text("Save")
                     }
@@ -69,6 +74,6 @@ struct AddProductTypeScreen: View {
 
 struct AddProductTypeScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddProductTypeScreen()
+        AddProductTypeScreen(viewModel: AddProductTypeViewModel(type: productTypesMock[3]))
     }
 }
