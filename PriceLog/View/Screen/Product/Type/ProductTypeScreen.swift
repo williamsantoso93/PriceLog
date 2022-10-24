@@ -27,7 +27,7 @@ struct ProductTypeScreen: View {
                         let type = viewModel.types[index]
                         
                         NavigationLink {
-                            ProductDetailPriceScreen()
+                            ProductDetailPriceScreen(viewModel: ProductDetailPriceViewModel(product: viewModel.product, selectedTypeIndex: index))
                         } label: {
                             ProductTypeCellView(
                                 type: type,

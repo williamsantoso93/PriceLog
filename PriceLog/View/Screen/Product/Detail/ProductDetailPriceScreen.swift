@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ProductDetailPriceScreen: View {
-    @StateObject private var viewModel = ProductDetailPriceViewModel()
+    @StateObject private var viewModel: ProductDetailPriceViewModel
     @State private var isShowAddProductDetail: Bool = false
+    
+    init(viewModel: ProductDetailPriceViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         ScrollView {
@@ -18,12 +22,12 @@ struct ProductDetailPriceScreen: View {
             
             VStack(alignment: .leading, spacing: 40.0) {
                 VStack(alignment: .leading) {
-                    Text("Coco crunch - Besar")
+                    Text(viewModel.title)
                     
                     HStack {
                         Image(systemName: "scalemass")
                         
-                        Text("400 g")
+                        Text("\(viewModel.unit.splitDigit(maximumFractionDigits: 2)) \(viewModel.unitName)")
                     }
                 }
                 
@@ -67,11 +71,14 @@ struct ProductDetailPriceScreen: View {
         .sheet(isPresented: $isShowAddProductDetail) {
             AddProductDetailScreen()
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct ProductDetailPriceScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ProductDetailPriceScreen()
+        NavigationStack {
+            ProductDetailPriceScreen(viewModel: ProductDetailPriceViewModel(product: productsMock[0], selectedTypeIndex: 0))
+        }
     }
 }

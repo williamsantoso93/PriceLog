@@ -30,15 +30,15 @@ let productTypesMock: [ProductType] = [
 
 let pricesMock: [[Price]] = [
     [
-        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Indomaret"), value: 20000),
-        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Super Indo"), value: 22500),
-        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Food Hall"), value: 21000),
+        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "02/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Indomaret"), value: 20000),
+        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "03/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Super Indo"), value: 22500),
+        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "04/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Food Hall"), value: 21000),
     ],
     [
-        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Food Hall"), value: 21000),
-        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Super Indo"), value: 22500),
+        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "02/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Food Hall"), value: 21000),
+        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "03/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Super Indo"), value: 22500),
     ],
     [
-        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Super Indo"), value: 22500),
+        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "04/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Super Indo"), value: 22500),
     ],
 ]

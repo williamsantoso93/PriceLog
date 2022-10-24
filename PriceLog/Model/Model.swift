@@ -97,6 +97,15 @@ struct Price: Identifiable {
     var updatedDate: Date
     var place: Place
     var value: Double
+    
+    var keywords: String {
+        [
+            place.name,
+            String(value),
+        ]
+        .joinedWithComma()
+        .lowercased()
+    }
 }
 
 struct Place: Identifiable {

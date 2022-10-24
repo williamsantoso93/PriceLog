@@ -17,7 +17,8 @@ struct PriceLogApp: App {
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
             CategoryScreen()
 //            NavigationStack {
-//                ProductTypeScreen(viewModel: ProductTypeViewModel(product: categoriesMock[0].products[0]))
+////                ProductTypeScreen(viewModel: ProductTypeViewModel(product: categoriesMock[0].products[0]))
+//                ProductDetailPriceScreen()
 //            }
         }
     }
