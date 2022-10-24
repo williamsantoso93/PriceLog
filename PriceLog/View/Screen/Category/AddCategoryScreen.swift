@@ -63,6 +63,7 @@ struct AddCategoryScreen: View {
                     }
                 }
             }
+            .hideKeyboardOnTapped()
         }
     }
 }

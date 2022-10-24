@@ -68,6 +68,7 @@ struct AddProductTypeScreen: View {
                     }
                 }
             }
+            .hideKeyboardOnTapped()
         }
     }
 }

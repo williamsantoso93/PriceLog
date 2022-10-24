@@ -16,6 +16,7 @@
 		E022B3032863705900E9437F /* PriceLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B3022863705900E9437F /* PriceLogTests.swift */; };
 		E022B30D2863705900E9437F /* PriceLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B30C2863705900E9437F /* PriceLogUITests.swift */; };
 		E022B30F2863705900E9437F /* PriceLogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B30E2863705900E9437F /* PriceLogUITestsLaunchTests.swift */; };
+		E0261B93290646C300C4F9A2 /* Modifier+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0261B92290646C300C4F9A2 /* Modifier+View.swift */; };
 		E04F8CA5290592EC0028B228 /* CategoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04F8CA4290592EC0028B228 /* CategoryCellView.swift */; };
 		E06D05C2286FF7E40081B70F /* AddProductTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */; };
 		E06D05C4286FF9410081B70F /* TextFieldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C3286FF9410081B70F /* TextFieldLabel.swift */; };
@@ -72,6 +73,7 @@
 		E022B3082863705900E9437F /* PriceLogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PriceLogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E022B30C2863705900E9437F /* PriceLogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogUITests.swift; sourceTree = "<group>"; };
 		E022B30E2863705900E9437F /* PriceLogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E0261B92290646C300C4F9A2 /* Modifier+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modifier+View.swift"; sourceTree = "<group>"; };
 		E04F8CA4290592EC0028B228 /* CategoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellView.swift; sourceTree = "<group>"; };
 		E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductTypeScreen.swift; sourceTree = "<group>"; };
 		E06D05C3286FF9410081B70F /* TextFieldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLabel.swift; sourceTree = "<group>"; };
@@ -184,6 +186,14 @@
 			path = PriceLogUITests;
 			sourceTree = "<group>";
 		};
+		E0261B94290646D300C4F9A2 /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				E0261B92290646C300C4F9A2 /* Modifier+View.swift */,
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
 		E06D05BB286FF7120081B70F /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +263,7 @@
 		E0EC8CF02868A069005CEB7B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E0261B94290646D300C4F9A2 /* Modifier */,
 				E06D05C0286FF7B30081B70F /* Component */,
 				E0EC8CF12868A074005CEB7B /* Screen */,
 			);
@@ -420,6 +431,7 @@
 				E0C42F042870002E005FE0C9 /* ProductViewModel.swift in Sources */,
 				E022B2F92863705900E9437F /* PriceLog.xcdatamodeld in Sources */,
 				E022B2ED2863705800E9437F /* PriceLogApp.swift in Sources */,
+				E0261B93290646C300C4F9A2 /* Modifier+View.swift in Sources */,
 				E0EC8CFB2868B0EC005CEB7B /* ProductTypeScreen.swift in Sources */,
 				E0C42F152870028E005FE0C9 /* AddProductDetailPriceViewModel.swift in Sources */,
 				E0B99F3C2869E49D0001ECCA /* AddProductScreen.swift in Sources */,
