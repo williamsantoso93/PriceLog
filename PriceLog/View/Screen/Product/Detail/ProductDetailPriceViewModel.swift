@@ -8,5 +8,5 @@
 import Foundation
 
 class ProductDetailPriceViewModel: ObservableObject {
-    @Published var prices: [Price] = pricesMock
+    @Published var prices: [Price] = pricesMock[0]
 }

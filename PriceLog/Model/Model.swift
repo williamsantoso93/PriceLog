@@ -25,7 +25,7 @@ struct ProductType: Identifiable {
     var id: UUID = UUID()
     var name: String = ""
     var image: String? //TODO: change type
-    var unit: Int = 0
+    var unit: Double = 0
     var unitType: UnitType = .kg
     var prices: [Price] = []
     
@@ -33,6 +33,18 @@ struct ProductType: Identifiable {
         prices.sorted {
             $0.value < $1.value
         }.first
+    }
+    
+    var keywords: String {
+        [
+            name,
+            String(unit),
+            unitType.getTitle(by: Double(unit)),
+            String(lowestPrice?.value ?? 0),
+            lowestPrice?.place.name ?? "",
+        ]
+        .joinedWithComma()
+        .lowercased()
     }
 }
 

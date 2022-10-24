@@ -14,7 +14,7 @@ class CategoryViewModel: ObservableObject {
     
     var categories: [Category] {
         _categories.filter { category in
-            searchText.isEmpty ? true : category.name.contains(searchText)
+            searchText.isEmpty ? true : category.name.lowercased().contains(searchText.lowercased())
         }
     }
     

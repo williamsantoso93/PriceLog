@@ -17,7 +17,7 @@ class ProductViewModel: ObservableObject {
     
     var products: [Product] {
         category.products.filter { product in
-            searchText.isEmpty ? true : product.name.contains(searchText)
+            searchText.isEmpty ? true : product.name.lowercased().contains(searchText.lowercased())
         }
     }
     var selectedProductIndex: Int?
@@ -28,7 +28,7 @@ class ProductViewModel: ObservableObject {
         return products[selectedProductIndex]
     }
     var randomSearchPrompt: String {
-        products[Int.random(in: products.indices)].name
+        category.products[Int.random(in: category.products.indices)].name
     }
     
     init(category: Category) {

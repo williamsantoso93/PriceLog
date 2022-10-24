@@ -16,7 +16,7 @@ class ProductTypeViewModel: ObservableObject {
     
     var types: [ProductType] {
         product.types.filter { type in
-            searchText.isEmpty ? true : type.name.contains(searchText)
+            searchText.isEmpty ? true : type.keywords.contains(searchText.lowercased())
         }
     }
     var selectedTypeIndex: Int?
@@ -27,11 +27,26 @@ class ProductTypeViewModel: ObservableObject {
         return types[selectedTypeIndex]
     }
     var randomSearchPrompt: String {
-        types[Int.random(in: types.indices)].name
+        product.types[Int.random(in: product.types.indices)].name
     }
-    
     
     init(product: Product) {
         self.product = product
+    }
+    
+    func setSavedType(type: ProductType) {
+        if let selectedTypeIndex = selectedTypeIndex, types.indices.contains(selectedTypeIndex) {
+            product.types[selectedTypeIndex] = type
+        } else {
+            product.types.append(type)
+        }
+    }
+    
+    func deleteType() {
+        guard let selectedTypeIndex = selectedTypeIndex, product.types.indices.contains(selectedTypeIndex) else {
+            return
+        }
+        
+        product.types.remove(at: selectedTypeIndex)
     }
 }

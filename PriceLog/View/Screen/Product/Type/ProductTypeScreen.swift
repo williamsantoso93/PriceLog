@@ -29,7 +29,16 @@ struct ProductTypeScreen: View {
                         NavigationLink {
                             ProductDetailPriceScreen()
                         } label: {
-                            ProductTypeCellView(type: type)
+                            ProductTypeCellView(
+                                type: type,
+                                onEdit: {
+                                    viewModel.selectedTypeIndex = index
+                                    isShowAddProductType.toggle()
+                                }, onDelete: {
+                                    viewModel.selectedTypeIndex = index
+                                    viewModel.deleteType()
+                                }
+                            )
                         }
                     }
                 }

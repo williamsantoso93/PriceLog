@@ -22,13 +22,22 @@ let productsMock: [Product] = [
 ]
 
 let productTypesMock: [ProductType] = [
-    ProductType(name: "Kecil", image: "", unit: 200, unitType: .g, prices: pricesMock),
-    ProductType(name: "Sedang", image: "", unit: 300, unitType: .g, prices: pricesMock),
-    ProductType(name: "Besar", image: "", unit: 400, unitType: .g, prices: pricesMock),
+    ProductType(name: "Kecil", image: "", unit: 200, unitType: .g, prices: pricesMock[0]),
+    ProductType(name: "Sedang", image: "", unit: 300, unitType: .kg, prices: pricesMock[1]),
+    ProductType(name: "Besar", image: "", unit: 400, unitType: .l, prices: pricesMock[2]),
 ]
 
-let pricesMock: [Price] = [
-    Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Indomaret"), value: 20000),
-    Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Super Indo"), value: 22500),
-    Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Food Hall"), value: 21000),
+let pricesMock: [[Price]] = [
+    [
+        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Indomaret"), value: 20000),
+        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Super Indo"), value: 22500),
+        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Food Hall"), value: 21000),
+    ],
+    [
+        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Food Hall"), value: 21000),
+        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Super Indo"), value: 22500),
+    ],
+    [
+        Price(createdDate: Date(), updatedDate: Date(), place: Place(name: "Super Indo"), value: 22500),
+    ],
 ]

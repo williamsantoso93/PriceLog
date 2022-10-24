@@ -33,7 +33,7 @@ struct ProductPricesCell: View {
 struct ProductPricesCell_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ProductPricesCell(price: pricesMock[0])
+            ProductPricesCell(price: pricesMock[0][0])
         }
         .padding()
     }

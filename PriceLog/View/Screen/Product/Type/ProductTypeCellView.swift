@@ -9,6 +9,14 @@ import SwiftUI
 
 struct ProductTypeCellView: View {
     var type: ProductType
+    let onEdit: (() -> Void)?
+    let onDelete: (() -> Void)?
+    
+    init(type: ProductType, onEdit: (() -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+        self.type = type
+        self.onEdit = onEdit
+        self.onDelete = onDelete
+    }
     
     var body: some View {
         HStack {
@@ -29,7 +37,7 @@ struct ProductTypeCellView: View {
                     HStack(alignment: .center) {
                         Image(systemName: "scalemass")
                         
-                        Text("\(type.unit) \(type.unitType.rawValue)")
+                        Text("\(type.unit.splitDigit(maximumFractionDigits: 2)) \(type.unitType.rawValue)")
                     }
                 }
                 
@@ -51,6 +59,23 @@ struct ProductTypeCellView: View {
             .background {
                 Color.gray.opacity(0.1)
                     .cornerRadius(10)
+            }
+        }
+        .contextMenu {
+            if let onEdit = onEdit {
+                Button {
+                    onEdit()
+                } label: {
+                    Label("Edit", systemImage: "pencil")
+                }
+            }
+            
+            if let onDelete = onDelete {
+                Button(role: .destructive) {
+                    onDelete()
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
             }
         }
     }
