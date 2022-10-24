@@ -9,20 +9,53 @@ import SwiftUI
 
 struct AddProductDetailScreen: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject var viewModel: AddProductDetailPriceViewModel
+    
+    let onSave: ((Price?) -> Void)?
+    let onDelete: (() -> Void)?
+    
+    init(viewModel: AddProductDetailPriceViewModel = AddProductDetailPriceViewModel(), onSave: ((Price?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+        self.viewModel = viewModel
+        self.onSave = onSave
+        self.onDelete = onDelete
+    }
+    
+    private var screenTitle: String {
+        (viewModel.isEdit ? "Edit" : "Add") + " Product Detail"
+    }
     
     var body: some View {
         NavigationStack {
             Form {
-                NumberFieldLabel(label: "Value", text: .constant(""))
-                TextFieldLabel(label: "Place", text: .constant(""))
-                DatePicker("Date", selection: .constant(Date()), displayedComponents: .date)
+                Section {
+                    NumberFieldLabel(label: "Price", text: $viewModel.priceString)
+                    
+                    Picker("Location", selection: $viewModel.locationSelection) {
+                        ForEach(viewModel.locations.indices, id: \.self) { index in
+                            Text(viewModel.locations[index])
+                        }
+                    }
+                    DatePicker("Date", selection: $viewModel.date, displayedComponents: .date)
+                }
+                
+                if let onDelete = onDelete {
+                    Section {
+                        Button("Delete", role: .destructive) {
+                            onDelete()
+                            dismiss()
+                        }
+                    }
+                }
             }
-            .navigationTitle("Add Product Detail")
+            .navigationTitle(screenTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        
+                        viewModel.save { price in
+                            onSave?(price)
+                            dismiss()
+                        }
                     } label: {
                         Text("Save")
                     }
@@ -35,12 +68,13 @@ struct AddProductDetailScreen: View {
                     }
                 }
             }
+            .hideKeyboardOnTapped()
         }
     }
 }
 
 struct AddProductDetailScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddProductDetailScreen()
+        AddProductDetailScreen(viewModel: AddProductDetailPriceViewModel(price: pricesMock[0][2]))
     }
 }

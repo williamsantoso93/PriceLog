@@ -9,24 +9,51 @@ import SwiftUI
 
 struct AddProductScreen: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var categorySelection: Int = 1
+    @ObservedObject var viewModel: AddProductViewModel
+    
+    let onSave: ((Product?) -> Void)?
+    let onDelete: (() -> Void)?
+    
+    init(viewModel: AddProductViewModel = AddProductViewModel(), onSave: ((Product?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+        self.viewModel = viewModel
+        self.onSave = onSave
+        self.onDelete = onDelete
+    }
+    
+    private var screenTitle: String {
+        (viewModel.isEdit ? "Edit" : "Add") + " Product"
+    }
     
     var body: some View {
         NavigationStack {
             Form {
-                TextFieldLabel(label: "Title", text: .constant(""))
+                Section {
+                    TextFieldLabel(label: "Name", text: $viewModel.name)
+//                    Picker("Category", selection: $viewModel.categorySelection) {
+//                        ForEach(viewModel.categories.indices, id: \.self) { index in
+//                            Text(viewModel.categories[index])
+//                        }
+//                    }
+                }
                 
-                Picker("Category", selection: $categorySelection) {
-                    Text("Drink")
-                    Text("Food")
+                if let onDelete = onDelete {
+                    Section {
+                        Button("Delete", role: .destructive) {
+                            onDelete()
+                            dismiss()
+                        }
+                    }
                 }
             }
-            .navigationTitle("Add Product")
+            .navigationTitle(screenTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        
+                        viewModel.save { product in
+                            onSave?(product)
+                            dismiss()
+                        }
                     } label: {
                         Text("Save")
                     }
@@ -39,6 +66,7 @@ struct AddProductScreen: View {
                     }
                 }
             }
+            .hideKeyboardOnTapped()
         }
     }
 }

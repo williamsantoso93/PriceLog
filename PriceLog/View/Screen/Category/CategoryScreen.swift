@@ -21,11 +21,22 @@ struct CategoryScreen: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: gridColumns, alignment: .leading) {
-                    ForEach(viewModel.categories) { category in
+                    ForEach(viewModel.categories.indices, id: \.self) { index in
+                        let category = viewModel.categories[index]
+                        
                         NavigationLink {
-                            ProductScreen()
+                            ProductScreen(viewModel: ProductViewModel(category: category))
                         } label: {
-                            CategoryCellView(title: category.name)
+                            CategoryCellView(
+                                title: category.name,
+                                onEdit: {
+                                    viewModel.selectedCategoryIndex = index
+                                    isShowAddCategory.toggle()
+                                }, onDelete: {
+                                    viewModel.selectedCategoryIndex = index
+                                    viewModel.deleteCategory()
+                                }
+                            )
                         }
                     }
                 }
@@ -33,10 +44,22 @@ struct CategoryScreen: View {
                 
                 Spacer(minLength: 0)
             }
-            .searchable(text: .constant(""), placement: .automatic, prompt: "Cereal")
+            .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
             .navigationTitle("Category")
-            .sheet(isPresented: $isShowAddCategory) {
-                AddCategoryScreen()
+            .sheet(isPresented: $isShowAddCategory, onDismiss: {
+                viewModel.selectedCategoryIndex = nil
+            }) {
+                AddCategoryScreen(
+                    viewModel: AddCategoryViewModel(category: viewModel.selectedCategory),
+                    onSave: { category in
+                        if let category = category {
+                            viewModel.setSavedCategory(category: category)
+                        }
+                    },
+                    onDelete: {
+                        viewModel.deleteCategory()
+                    }
+                )
             }
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
@@ -57,28 +80,3 @@ struct CategoryScreen_Previews: PreviewProvider {
     }
 }
 
-struct CategoryCellView: View {
-    let title: String
-    
-    var body: some View {
-        ZStack {
-            Color.gray
-                .frame(height: 100)
-            Text(title)
-        }
-        .cornerRadius(10)
-//        .contextMenu {
-//            Button {
-//                print("Change country setting")
-//            } label: {
-//                Label("Edit", systemImage: "pencil")
-//            }
-//            
-//            Button(role: .destructive) {
-//                print("Enable geolocation")
-//            } label: {
-//                Label("Delete", systemImage: "trash")
-//            }
-//        }
-    }
-}

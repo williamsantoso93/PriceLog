@@ -19,7 +19,7 @@ struct ProductPricesCell: View {
             VStack(alignment: .trailing) {
                 Text(price.place.name)
                 
-                Text("\(price.updatedDate.toString())")
+                Text("\(price.date.toString())")
             }
         }
         .padding()
@@ -33,7 +33,7 @@ struct ProductPricesCell: View {
 struct ProductPricesCell_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ProductPricesCell(price: pricesMock[0])
+            ProductPricesCell(price: pricesMock[0][0])
         }
         .padding()
     }

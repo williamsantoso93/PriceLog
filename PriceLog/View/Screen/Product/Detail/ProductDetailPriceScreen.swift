@@ -8,22 +8,37 @@
 import SwiftUI
 
 struct ProductDetailPriceScreen: View {
-    @StateObject private var viewModel = ProductDetailPriceViewModel()
+    @StateObject private var viewModel: ProductDetailPriceViewModel
     @State private var isShowAddProductDetail: Bool = false
+    
+    init(viewModel: ProductDetailPriceViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         ScrollView {
             Rectangle()
                 .frame(height: 300)
             
-            VStack(alignment: .leading, spacing: 40.0) {
+            VStack(alignment: .leading, spacing: 20.0) {
                 VStack(alignment: .leading) {
-                    Text("Coco crunch - Besar")
+                    Text(viewModel.title)
                     
                     HStack {
                         Image(systemName: "scalemass")
                         
-                        Text("400 g")
+                        Text("\(viewModel.unit.splitDigit(maximumFractionDigits: 2)) \(viewModel.unitName)")
+                    }
+                }
+                
+                if let lowestPrice = viewModel.lowestPrice {
+                    VStack {
+                        HStack {
+                            Text("Lowest Price")
+                            
+                            Spacer()
+                        }
+                        ProductPricesCell(price: lowestPrice)
                     }
                 }
                 
@@ -40,34 +55,51 @@ struct ProductDetailPriceScreen: View {
                         }
                     }
                     
-                    ForEach(viewModel.prices) { price in
-                        ProductPricesCell(price: price)
-                            .contextMenu {
-                                Button {
-                                    print("Change country setting")
-                                } label: {
-                                    Label("Edit", systemImage: "pencil")
+                    ForEach(viewModel.prices.indices, id: \.self) { index in
+                        let price = viewModel.prices[index]
+                        
+                        Button {
+                            viewModel.selectedPriceIndex = index
+                            isShowAddProductDetail.toggle()
+                        } label: {
+                            ProductPricesCell(price: price)
+                                .contextMenu {
+                                    Button(role: .destructive) {
+                                        viewModel.selectedPriceIndex = index
+                                        viewModel.deletePrice()
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
                                 }
-                                
-                                Button(role: .destructive) {
-                                    print("Enable geolocation")
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                            }
+                        }
                     }
                 }
             }
             .padding(.horizontal, 12)
         }
-        .sheet(isPresented: $isShowAddProductDetail) {
-            AddProductDetailScreen()
+        .sheet(isPresented: $isShowAddProductDetail, onDismiss: {
+            viewModel.selectedPriceIndex = nil
+        }) {
+            AddProductDetailScreen(
+                viewModel: AddProductDetailPriceViewModel(price: viewModel.selectedPrice),
+                onSave: { price in
+                    if let price = price {
+                        viewModel.setSavedPrice(price: price)
+                    }
+                },
+                onDelete: {
+                    viewModel.deletePrice()
+                }
+            )
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct ProductDetailPriceScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ProductDetailPriceScreen()
+        NavigationStack {
+            ProductDetailPriceScreen(viewModel: ProductDetailPriceViewModel(product: productsMock[0], selectedTypeIndex: 0))
+        }
     }
 }

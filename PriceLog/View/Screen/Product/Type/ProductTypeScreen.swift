@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ProductTypeScreen: View {
-    @StateObject private var viewModel = ProductTypeViewModel()
+    @StateObject private var viewModel: ProductTypeViewModel
     @State private var isShowAddProductType: Bool = false
+    
+    init(viewModel: ProductTypeViewModel) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         ZStack {
@@ -19,21 +23,44 @@ struct ProductTypeScreen: View {
             
             ScrollView {
                 VStack {
-                    ForEach(viewModel.productTypes) { productType in
+                    ForEach(viewModel.types.indices, id:\.self) { index in
+                        let type = viewModel.types[index]
+                        
                         NavigationLink {
-                            ProductDetailPriceScreen()
+                            ProductDetailPriceScreen(viewModel: ProductDetailPriceViewModel(product: viewModel.product, selectedTypeIndex: index))
                         } label: {
-                            ProductTypeCellView(type: productType)
+                            ProductTypeCellView(
+                                type: type,
+                                onEdit: {
+                                    viewModel.selectedTypeIndex = index
+                                    isShowAddProductType.toggle()
+                                }, onDelete: {
+                                    viewModel.selectedTypeIndex = index
+                                    viewModel.deleteType()
+                                }
+                            )
                         }
                     }
                 }
                 .padding(.horizontal, 12)
             }
         }
-        .searchable(text: .constant(""), placement: .automatic, prompt: "Cereal")
-        .navigationTitle("Coco Crunch")
-        .sheet(isPresented: $isShowAddProductType) {
-            AddProductTypeScreen()
+        .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
+        .navigationTitle(viewModel.productName)
+        .sheet(isPresented: $isShowAddProductType, onDismiss: {
+            viewModel.selectedTypeIndex = nil
+        }) {
+            AddProductTypeScreen(
+                viewModel: AddProductTypeViewModel(type: viewModel.selectedType),
+                onSave: { type in
+                    if let type = type {
+                        viewModel.setSavedType(type: type)
+                    }
+                },
+                onDelete: {
+                    viewModel.deleteType()
+                }
+            )
         }
         .toolbar {
             ToolbarItemGroup(placement: .automatic) {
@@ -50,7 +77,7 @@ struct ProductTypeScreen: View {
 struct ProductDetailScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProductTypeScreen()
+            ProductTypeScreen(viewModel: ProductTypeViewModel(product: categoriesMock[0].products[0]))
         }
     }
 }
