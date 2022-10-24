@@ -28,12 +28,12 @@ struct AddProductScreen: View {
         NavigationStack {
             Form {
                 Section {
-                    TextFieldLabel(label: "Title", text: $viewModel.name)
-                    Picker("Category", selection: $viewModel.categorySelection) {
-                        ForEach(viewModel.categories.indices, id: \.self) { index in
-                            Text(viewModel.categories[index])
-                        }
-                    }
+                    TextFieldLabel(label: "Name", text: $viewModel.name)
+//                    Picker("Category", selection: $viewModel.categorySelection) {
+//                        ForEach(viewModel.categories.indices, id: \.self) { index in
+//                            Text(viewModel.categories[index])
+//                        }
+//                    }
                 }
                 
                 if viewModel.isEdit {

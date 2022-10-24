@@ -9,8 +9,13 @@ import Foundation
 
 class ProductViewModel: ObservableObject {
     @Published var category: Category
+    var categoryName: String {
+        category.name
+    }
     var products: [Product] {
-        category.products
+        category.products.filter { product in
+            searchText.isEmpty ? true : product.name.contains(searchText)
+        }
     }
     var selectedProductIndex: Int?
     var selectedProduct: Product? {
@@ -19,6 +24,11 @@ class ProductViewModel: ObservableObject {
         }
         return products[selectedProductIndex]
     }
+    var randomSearchPrompt: String {
+        products[Int.random(in: products.indices)].name
+    }
+    
+    @Published var searchText: String = ""
     
     init(category: Category) {
         self.category = category

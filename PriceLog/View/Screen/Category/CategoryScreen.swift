@@ -44,7 +44,7 @@ struct CategoryScreen: View {
                 
                 Spacer(minLength: 0)
             }
-            .searchable(text: .constant(""), placement: .automatic, prompt: "Cereal")
+            .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
             .navigationTitle("Category")
             .sheet(isPresented: $isShowAddCategory, onDismiss: {
                 viewModel.selectedCategoryIndex = nil

@@ -47,8 +47,8 @@ struct ProductScreen: View {
             
             Spacer(minLength: 0)
         }
-        .searchable(text: .constant(""), placement: .automatic, prompt: "Cereal")
-        .navigationTitle("Cereal")
+        .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
+        .navigationTitle(viewModel.categoryName)
         .sheet(isPresented: $isShowAddProduct, onDismiss: {
             viewModel.selectedProductIndex = nil
         }) {

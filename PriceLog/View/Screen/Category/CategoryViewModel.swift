@@ -8,29 +8,38 @@
 import Foundation
 
 class CategoryViewModel: ObservableObject {
-    @Published var categories: [Category] = categoriesMock
-    
+    private var _categories: [Category] = categoriesMock
+    var categories: [Category] {
+        _categories.filter { category in
+            searchText.isEmpty ? true : category.name.contains(searchText)
+        }
+    }
     var selectedCategoryIndex: Int?
     var selectedCategory: Category? {
-        guard let selectedCategoryIndex = selectedCategoryIndex, categories.indices.contains(selectedCategoryIndex) else {
+        guard let selectedCategoryIndex = selectedCategoryIndex, _categories.indices.contains(selectedCategoryIndex) else {
             return nil
         }
-        return categories[selectedCategoryIndex]
+        return _categories[selectedCategoryIndex]
+    }
+    var randomSearchPrompt: String {
+        _categories[Int.random(in: _categories.indices)].name
     }
     
+    @Published var searchText: String = ""
+    
     func setSavedCategory(category: Category) {
-        if let selectedCategoryIndex = selectedCategoryIndex, categories.indices.contains(selectedCategoryIndex) {
-            categories[selectedCategoryIndex] = category
+        if let selectedCategoryIndex = selectedCategoryIndex, _categories.indices.contains(selectedCategoryIndex) {
+            _categories[selectedCategoryIndex] = category
         } else {
-            categories.append(category)
+            _categories.append(category)
         }
     }
     
     func deleteCategory() {
-        guard let selectedCategoryIndex = selectedCategoryIndex, categories.indices.contains(selectedCategoryIndex) else {
+        guard let selectedCategoryIndex = selectedCategoryIndex, _categories.indices.contains(selectedCategoryIndex) else {
             return
         }
         
-        categories.remove(at: selectedCategoryIndex)
+        _categories.remove(at: selectedCategoryIndex)
     }
 }
