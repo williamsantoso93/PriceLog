@@ -8,24 +8,24 @@
 import Foundation
 
 let categoriesMock: [Category] = [
-    Category(name: "Cereal", image: "", products: productsMock),
-    Category(name: "Drink", image: "", products: productsMock),
-    Category(name: "Oil", image: "", products: productsMock),
-    Category(name: "Sauce", image: "", products: productsMock),
+    Category(name: "Cereal", products: productsMock),
+    Category(name: "Drink", products: productsMock),
+    Category(name: "Oil", products: productsMock),
+    Category(name: "Sauce", products: productsMock),
 ]
 
 let productsMock: [Product] = [
-    Product(name: "Coco Crunch", image: "", types: productTypesMock),
-    Product(name: "Milo", image: "", types: productTypesMock),
-    Product(name: "Honey Star", image: "", types: productTypesMock),
-    Product(name: "Corn Flex", image: "", types: productTypesMock)
+    Product(name: "Coco Crunch", types: productTypesMock),
+    Product(name: "Milo", types: productTypesMock),
+    Product(name: "Honey Star", types: productTypesMock),
+    Product(name: "Corn Flex", types: productTypesMock)
 ]
 
 let productTypesMock: [ProductType] = [
-    ProductType(name: "Kecil", image: "", unit: 200, unitType: .g, prices: pricesMock[0]),
-    ProductType(name: "Sedang", image: "", unit: 300, unitType: .kg, prices: pricesMock[1]),
-    ProductType(name: "Besar", image: "", unit: 400, unitType: .l, prices: pricesMock[2]),
-    ProductType(name: "Besar", image: "", unit: 450.05, unitType: .l, prices: pricesMock[2]),
+    ProductType(name: "Kecil", unit: 200, unitType: .g, prices: pricesMock[0]),
+    ProductType(name: "Sedang", unit: 300, unitType: .kg, prices: pricesMock[1]),
+    ProductType(name: "Besar", unit: 400, unitType: .l, prices: pricesMock[2]),
+    ProductType(name: "Besar", unit: 450.05, unitType: .l, prices: pricesMock[2]),
 ]
 
 let pricesMock: [[Price]] = [

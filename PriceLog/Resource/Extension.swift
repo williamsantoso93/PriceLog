@@ -64,28 +64,6 @@ extension String {
 }
 
 extension Double {
-//    func splitDigit(with groupingSeparator: String) -> String {
-//        let numberFormatter = NumberFormatter()
-//        numberFormatter.numberStyle = .decimal
-//        numberFormatter.maximumFractionDigits = 0
-//        numberFormatter.groupingSeparator = groupingSeparator
-//        return numberFormatter.string(from: NSNumber(value: self)) ?? ""
-//    }
-//    func splitDigit() -> String {
-//        let numberFormatter = NumberFormatter()
-//        numberFormatter.numberStyle = .decimal
-//        numberFormatter.maximumFractionDigits = 2
-//        return numberFormatter.string(from: NSNumber(value: self)) ?? ""
-//    }
-//    func splitDigit(maximumFractionDigits: Int) -> String {
-//        let numberFormatter = NumberFormatter()
-//        numberFormatter.numberStyle = .decimal
-//        if maximumFractionDigits > 0 {
-//            numberFormatter.maximumFractionDigits = maximumFractionDigits
-//        }
-//        return numberFormatter.string(from: NSNumber(value: self)) ?? ""
-//    }
-    
     func splitDigit(with groupingSeparator: String? = nil, maximumFractionDigits: Int = 0) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -100,13 +78,6 @@ extension Double {
 }
 
 extension Int {
-//    func splitDigit() -> String {
-//        let numberFormatter = NumberFormatter()
-//        numberFormatter.numberStyle = .decimal
-//        numberFormatter.groupingSeparator = "."
-//        return numberFormatter.string(from: NSNumber(value: self)) ?? ""
-//    }
-    
     func splitDigit(with groupingSeparator: String? = nil, maximumFractionDigits: Int = 0) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -176,5 +147,11 @@ extension URLResponse {
             }
         }
         return false
+    }
+}
+
+extension Bundle {
+    var displayName: String? {
+        return object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
     }
 }

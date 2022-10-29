@@ -25,6 +25,7 @@ struct AddCategoryScreen: View {
     }
     
     @State private var title: String = ""
+    @State private var isShowDiscardAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -33,7 +34,7 @@ struct AddCategoryScreen: View {
                     TextFieldLabel(label: "Name", text: $viewModel.name)
                 }
                 
-                if let onDelete = onDelete {
+                if let onDelete = onDelete, viewModel.isEdit {
                     Section {
                         Button("Delete", role: .destructive) {
                             onDelete()
@@ -57,11 +58,18 @@ struct AddCategoryScreen: View {
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     Button {
-                        dismiss()
+                        if viewModel.isChange {
+                            isShowDiscardAlert = true
+                        } else {
+                            dismiss()
+                        }
                     } label: {
                         Text("Cancel")
                     }
                 }
+            }
+            .discardChangesAlert(isShowAlert: $isShowDiscardAlert) {
+                dismiss()
             }
             .hideKeyboardOnTapped()
         }

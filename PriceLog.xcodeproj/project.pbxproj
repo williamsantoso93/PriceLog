@@ -17,6 +17,8 @@
 		E022B30D2863705900E9437F /* PriceLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B30C2863705900E9437F /* PriceLogUITests.swift */; };
 		E022B30F2863705900E9437F /* PriceLogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B30E2863705900E9437F /* PriceLogUITestsLaunchTests.swift */; };
 		E0261B93290646C300C4F9A2 /* Modifier+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0261B92290646C300C4F9A2 /* Modifier+View.swift */; };
+		E030F8D62906C461009DA8C6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030F8D52906C461009DA8C6 /* ImagePicker.swift */; };
+		E030F8D82906C66F009DA8C6 /* RequestAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030F8D72906C66F009DA8C6 /* RequestAccess.swift */; };
 		E04F8CA5290592EC0028B228 /* CategoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04F8CA4290592EC0028B228 /* CategoryCellView.swift */; };
 		E06D05C2286FF7E40081B70F /* AddProductTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */; };
 		E06D05C4286FF9410081B70F /* TextFieldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C3286FF9410081B70F /* TextFieldLabel.swift */; };
@@ -74,6 +76,8 @@
 		E022B30C2863705900E9437F /* PriceLogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogUITests.swift; sourceTree = "<group>"; };
 		E022B30E2863705900E9437F /* PriceLogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E0261B92290646C300C4F9A2 /* Modifier+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modifier+View.swift"; sourceTree = "<group>"; };
+		E030F8D52906C461009DA8C6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		E030F8D72906C66F009DA8C6 /* RequestAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAccess.swift; sourceTree = "<group>"; };
 		E04F8CA4290592EC0028B228 /* CategoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellView.swift; sourceTree = "<group>"; };
 		E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductTypeScreen.swift; sourceTree = "<group>"; };
 		E06D05C3286FF9410081B70F /* TextFieldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLabel.swift; sourceTree = "<group>"; };
@@ -248,6 +252,7 @@
 				E06D05C3286FF9410081B70F /* TextFieldLabel.swift */,
 				E0C42EFA286FFDF2005FE0C9 /* NumberFieldLabel.swift */,
 				E04F8CA4290592EC0028B228 /* CategoryCellView.swift */,
+				E030F8D52906C461009DA8C6 /* ImagePicker.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				E0C42EFD286FFF25005FE0C9 /* Extension.swift */,
+				E030F8D72906C66F009DA8C6 /* RequestAccess.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -445,8 +451,10 @@
 				E0EC8CF92868AFB9005CEB7B /* ProductScreen.swift in Sources */,
 				E0C42EFB286FFDF2005FE0C9 /* NumberFieldLabel.swift in Sources */,
 				E0C42F002870000C005FE0C9 /* CategoryViewModel.swift in Sources */,
+				E030F8D62906C461009DA8C6 /* ImagePicker.swift in Sources */,
 				E0C42F0C28700228005FE0C9 /* ProductTypeViewModel.swift in Sources */,
 				E0C42EF9286FFC69005FE0C9 /* AddProductDetailScreen.swift in Sources */,
+				E030F8D82906C66F009DA8C6 /* RequestAccess.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,6 +616,8 @@
 				DEVELOPMENT_TEAM = 497N7524MA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "PriceLog need to Access Camera";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "PriceLog need to Access Photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -637,6 +647,8 @@
 				DEVELOPMENT_TEAM = 497N7524MA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "PriceLog need to Access Camera";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "PriceLog need to Access Photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

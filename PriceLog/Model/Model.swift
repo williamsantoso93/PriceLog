@@ -6,27 +6,29 @@
 //
 
 import Foundation
+import UIKit
 
 struct Category: Identifiable {
     var id: UUID = UUID()
     var name: String = ""
-    var image: String? //TODO: change type
+    var image: UIImage?
     var products: [Product] = []
 }
 
 struct Product: Identifiable {
     var id: UUID = UUID()
     var name: String = ""
-    var image: String? //TODO: change type
+    var image: UIImage?
     var types: [ProductType] = []
 }
 
 struct ProductType: Identifiable {
     var id: UUID = UUID()
     var name: String = ""
-    var image: String? //TODO: change type
+    var image: UIImage?
     var unit: Double = 0
     var unitType: UnitType = .kg
+    var code: String?
     var prices: [Price] = []
     
     var lowestPrice: Price? {
