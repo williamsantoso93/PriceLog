@@ -26,6 +26,17 @@ class AddProductDetailPriceViewModel: ObservableObject {
     
     var isEdit: Bool = false
     
+    var isChange: Bool {
+        if let price = price {
+            return (
+                self.priceValue != price.value ||
+                self.date != price.date
+            )
+        }
+        
+        return false
+    }
+    
     init(price: Price? = nil) {
         if let price = price {
             self.price = price

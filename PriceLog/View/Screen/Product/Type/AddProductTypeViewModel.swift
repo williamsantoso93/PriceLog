@@ -20,6 +20,18 @@ class AddProductTypeViewModel: ObservableObject {
     
     var isEdit: Bool = false
     
+    var isChange: Bool {
+        if let type = type {
+            return (
+                self.name != type.name ||
+                self.unitType != type.unitType ||
+                self.unit != type.unit
+            )
+        }
+        
+        return false
+    }
+    
     init(type: ProductType? = nil) {
         if let type = type {
             self.type = type

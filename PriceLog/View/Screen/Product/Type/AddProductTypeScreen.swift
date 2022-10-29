@@ -23,6 +23,7 @@ struct AddProductTypeScreen: View {
     private var screenTitle: String {
         (viewModel.isEdit ? "Edit" : "Add") + " Product Type"
     }
+    @State private var isShowDiscardAlert: Bool = false
     
     
     var body: some View {
@@ -38,7 +39,7 @@ struct AddProductTypeScreen: View {
                     TextFieldLabel(label: viewModel.unitType.getValueTitle(), text: $viewModel.unitString)
                 }
                 
-                if let onDelete = onDelete {
+                if let onDelete = onDelete, viewModel.isEdit {
                     Section {
                         Button("Delete", role: .destructive) {
                             onDelete()
@@ -62,11 +63,18 @@ struct AddProductTypeScreen: View {
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     Button {
-                        dismiss()
+                        if viewModel.isChange {
+                            isShowDiscardAlert = true
+                        } else {
+                            dismiss()
+                        }
                     } label: {
                         Text("Cancel")
                     }
                 }
+            }
+            .discardChangesAlert(isShowAlert: $isShowDiscardAlert) {
+                dismiss()
             }
             .hideKeyboardOnTapped()
         }
