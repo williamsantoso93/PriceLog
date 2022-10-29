@@ -37,7 +37,17 @@ class AddCategoryViewModel: ObservableObject {
             category?.name = name
             
             //TODO: save action
-            completion(category)
+            let categoryCD = CategoryCD(context: CategoryCD.viewContext)
+            categoryCD.id = UUID()
+            categoryCD.name = name
+            
+            do {
+                try categoryCD.save()
+                
+                completion(category)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }
