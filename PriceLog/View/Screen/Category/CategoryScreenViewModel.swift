@@ -10,20 +10,18 @@ import CoreData
 
 class CategoryScreenViewModel: ObservableObject {
     @Published private var _categories: [Category] = categoriesMock
-    @Published private var _categoriesCD: [CategoryViewModel] = []
+    @Published private var _categoriesVM: [CategoryViewModel] = []
     
     @Published var searchText: String = ""
     
-    var categories: [(id: NSManagedObjectID, category: Category)] {
-        _categoriesCD.filter { categoryViewModel in
+    var categoriesVM: [CategoryViewModel] {
+        _categoriesVM.filter { categoryViewModel in
             searchText.isEmpty ? true : categoryViewModel.category.name.lowercased().contains(searchText.lowercased())
-        }.map { categoryViewModel in
-            (categoryViewModel.categoryID, categoryViewModel.category)
         }
     }
-    var categoriesCD: [CategoryViewModel] {
-        _categoriesCD.filter { categoryViewModel in
-            searchText.isEmpty ? true : categoryViewModel.category.name.lowercased().contains(searchText.lowercased())
+    var categories: [(id: NSManagedObjectID, category: Category)] {
+        categoriesVM.map { categoryViewModel in
+            (categoryViewModel.categoryID, categoryViewModel.category)
         }
     }
     
@@ -34,8 +32,14 @@ class CategoryScreenViewModel: ObservableObject {
         }
         return _categories[selectedCategoryIndex]
     }
+    var selectedCategoryVM: CategoryViewModel? {
+        guard let selectedCategoryVMIndex = selectedCategoryIndex, categoriesVM.indices.contains(selectedCategoryVMIndex) else {
+            return nil
+        }
+        return categoriesVM[selectedCategoryVMIndex]
+    }
     var randomSearchPrompt: String {
-        _categories[Int.random(in: _categories.indices)].name
+        _categories.isEmpty ? "" : _categories[Int.random(in: _categories.indices)].name
     }
     
     func setSavedCategory(category: Category) {
@@ -56,13 +60,12 @@ class CategoryScreenViewModel: ObservableObject {
     
     func getCategoriesCD() {
         DispatchQueue.main.async {
-            self._categoriesCD = CategoryCD.all().map(CategoryViewModel.init)
+            self._categoriesVM = CategoryCD.all().map(CategoryViewModel.init)
         }
     }
     
     func deleteCategory(by id: NSManagedObjectID) {
-        let category: CategoryCD? = CategoryCD.byId(id: id)
-        if let category = category {
+        if let category: CategoryCD = CategoryCD.byId(id: id) {
             do {
                 try category.delete()
                 getCategoriesCD()
@@ -73,7 +76,7 @@ class CategoryScreenViewModel: ObservableObject {
     }
     
     func deleteAll() {
-        for category in categoriesCD {
+        for category in categoriesVM {
             do {
                 try category.delete()
             } catch {
@@ -106,5 +109,9 @@ struct CategoryViewModel {
     
     func delete() throws {
         try categoryCD.delete()
+    }
+    
+    func getProducts() -> [ProductViewModel] {
+        ProductCD.getProducts(by: categoryID).map(ProductViewModel.init)
     }
 }

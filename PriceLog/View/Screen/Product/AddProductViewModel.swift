@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import CoreData
 
 class AddProductViewModel: ObservableObject {
+    var categoryId: NSManagedObjectID
     var product: Product?
     
     @Published var name: String = ""
@@ -32,8 +34,10 @@ class AddProductViewModel: ObservableObject {
         return false
     }
     
-    init(product: Product? = nil) {
-        if let product = product {
+    init(categoryId: NSManagedObjectID, productVM: ProductViewModel?) {
+        self.categoryId = categoryId
+        
+        if let product = productVM?.product {
             self.product = product
             self.name = product.name
             self.image = product.image
@@ -43,13 +47,27 @@ class AddProductViewModel: ObservableObject {
         }
     }
     
+    //TODO: update data
+    
     func save(completion: (Product?) -> Void) {
         if !name.isEmpty {
             product?.name = name
             product?.image = image
             
-            //TODO: save action
-            completion(product)
+            if let categoryCD: CategoryCD = CategoryCD.byId(id: categoryId) {
+                let productCD = ProductCD(context: ProductCD.viewContext)
+                productCD.id = UUID()
+                productCD.name = name
+                categoryCD.addToProducts(productCD)
+                
+                do {
+                    try productCD.save()
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+                completion(product)
+            }
         }
     }
 }

@@ -21,20 +21,19 @@ struct CategoryScreen: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: gridColumns, alignment: .leading) {
-                    ForEach(viewModel.categoriesCD.indices, id: \.self) { index in
-                        let category = viewModel.categories[index].category
+                    ForEach(viewModel.categoriesVM.indices, id: \.self) { index in
+                        let categoryVM = viewModel.categoriesVM[index]
                         
                         NavigationLink {
-                            ProductScreen(viewModel: ProductViewModel(category: category))
+                            ProductScreen(viewModel: ProductScreenViewModel(categoryVM: categoryVM))
                         } label: {
                             CategoryCellView(
-                                title: category.name,
+                                title: categoryVM.category.name,
                                 onEdit: {
                                     viewModel.selectedCategoryIndex = index
                                     isShowAddCategory.toggle()
                                 }, onDelete: {
                                     viewModel.selectedCategoryIndex = index
-//                                    viewModel.deleteCategory()
                                     viewModel.deleteCategory(by: viewModel.categories[index].id)
                                 }
                             )
@@ -53,7 +52,7 @@ struct CategoryScreen: View {
                 viewModel.getCategoriesCD()
             }) {
                 AddCategoryScreen(
-                    viewModel: AddCategoryViewModel(category: viewModel.selectedCategory),
+                    viewModel: AddCategoryViewModel(categoryVM: viewModel.selectedCategoryVM),
                     onSave: { category in
                         if let category = category {
                             viewModel.setSavedCategory(category: category)

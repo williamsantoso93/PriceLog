@@ -3,5 +3,11 @@
     <entity name="CategoryCD" representedClassName="CategoryCD" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
+        <relationship name="products" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductCD" inverseName="category" inverseEntity="ProductCD"/>
+    </entity>
+    <entity name="ProductCD" representedClassName="ProductCD" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryCD" inverseName="products" inverseEntity="CategoryCD"/>
     </entity>
 </model>

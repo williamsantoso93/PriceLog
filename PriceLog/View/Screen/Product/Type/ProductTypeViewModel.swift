@@ -27,7 +27,7 @@ class ProductTypeViewModel: ObservableObject {
         return types[selectedTypeIndex]
     }
     var randomSearchPrompt: String {
-        product.types[Int.random(in: product.types.indices)].name
+        product.types.isEmpty ? "" : product.types[Int.random(in: product.types.indices)].name
     }
     
     init(product: Product) {
