@@ -14,6 +14,14 @@ class AddCategoryViewModel: ObservableObject {
     
     var isEdit: Bool = false
     
+    var isChange: Bool {
+        if let name = category?.name {
+            return self.name != name
+        }
+        
+        return false
+    }
+    
     init(category: Category? = nil) {
         if let category = category {
             self.category = category

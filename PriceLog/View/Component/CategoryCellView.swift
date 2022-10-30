@@ -23,6 +23,7 @@ struct CategoryCellView: View {
             Color.gray
                 .frame(height: 100)
             Text(title)
+                .foregroundColor(.white)
         }
         .cornerRadius(10)
         .contextMenu {
@@ -48,5 +49,6 @@ struct CategoryCellView: View {
 struct CategoryCellView_Previews: PreviewProvider {
     static var previews: some View {
         CategoryCellView(title: "Cereal")
+            .padding()
     }
 }

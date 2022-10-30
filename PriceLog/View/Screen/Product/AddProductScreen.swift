@@ -24,10 +24,33 @@ struct AddProductScreen: View {
         (viewModel.isEdit ? "Edit" : "Add") + " Product"
     }
     
+    @State private var sourceType: ImagePicker.SourceType = .photoLibrary
+    @State private var requestAccessType: RequestType = .photos
+    @State private var isShowImagePicker = false
+    @State private var isShowAlertRequest = false
+    @State private var isShowDiscardAlert: Bool = false
+    
     var body: some View {
         NavigationStack {
             Form {
                 Section {
+                    ZStack(alignment: .center) {
+                        if let image = viewModel.image {
+                            Image(uiImage: image)
+                        } else {
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(.blue, lineWidth: 2)
+                            
+                            Button {
+                                imagePicker()
+                            } label: {
+                                Image(systemName: "camera")
+                                    .font(.title)
+                            }
+                        }
+                    }
+                    .frame(height: 175)
+                    
                     TextFieldLabel(label: "Name", text: $viewModel.name)
 //                    Picker("Category", selection: $viewModel.categorySelection) {
 //                        ForEach(viewModel.categories.indices, id: \.self) { index in
@@ -36,7 +59,7 @@ struct AddProductScreen: View {
 //                    }
                 }
                 
-                if let onDelete = onDelete {
+                if let onDelete = onDelete, viewModel.isEdit {
                     Section {
                         Button("Delete", role: .destructive) {
                             onDelete()
@@ -60,15 +83,44 @@ struct AddProductScreen: View {
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     Button {
-                        dismiss()
+                        if viewModel.isChange {
+                            isShowDiscardAlert = true
+                        } else {
+                            dismiss()
+                        }
                     } label: {
                         Text("Cancel")
                     }
                 }
             }
+            .sheet(isPresented: $isShowImagePicker) {
+                ImagePicker(sourceType: sourceType) { image in
+                    viewModel.image = image
+                    isShowImagePicker = false
+                }
+            }
+            .discardChangesAlert(isShowAlert: $isShowDiscardAlert) {
+                dismiss()
+            }
             .hideKeyboardOnTapped()
         }
     }
+    
+    func imagePicker() {
+        sourceType = .photoLibrary
+        RequestAccess.PhotosAccess { status in
+            switch status {
+            case .success:
+                isShowImagePicker.toggle()
+            case .notAllow:
+                break
+            case .decline:
+                requestAccessType = .photos
+                isShowAlertRequest.toggle()
+            }
+        }
+    }
+
 }
 
 struct AddProductScreen_Previews: PreviewProvider {
