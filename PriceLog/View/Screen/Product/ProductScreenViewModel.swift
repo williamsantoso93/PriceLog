@@ -89,7 +89,7 @@ class ProductScreenViewModel: ObservableObject {
     }
     
     func deleteAll() {
-        for product in productsVM {
+        for product in _productsVM {
             do {
                 try product.delete()
             } catch {
@@ -122,5 +122,9 @@ struct ProductViewModel {
     
     func delete() throws {
         try productCD.delete()
+    }
+    
+    func getProductTypes() -> [ProductTypeViewModel] {
+        ProductTypeCD.getProductTypes(by: productID).map(ProductTypeViewModel.init)
     }
 }

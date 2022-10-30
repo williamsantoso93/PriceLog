@@ -9,8 +9,8 @@ import SwiftUI
 import CoreData
 
 class AddProductViewModel: ObservableObject {
-    var categoryId: NSManagedObjectID
-    var product: Product?
+    private var categoryId: NSManagedObjectID
+    private var product: Product?
     
     @Published var name: String = ""
     @Published var image: UIImage? = nil
@@ -34,7 +34,7 @@ class AddProductViewModel: ObservableObject {
         return false
     }
     
-    init(categoryId: NSManagedObjectID, productVM: ProductViewModel?) {
+    init(categoryId: NSManagedObjectID, productVM: ProductViewModel? = nil) {
         self.categoryId = categoryId
         
         if let product = productVM?.product {
@@ -58,6 +58,7 @@ class AddProductViewModel: ObservableObject {
                 let productCD = ProductCD(context: ProductCD.viewContext)
                 productCD.id = UUID()
                 productCD.name = name
+                
                 categoryCD.addToProducts(productCD)
                 
                 do {

@@ -28,7 +28,7 @@ struct ProductScreen: View {
                     let productVM = viewModel.productsVM[index]
                     
                     NavigationLink {
-                        ProductTypeScreen(viewModel: ProductTypeViewModel(product: productVM.product))
+                        ProductTypeScreen(viewModel: ProductTypeScreenViewModel(productVM: productVM))
                     } label: {
                         CategoryCellView(
                             title: productVM.product.name,

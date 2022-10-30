@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 
 extension ProductCD: BaseModel {
-    static func getProducts(by categoryID: NSManagedObjectID) -> [ProductCD] {
-        guard let category = CategoryCD.byId(id: categoryID) as? CategoryCD,
+    static func getProducts(by categoryId: NSManagedObjectID) -> [ProductCD] {
+        guard let category = CategoryCD.byId(id: categoryId) as? CategoryCD,
               let products = category.products
         else {
             return []
@@ -18,14 +18,4 @@ extension ProductCD: BaseModel {
         
         return products.allObjects as? [ProductCD] ?? []
     }
-    
-//    static func getActorsByMovieId(movieId: NSManagedObjectID) -> [Actor] {
-//        guard let movie = Movie.byId(id: movieId) as? Movie,
-//              let actors = movie.actors
-//        else {
-//            return []
-//        }
-//
-//        return (actors.allObjects as? [Actor]) ?? []
-//    }
 }

@@ -76,7 +76,7 @@ class CategoryScreenViewModel: ObservableObject {
     }
     
     func deleteAll() {
-        for category in categoriesVM {
+        for category in _categoriesVM {
             do {
                 try category.delete()
             } catch {
