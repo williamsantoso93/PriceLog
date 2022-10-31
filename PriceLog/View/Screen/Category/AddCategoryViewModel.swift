@@ -34,14 +34,14 @@ class AddCategoryViewModel: ObservableObject {
         }
     }
     
-    //TODO: update when edit
-    
     func save(completion: (Category?) -> Void) {
         if !name.isEmpty {
             category?.name = name
             
-            let categoryCD = CategoryCD.init(context: CategoryCD.viewContext)
-            categoryCD.id = UUID()
+            let categoryCD = getCategoryCD()
+            if !isEdit {
+                categoryCD.id = UUID()
+            }
             categoryCD.name = name
             
             do {
@@ -51,6 +51,14 @@ class AddCategoryViewModel: ObservableObject {
             } catch {
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    private func getCategoryCD() -> CategoryCD {
+        if isEdit, let categoryCD = categoryVM?.categoryCD {
+            return categoryCD
+        } else {
+            return CategoryCD.init(context: CategoryCD.viewContext)
         }
     }
 }

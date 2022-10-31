@@ -92,7 +92,7 @@ class CategoryScreenViewModel: ObservableObject {
 }
 
 struct CategoryViewModel {
-    private let categoryCD: CategoryCD
+    let categoryCD: CategoryCD
     
     init(categoryCD: CategoryCD) {
         self.categoryCD = categoryCD
