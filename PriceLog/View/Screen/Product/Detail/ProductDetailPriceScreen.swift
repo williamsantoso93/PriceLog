@@ -105,7 +105,7 @@ struct ProductDetailPriceScreen: View {
 struct ProductDetailPriceScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProductDetailPriceScreen(viewModel: ProductDetailScreenPriceViewModel(productTypeVM: ProductTypeViewModel(productTypeCD: ProductTypeCD.initContext())))
+            ProductDetailPriceScreen(viewModel: ProductDetailScreenPriceViewModel(productTypeVM: ProductTypeViewModel(productTypeCD: ProductTypeCD.init(context: ProductTypeCD.viewContext))))
         }
     }
 }

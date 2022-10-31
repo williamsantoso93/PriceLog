@@ -55,7 +55,7 @@ class AddProductViewModel: ObservableObject {
             product?.image = image
             
             if let categoryCD: CategoryCD = CategoryCD.byId(id: categoryId) {
-                let productCD = ProductCD.initContext()
+                let productCD = ProductCD.init(context: ProductCD.viewContext)
                 productCD.id = UUID()
                 productCD.name = name
                 

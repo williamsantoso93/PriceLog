@@ -82,7 +82,7 @@ class AddProductDetailPriceViewModel: ObservableObject {
         ]
         
         for store in stores {
-            let storeCD = StoreCD.initContext()
+            let storeCD = StoreCD.init(context: StoreCD.viewContext)
             
             storeCD.id = store.id
             storeCD.name = store.name
@@ -109,7 +109,7 @@ class AddProductDetailPriceViewModel: ObservableObject {
             productPrice?.store = stores[locationStore].store
             
             if let productTypeCD: ProductTypeCD = ProductTypeCD.byId(id: productTypeId) {
-                let productPriceCD = ProductPriceCD.initContext()
+                let productPriceCD = ProductPriceCD.init(context: ProductPriceCD.viewContext)
                 
                 productPriceCD.id = UUID()
                 productPriceCD.value = priceValue
