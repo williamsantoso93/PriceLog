@@ -31,6 +31,7 @@ struct AddProductDetailScreen: View {
                 Section {
                     NumberFieldLabel(label: "Price", text: $viewModel.priceString)
                     
+                    //TODO: fix delete when select picker
                     Picker("Store", selection: $viewModel.locationStore) {
                         ForEach(viewModel.storesVM.indices, id: \.self) { index in
                             Text(viewModel.storesVM[index].store.name)

@@ -9,8 +9,12 @@ import Foundation
 import CoreData
 
 class CategoryScreenViewModel: ObservableObject {
-    @Published private var _categories: [Category] = categoriesMock
     @Published private var _categoriesVM: [CategoryViewModel] = []
+    private var _categories: [Category] {
+        _categoriesVM.map { categoryViewModel in
+            categoryViewModel.category
+        }
+    }
     
     @Published var searchText: String = ""
     
@@ -51,11 +55,11 @@ class CategoryScreenViewModel: ObservableObject {
     }
     
     func deleteCategory() {
-        guard let selectedCategoryIndex = selectedCategoryIndex, _categories.indices.contains(selectedCategoryIndex) else {
-            return
-        }
-        
-        _categories.remove(at: selectedCategoryIndex)
+//        guard let selectedCategoryIndex = selectedCategoryIndex, _categories.indices.contains(selectedCategoryIndex) else {
+//            return
+//        }
+//
+//        _categories.remove(at: selectedCategoryIndex)
     }
     
     func getCategoriesCD() {

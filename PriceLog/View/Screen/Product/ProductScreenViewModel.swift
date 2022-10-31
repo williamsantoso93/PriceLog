@@ -48,7 +48,7 @@ class ProductScreenViewModel: ObservableObject {
         return productsVM[selectedProductVMIndex]
     }
     var randomSearchPrompt: String {
-        category.products.isEmpty ? "" : category.products[Int.random(in: category.products.indices)].name
+        products.isEmpty ? "" : products[Int.random(in: products.indices)].product.name
     }
     
     init(categoryVM: CategoryViewModel) {

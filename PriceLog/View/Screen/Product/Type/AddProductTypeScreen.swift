@@ -31,6 +31,7 @@ struct AddProductTypeScreen: View {
             Form {
                 Section {
                     TextFieldLabel(label: "Name", text: $viewModel.name)
+                    //TODO: fix delete when select picker
                     Picker("Unit", selection: $viewModel.unitType) {
                         ForEach(UnitType.allCases, id: \.self) { unitType in
                             Text(viewModel.getUnitTitle(unitType: unitType))
