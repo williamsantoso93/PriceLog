@@ -102,7 +102,7 @@ class ProductTypeScreenViewModel: ObservableObject {
 }
 
 struct ProductTypeViewModel {
-    private let productTypeCD: ProductTypeCD
+    let productTypeCD: ProductTypeCD
     
     init(productTypeCD: ProductTypeCD) {
         self.productTypeCD = productTypeCD
