@@ -40,7 +40,7 @@ class AddCategoryViewModel: ObservableObject {
         if !name.isEmpty {
             category?.name = name
             
-            let categoryCD = CategoryCD(context: CategoryCD.viewContext)
+            let categoryCD = CategoryCD.initContext()
             categoryCD.id = UUID()
             categoryCD.name = name
             

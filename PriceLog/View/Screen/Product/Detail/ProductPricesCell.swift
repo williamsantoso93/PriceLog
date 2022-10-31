@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ProductPricesCell: View {
-    var price: Price
+    var productPrice: ProductPrice
     
     var body: some View {
         HStack {
-            Text("Rp \(price.value.splitDigit())")
+            Text("Rp \(productPrice.value.splitDigit())")
             
             Spacer()
             
             VStack(alignment: .trailing) {
-                Text(price.place.name)
+                Text(productPrice.store.name)
                 
-                Text("\(price.date.toString())")
+                Text("\(productPrice.date.toString())")
             }
         }
         .padding()
@@ -33,7 +33,7 @@ struct ProductPricesCell: View {
 struct ProductPricesCell_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ProductPricesCell(price: pricesMock[0][0])
+            ProductPricesCell(productPrice: pricesMock[0][0])
         }
         .padding()
     }

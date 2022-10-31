@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ProductDetailPriceScreen: View {
-    @StateObject private var viewModel: ProductDetailPriceViewModel
+    @StateObject private var viewModel: ProductDetailScreenPriceViewModel
     @State private var isShowAddProductDetail: Bool = false
     
-    init(viewModel: ProductDetailPriceViewModel) {
+    init(viewModel: ProductDetailScreenPriceViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -38,7 +38,7 @@ struct ProductDetailPriceScreen: View {
                             
                             Spacer()
                         }
-                        ProductPricesCell(price: lowestPrice)
+                        ProductPricesCell(productPrice: lowestPrice)
                     }
                 }
                 
@@ -55,18 +55,18 @@ struct ProductDetailPriceScreen: View {
                         }
                     }
                     
-                    ForEach(viewModel.prices.indices, id: \.self) { index in
-                        let price = viewModel.prices[index]
+                    ForEach(viewModel.productPricesVM.indices, id: \.self) { index in
+                        let productPriceVM = viewModel.productPricesVM[index]
                         
                         Button {
                             viewModel.selectedPriceIndex = index
                             isShowAddProductDetail.toggle()
                         } label: {
-                            ProductPricesCell(price: price)
+                            ProductPricesCell(productPrice: productPriceVM.productPrice)
                                 .contextMenu {
                                     Button(role: .destructive) {
                                         viewModel.selectedPriceIndex = index
-                                        viewModel.deletePrice()
+                                        viewModel.deleteProductPrice(by: productPriceVM.id)
                                     } label: {
                                         Label("Delete", systemImage: "trash")
                                     }
@@ -77,18 +77,24 @@ struct ProductDetailPriceScreen: View {
             }
             .padding(.horizontal, 12)
         }
+        .onAppear {
+            viewModel.getProductPricesCD()
+        }
         .sheet(isPresented: $isShowAddProductDetail, onDismiss: {
             viewModel.selectedPriceIndex = nil
+            viewModel.getProductPricesCD()
         }) {
             AddProductDetailScreen(
-                viewModel: AddProductDetailPriceViewModel(price: viewModel.selectedPrice),
+                viewModel: AddProductDetailPriceViewModel(productTypeId: viewModel.productTypeId, productPriceVM: viewModel.selectedPriceVM),
                 onSave: { price in
                     if let price = price {
                         viewModel.setSavedPrice(price: price)
                     }
                 },
                 onDelete: {
-                    viewModel.deletePrice()
+                    if let id = viewModel.selectedPriceVM?.id {
+                        viewModel.deleteProductPrice(by: id)
+                    }
                 }
             )
         }
@@ -99,7 +105,7 @@ struct ProductDetailPriceScreen: View {
 struct ProductDetailPriceScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProductDetailPriceScreen(viewModel: ProductDetailPriceViewModel(product: productsMock[0], selectedTypeIndex: 0))
+            ProductDetailPriceScreen(viewModel: ProductDetailScreenPriceViewModel(productTypeVM: ProductTypeViewModel(productTypeCD: ProductTypeCD.initContext())))
         }
     }
 }

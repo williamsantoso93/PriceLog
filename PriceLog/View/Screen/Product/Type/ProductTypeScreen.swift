@@ -27,7 +27,7 @@ struct ProductTypeScreen: View {
                         let productTypeVM = viewModel.productTypesVM[index]
                         
                         NavigationLink {
-                            ProductDetailPriceScreen(viewModel: ProductDetailPriceViewModel(product: viewModel.product, selectedTypeIndex: index))
+                            ProductDetailPriceScreen(viewModel: ProductDetailScreenPriceViewModel(productTypeVM: productTypeVM))
                         } label: {
                             ProductTypeCellView(
                                 type: productTypeVM.productType,
@@ -36,7 +36,7 @@ struct ProductTypeScreen: View {
                                     isShowAddProductType.toggle()
                                 }, onDelete: {
                                     viewModel.selectedTypeIndex = index
-                                    viewModel.deleteProductType(by: productTypeVM.productTypeID)
+                                    viewModel.deleteProductType(by: productTypeVM.id)
                                 }
                             )
                         }
@@ -62,7 +62,9 @@ struct ProductTypeScreen: View {
                     }
                 },
                 onDelete: {
-                    viewModel.deleteType()
+                    if let id = viewModel.selectedTypeVM?.id {
+                        viewModel.deleteProductType(by: id)
+                    }
                 }
             )
         }
@@ -88,7 +90,7 @@ struct ProductTypeScreen: View {
 struct ProductDetailScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProductTypeScreen(viewModel: ProductTypeScreenViewModel(productVM: ProductViewModel(productCD: ProductCD(context: ProductCD.viewContext))))
+            ProductTypeScreen(viewModel: ProductTypeScreenViewModel(productVM: ProductViewModel(productCD: ProductCD.initContext())))
         }
     }
 }

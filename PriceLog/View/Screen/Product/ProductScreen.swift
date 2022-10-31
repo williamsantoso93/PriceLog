@@ -38,7 +38,7 @@ struct ProductScreen: View {
                             }, onDelete: {
                                 viewModel.selectedProductIndex = index
                                 viewModel.deleteProduct()
-                                viewModel.deleteProduct(by: productVM.productID)
+                                viewModel.deleteProduct(by: productVM.id)
                             }
                         )
                     }
@@ -65,7 +65,9 @@ struct ProductScreen: View {
                     }
                 },
                 onDelete: {
-                    viewModel.deleteProduct()
+                    if let id = viewModel.selectedProductVM?.id {
+                        viewModel.deleteProduct(by: id)
+                    }
                 }
             )
         }
@@ -91,7 +93,7 @@ struct ProductScreen: View {
 struct ProductScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProductScreen(viewModel: ProductScreenViewModel(categoryVM: CategoryViewModel(categoryCD: CategoryCD(context: CategoryCD.viewContext))))
+            ProductScreen(viewModel: ProductScreenViewModel(categoryVM: CategoryViewModel(categoryCD: CategoryCD.initContext())))
         }
     }
 }

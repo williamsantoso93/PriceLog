@@ -18,4 +18,14 @@ extension ProductCD: BaseModel {
         
         return products.allObjects as? [ProductCD] ?? []
     }
+    
+    static func getByProductType(by productTypeId: NSManagedObjectID) -> ProductCD? {
+        guard let productType = ProductTypeCD.byId(id: productTypeId) as? ProductTypeCD,
+              let productId = productType.product?.objectID
+        else {
+            return nil
+        }
+        
+        return ProductCD.byId(id: productId)
+    }
 }

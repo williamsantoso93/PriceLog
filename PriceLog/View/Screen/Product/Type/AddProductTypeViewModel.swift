@@ -60,7 +60,7 @@ class AddProductTypeViewModel: ObservableObject {
             productType?.unit = unit
             
             if let productCD: ProductCD = ProductCD.byId(id: productId) {
-                let productTypeCD = ProductTypeCD(context: ProductTypeCD.viewContext)
+                let productTypeCD = ProductTypeCD.initContext()
                 productTypeCD.id  = UUID()
                 productTypeCD.name = name
                 productTypeCD.unit = unit
@@ -68,7 +68,13 @@ class AddProductTypeViewModel: ObservableObject {
                 
                 productCD.addToProductTypes(productTypeCD)
                 
-                completion(productType)
+                do {
+                    try productTypeCD.save()
+                    
+                    completion(productType)
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
         }
     }

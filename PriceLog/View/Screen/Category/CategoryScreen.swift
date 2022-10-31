@@ -59,7 +59,9 @@ struct CategoryScreen: View {
                         }
                     },
                     onDelete: {
-                        viewModel.deleteCategory()
+                        if let id = viewModel.selectedCategoryVM?.id {
+                            viewModel.deleteCategory(by: id)
+                        }
                     }
                 )
             }

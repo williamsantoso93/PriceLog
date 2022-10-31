@@ -33,6 +33,10 @@ extension BaseModel {
         try save()
     }
     
+    static func initContext() -> Self {
+        self.init(context: self.viewContext)
+    }
+    
     static func all<T>() -> [T] where T: NSManagedObject {
         let fetchRequest: NSFetchRequest<T> = NSFetchRequest(entityName: String(describing: T.self))
         

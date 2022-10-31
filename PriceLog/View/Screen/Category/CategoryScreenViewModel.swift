@@ -21,7 +21,7 @@ class CategoryScreenViewModel: ObservableObject {
     }
     var categories: [(id: NSManagedObjectID, category: Category)] {
         categoriesVM.map { categoryViewModel in
-            (categoryViewModel.categoryID, categoryViewModel.category)
+            (categoryViewModel.id, categoryViewModel.category)
         }
     }
     
@@ -94,7 +94,7 @@ struct CategoryViewModel {
         self.categoryCD = categoryCD
     }
     
-    var categoryID: NSManagedObjectID {
+    var id: NSManagedObjectID {
         categoryCD.objectID
     }
     
@@ -111,7 +111,7 @@ struct CategoryViewModel {
         try categoryCD.delete()
     }
     
-    func getProducts() -> [ProductViewModel] {
-        ProductCD.getProducts(by: categoryID).map(ProductViewModel.init)
+    func getProductsVM() -> [ProductViewModel] {
+        ProductCD.getProducts(by: id).map(ProductViewModel.init)
     }
 }

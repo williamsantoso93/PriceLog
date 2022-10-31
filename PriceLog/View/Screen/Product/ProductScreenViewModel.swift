@@ -12,7 +12,7 @@ class ProductScreenViewModel: ObservableObject {
     @Published private var _categoryVM: CategoryViewModel
     @Published private var _productsVM: [ProductViewModel] = []
     var categoryId: NSManagedObjectID {
-        _categoryVM.categoryID
+        _categoryVM.id
     }
     var category: Category {
         _categoryVM.category
@@ -30,7 +30,7 @@ class ProductScreenViewModel: ObservableObject {
     }
     var products: [(id: NSManagedObjectID, product: Product)] {
         productsVM.map { productViewModel in
-            (productViewModel.productID, productViewModel.product)
+            (productViewModel.id, productViewModel.product)
         }
     }
                     
@@ -57,7 +57,7 @@ class ProductScreenViewModel: ObservableObject {
     
     func getProductsCD() {
         DispatchQueue.main.async {
-            self._productsVM = self._categoryVM.getProducts()
+            self._productsVM = self._categoryVM.getProductsVM()
         }
     }
     
@@ -107,7 +107,7 @@ struct ProductViewModel {
         self.productCD = productCD
     }
     
-    var productID: NSManagedObjectID {
+    var id: NSManagedObjectID {
         productCD.objectID
     }
     
@@ -116,7 +116,7 @@ struct ProductViewModel {
             id: productCD.id ?? UUID(),
             name: productCD.name ?? "",
             image: nil,
-            types: []
+            types: getProductTypes()
         )
     }
     
@@ -124,7 +124,12 @@ struct ProductViewModel {
         try productCD.delete()
     }
     
-    func getProductTypes() -> [ProductTypeViewModel] {
-        ProductTypeCD.getProductTypes(by: productID).map(ProductTypeViewModel.init)
+    func getProductTypesVM() -> [ProductTypeViewModel] {
+        ProductTypeCD.getProductTypes(by: id).map(ProductTypeViewModel.init)
+    }
+    func getProductTypes() -> [ProductType] {
+        getProductTypesVM().map { productTypeViewModel in
+            productTypeViewModel.productType
+        }
     }
 }
