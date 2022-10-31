@@ -10,6 +10,7 @@ import CoreData
 
 class AddProductViewModel: ObservableObject {
     private var categoryId: NSManagedObjectID
+    private var productVM: ProductViewModel?
     private var product: Product?
     
     @Published var name: String = ""
@@ -36,6 +37,7 @@ class AddProductViewModel: ObservableObject {
     
     init(categoryId: NSManagedObjectID, productVM: ProductViewModel? = nil) {
         self.categoryId = categoryId
+        self.productVM = productVM
         
         if let product = productVM?.product {
             self.product = product
@@ -47,16 +49,16 @@ class AddProductViewModel: ObservableObject {
         }
     }
     
-    //TODO: update data
-    
     func save(completion: (Product?) -> Void) {
         if !name.isEmpty {
             product?.name = name
             product?.image = image
             
             if let categoryCD: CategoryCD = CategoryCD.byId(id: categoryId) {
-                let productCD = ProductCD.init(context: ProductCD.viewContext)
-                productCD.id = UUID()
+                let productCD = getProductCD()
+                if !isEdit {
+                    productCD.id = UUID()
+                }
                 productCD.name = name
                 
                 categoryCD.addToProducts(productCD)
@@ -69,6 +71,14 @@ class AddProductViewModel: ObservableObject {
                 
                 completion(product)
             }
+        }
+    }
+    
+    private func getProductCD() -> ProductCD {
+        if isEdit, let productCD = productVM?.productCD {
+            return productCD
+        } else {
+            return ProductCD.init(context: ProductCD.viewContext)
         }
     }
 }
