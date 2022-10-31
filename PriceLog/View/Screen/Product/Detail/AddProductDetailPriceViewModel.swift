@@ -97,8 +97,6 @@ class AddProductDetailPriceViewModel: ObservableObject {
         getStores()
     }
     
-    //TODO: update data
-    
     func save(completion: (ProductPrice?) -> Void) {
         if !priceString.isEmpty {
             productPrice?.value = priceValue
@@ -109,19 +107,18 @@ class AddProductDetailPriceViewModel: ObservableObject {
             productPrice?.store = stores[locationStore].store
             
             if let productTypeCD: ProductTypeCD = ProductTypeCD.byId(id: productTypeId) {
-                let productPriceCD = ProductPriceCD.init(context: ProductPriceCD.viewContext)
+                let productPriceCD = getProductPriceCD()
                 
-                productPriceCD.id = UUID()
                 productPriceCD.value = priceValue
                 productPriceCD.date = date
                 if !isEdit {
+                    productPriceCD.id = UUID()
                     productPriceCD.createdAt = Date()
                 }
                 productPriceCD.updatedAt = Date()
                 productPriceCD.store = storesVM[locationStore].getStoreCD()
                 
                 productTypeCD.addToProductPrices(productPriceCD)
-                
                 
                 do {
                     try productPriceCD.save()
@@ -131,6 +128,14 @@ class AddProductDetailPriceViewModel: ObservableObject {
                     print(error.localizedDescription)
                 }
             }
+        }
+    }
+    
+    private func getProductPriceCD() -> ProductPriceCD {
+        if isEdit, let productPriceCD = productPriceVM?.productPriceCD {
+            return productPriceCD
+        } else {
+            return ProductPriceCD.init(context: ProductPriceCD.viewContext)
         }
     }
 }

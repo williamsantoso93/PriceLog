@@ -142,7 +142,7 @@ struct StoreViewModel {
 }
 
 struct ProductPriceViewModel {
-    private let productPriceCD: ProductPriceCD
+    let productPriceCD: ProductPriceCD
     
     init(productPriceCD: ProductPriceCD) {
         self.productPriceCD = productPriceCD
