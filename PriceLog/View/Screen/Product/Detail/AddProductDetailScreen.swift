@@ -11,10 +11,10 @@ struct AddProductDetailScreen: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var viewModel: AddProductDetailPriceViewModel
     
-    let onSave: ((Price?) -> Void)?
+    let onSave: ((ProductPrice?) -> Void)?
     let onDelete: (() -> Void)?
     
-    init(viewModel: AddProductDetailPriceViewModel = AddProductDetailPriceViewModel(), onSave: ((Price?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+    init(viewModel: AddProductDetailPriceViewModel, onSave: ((ProductPrice?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
         self.viewModel = viewModel
         self.onSave = onSave
         self.onDelete = onDelete
@@ -31,9 +31,10 @@ struct AddProductDetailScreen: View {
                 Section {
                     NumberFieldLabel(label: "Price", text: $viewModel.priceString)
                     
-                    Picker("Location", selection: $viewModel.locationSelection) {
-                        ForEach(viewModel.locations.indices, id: \.self) { index in
-                            Text(viewModel.locations[index])
+                    //TODO: fix delete when select picker
+                    Picker("Store", selection: $viewModel.locationStore) {
+                        ForEach(viewModel.storesVM.indices, id: \.self) { index in
+                            Text(viewModel.storesVM[index].store.name)
                         }
                     }
                     DatePicker("Date", selection: $viewModel.date, displayedComponents: .date)
@@ -47,6 +48,9 @@ struct AddProductDetailScreen: View {
                         }
                     }
                 }
+            }
+            .onAppear {
+                viewModel.getStores()
             }
             .navigationTitle(screenTitle)
             .navigationBarTitleDisplayMode(.inline)
@@ -81,8 +85,8 @@ struct AddProductDetailScreen: View {
     }
 }
 
-struct AddProductDetailScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        AddProductDetailScreen(viewModel: AddProductDetailPriceViewModel(price: pricesMock[0][2]))
-    }
-}
+//struct AddProductDetailScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddProductDetailScreen(viewModel: AddProductDetailPriceViewModel(productPrice: pricesMock[0][2]))
+//    }
+//}

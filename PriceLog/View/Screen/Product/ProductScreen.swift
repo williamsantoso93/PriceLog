@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProductScreen: View {
-    @StateObject private var viewModel: ProductViewModel
+    @StateObject private var viewModel: ProductScreenViewModel
     @State private var isShowAddProduct: Bool = false
     
     private let gridColumns: [GridItem] = [
@@ -17,27 +17,28 @@ struct ProductScreen: View {
         GridItem(.flexible())
     ]
     
-    init(viewModel: ProductViewModel) {
+    init(viewModel: ProductScreenViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
-        ScrollView {
+        VStack {
             LazyVGrid(columns: gridColumns, alignment: .leading) {
-                ForEach(viewModel.products.indices, id: \.self) { index in
-                    let product = viewModel.products[index]
+                ForEach(viewModel.productsVM.indices, id: \.self) { index in
+                    let productVM = viewModel.productsVM[index]
                     
                     NavigationLink {
-                        ProductTypeScreen(viewModel: ProductTypeViewModel(product: product))
+                        ProductTypeScreen(viewModel: ProductTypeScreenViewModel(productVM: productVM))
                     } label: {
                         CategoryCellView(
-                            title: product.name,
+                            title: productVM.product.name,
                             onEdit: {
                                 viewModel.selectedProductIndex = index
                                 isShowAddProduct.toggle()
                             }, onDelete: {
                                 viewModel.selectedProductIndex = index
                                 viewModel.deleteProduct()
+                                viewModel.deleteProduct(by: productVM.id)
                             }
                         )
                     }
@@ -47,20 +48,26 @@ struct ProductScreen: View {
             
             Spacer(minLength: 0)
         }
+        .onAppear {
+            viewModel.getProductsCD()
+        }
         .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
         .navigationTitle(viewModel.categoryName)
         .sheet(isPresented: $isShowAddProduct, onDismiss: {
             viewModel.selectedProductIndex = nil
+            viewModel.getProductsCD()
         }) {
             AddProductScreen(
-                viewModel: AddProductViewModel(product: viewModel.selectedProduct),
+                viewModel: AddProductViewModel(categoryId: viewModel.categoryId, productVM: viewModel.selectedProductVM),
                 onSave: { product in
                     if let product = product {
                         viewModel.setSavedProduct(product: product)
                     }
                 },
                 onDelete: {
-                    viewModel.deleteProduct()
+                    if let id = viewModel.selectedProductVM?.id {
+                        viewModel.deleteProduct(by: id)
+                    }
                 }
             )
         }
@@ -72,6 +79,13 @@ struct ProductScreen: View {
                     Image(systemName: "plus")
                 }
             }
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    viewModel.deleteAll()
+                } label: {
+                    Text("Delete All")
+                }
+            }
         }
     }
 }
@@ -79,7 +93,7 @@ struct ProductScreen: View {
 struct ProductScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProductScreen(viewModel: ProductViewModel(category: categoriesMock[0]))
+            ProductScreen(viewModel: ProductScreenViewModel(categoryVM: CategoryViewModel(categoryCD: CategoryCD.initContext())))
         }
     }
 }

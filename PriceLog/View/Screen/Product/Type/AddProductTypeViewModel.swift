@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import CoreData
 
 class AddProductTypeViewModel: ObservableObject {
-    var type: ProductType?
+    private var productId: NSManagedObjectID
+    private var productType: ProductType?
     
     @Published var name: String = ""
     @Published var unitType: UnitType = .kg
@@ -21,7 +23,7 @@ class AddProductTypeViewModel: ObservableObject {
     var isEdit: Bool = false
     
     var isChange: Bool {
-        if let type = type {
+        if let type = productType {
             return (
                 self.name != type.name ||
                 self.unitType != type.unitType ||
@@ -32,14 +34,16 @@ class AddProductTypeViewModel: ObservableObject {
         return false
     }
     
-    init(type: ProductType? = nil) {
-        if let type = type {
-            self.type = type
-            self.name = type.name
-            self.unitString = type.unit.splitDigit(maximumFractionDigits: 2)
+    init(productId: NSManagedObjectID, productTypeVM: ProductTypeViewModel? = nil) {
+        self.productId = productId
+        
+        if let productType = productTypeVM?.productType {
+            self.productType = productType
+            self.name = productType.name
+            self.unitString = productType.unit.splitDigit(maximumFractionDigits: 2)
             isEdit = true
         } else {
-            self.type = ProductType()
+            self.productType = ProductType()
         }
     }
     
@@ -47,14 +51,31 @@ class AddProductTypeViewModel: ObservableObject {
         unitType.getTitle(by: unit)
     }
     
+    //TODO: update data
+    
     func save(completion: (ProductType?) -> Void) {
         if !name.isEmpty, !unitString.isEmpty {
-            type?.name = name
-            type?.unitType = unitType
-            type?.unit = unit
+            productType?.name = name
+            productType?.unitType = unitType
+            productType?.unit = unit
             
-            //TODO: save action
-            completion(type)
+            if let productCD: ProductCD = ProductCD.byId(id: productId) {
+                let productTypeCD = ProductTypeCD.initContext()
+                productTypeCD.id  = UUID()
+                productTypeCD.name = name
+                productTypeCD.unit = unit
+                productTypeCD.unitType = unitType.rawValue
+                
+                productCD.addToProductTypes(productTypeCD)
+                
+                do {
+                    try productTypeCD.save()
+                    
+                    completion(productType)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }

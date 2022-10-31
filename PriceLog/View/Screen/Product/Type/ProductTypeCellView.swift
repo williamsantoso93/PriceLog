@@ -50,7 +50,7 @@ struct ProductTypeCellView: View {
                         HStack(alignment: .center) {
                             Image(systemName: "house")
                             
-                            Text("\(lowestPrice.place.name)")
+                            Text("\(lowestPrice.store.name)")
                         }
                     }
                 }

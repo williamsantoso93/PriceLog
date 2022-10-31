@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoryScreen: View {
-    @StateObject private var viewModel = CategoryViewModel()
+    @StateObject private var viewModel = CategoryScreenViewModel()
     @State private var isShowAddCategory: Bool = false
     
     private let gridColumns: [GridItem] = [
@@ -21,43 +21,47 @@ struct CategoryScreen: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: gridColumns, alignment: .leading) {
-                    ForEach(viewModel.categories.indices, id: \.self) { index in
-                        let category = viewModel.categories[index]
+                    ForEach(viewModel.categoriesVM.indices, id: \.self) { index in
+                        let categoryVM = viewModel.categoriesVM[index]
                         
                         NavigationLink {
-                            ProductScreen(viewModel: ProductViewModel(category: category))
+                            ProductScreen(viewModel: ProductScreenViewModel(categoryVM: categoryVM))
                         } label: {
                             CategoryCellView(
-                                title: category.name,
+                                title: categoryVM.category.name,
                                 onEdit: {
                                     viewModel.selectedCategoryIndex = index
                                     isShowAddCategory.toggle()
                                 }, onDelete: {
                                     viewModel.selectedCategoryIndex = index
-                                    viewModel.deleteCategory()
+                                    viewModel.deleteCategory(by: viewModel.categories[index].id)
                                 }
                             )
                         }
                     }
                 }
                 .padding(.horizontal, 12)
-                
-                Spacer(minLength: 0)
+            }
+            .onAppear {
+                viewModel.getCategoriesCD()
             }
             .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
             .navigationTitle("Category")
             .sheet(isPresented: $isShowAddCategory, onDismiss: {
                 viewModel.selectedCategoryIndex = nil
+                viewModel.getCategoriesCD()
             }) {
                 AddCategoryScreen(
-                    viewModel: AddCategoryViewModel(category: viewModel.selectedCategory),
+                    viewModel: AddCategoryViewModel(categoryVM: viewModel.selectedCategoryVM),
                     onSave: { category in
                         if let category = category {
                             viewModel.setSavedCategory(category: category)
                         }
                     },
                     onDelete: {
-                        viewModel.deleteCategory()
+                        if let id = viewModel.selectedCategoryVM?.id {
+                            viewModel.deleteCategory(by: id)
+                        }
                     }
                 )
             }
@@ -67,6 +71,13 @@ struct CategoryScreen: View {
                         isShowAddCategory.toggle()
                     } label: {
                         Image(systemName: "plus")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        viewModel.deleteAll()
+                    } label: {
+                        Text("Delete All")
                     }
                 }
             }

@@ -14,7 +14,7 @@ struct AddProductTypeScreen: View {
     let onSave: ((ProductType?) -> Void)?
     let onDelete: (() -> Void)?
     
-    init(viewModel: AddProductTypeViewModel = AddProductTypeViewModel(), onSave: ((ProductType?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+    init(viewModel: AddProductTypeViewModel, onSave: ((ProductType?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
         self.viewModel = viewModel
         self.onSave = onSave
         self.onDelete = onDelete
@@ -31,6 +31,7 @@ struct AddProductTypeScreen: View {
             Form {
                 Section {
                     TextFieldLabel(label: "Name", text: $viewModel.name)
+                    //TODO: fix delete when select picker
                     Picker("Unit", selection: $viewModel.unitType) {
                         ForEach(UnitType.allCases, id: \.self) { unitType in
                             Text(viewModel.getUnitTitle(unitType: unitType))
@@ -81,8 +82,8 @@ struct AddProductTypeScreen: View {
     }
 }
 
-struct AddProductTypeScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        AddProductTypeScreen(viewModel: AddProductTypeViewModel(type: productTypesMock[3]))
-    }
-}
+//struct AddProductTypeScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddProductTypeScreen(viewModel: AddProductTypeViewModel(type: productTypesMock[3]))
+//    }
+//}

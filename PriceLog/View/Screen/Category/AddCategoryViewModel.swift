@@ -8,6 +8,7 @@
 import Foundation
 
 class AddCategoryViewModel: ObservableObject {
+    var categoryVM: CategoryViewModel?
     var category: Category?
     
     @Published var name: String = ""
@@ -22,8 +23,9 @@ class AddCategoryViewModel: ObservableObject {
         return false
     }
     
-    init(category: Category? = nil) {
-        if let category = category {
+    init(categoryVM: CategoryViewModel? = nil) {
+        self.categoryVM = categoryVM
+        if let category = categoryVM?.category {
             self.category = category
             self.name = category.name
             isEdit = true
@@ -32,12 +34,23 @@ class AddCategoryViewModel: ObservableObject {
         }
     }
     
+    //TODO: update when edit
+    
     func save(completion: (Category?) -> Void) {
         if !name.isEmpty {
             category?.name = name
             
-            //TODO: save action
-            completion(category)
+            let categoryCD = CategoryCD.initContext()
+            categoryCD.id = UUID()
+            categoryCD.name = name
+            
+            do {
+                try categoryCD.save()
+                
+                completion(category)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

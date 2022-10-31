@@ -28,17 +28,17 @@ let productTypesMock: [ProductType] = [
     ProductType(name: "Besar", unit: 450.05, unitType: .l, prices: pricesMock[2]),
 ]
 
-let pricesMock: [[Price]] = [
+let pricesMock: [[ProductPrice]] = [
     [
-        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "02/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Indomaret"), value: 20000, date: "02/10/2022".toDate(format: "dd/MM/yyyy")!),
-        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "03/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Super Indo"), value: 22500, date: "03/10/2022".toDate(format: "dd/MM/yyyy")!),
-        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "04/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Food Hall"), value: 21000, date: "04/10/2022".toDate(format: "dd/MM/yyyy")!),
+        ProductPrice(createdAt: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedAt: "02/10/2022".toDate(format: "dd/MM/yyyy")!, store: Store(name: "Indomaret"), value: 20000, date: "02/10/2022".toDate(format: "dd/MM/yyyy")!),
+        ProductPrice(createdAt: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedAt: "03/10/2022".toDate(format: "dd/MM/yyyy")!, store: Store(name: "Super Indo"), value: 22500, date: "03/10/2022".toDate(format: "dd/MM/yyyy")!),
+        ProductPrice(createdAt: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedAt: "04/10/2022".toDate(format: "dd/MM/yyyy")!, store: Store(name: "Food Hall"), value: 21000, date: "04/10/2022".toDate(format: "dd/MM/yyyy")!),
     ],
     [
-        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "02/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Food Hall"), value: 21000, date: "02/10/2022".toDate(format: "dd/MM/yyyy")!),
-        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "03/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Super Indo"), value: 22500, date: "03/10/2022".toDate(format: "dd/MM/yyyy")!),
+        ProductPrice(createdAt: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedAt: "02/10/2022".toDate(format: "dd/MM/yyyy")!, store: Store(name: "Food Hall"), value: 21000, date: "02/10/2022".toDate(format: "dd/MM/yyyy")!),
+        ProductPrice(createdAt: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedAt: "03/10/2022".toDate(format: "dd/MM/yyyy")!, store: Store(name: "Super Indo"), value: 22500, date: "03/10/2022".toDate(format: "dd/MM/yyyy")!),
     ],
     [
-        Price(createdDate: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedDate: "04/10/2022".toDate(format: "dd/MM/yyyy")!, place: Place(name: "Super Indo"), value: 22500, date: "04/10/2022".toDate(format: "dd/MM/yyyy")!),
+        ProductPrice(createdAt: "01/10/2022".toDate(format: "dd/MM/yyyy")!, updatedAt: "04/10/2022".toDate(format: "dd/MM/yyyy")!, store: Store(name: "Super Indo"), value: 22500, date: "04/10/2022".toDate(format: "dd/MM/yyyy")!),
     ],
 ]

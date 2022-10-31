@@ -6,66 +6,132 @@
 //
 
 import Foundation
+import CoreData
 
 class AddProductDetailPriceViewModel: ObservableObject {
-    var price: Price?
+    private var productTypeId: NSManagedObjectID
+    private var productPriceVM: ProductPriceViewModel?
+    private var productPrice: ProductPrice?
     
     @Published var priceString: String = ""
     private var priceValue: Double {
         priceString.toDouble() ?? 0
     }
     
-    @Published var locationSelection: Int = 0
-    //TODO: change to actual data
-    let locations: [String] = [
-        "Superindo",
-        "Indomaret"
-    ]
+    @Published var locationStore: Int = 0
+    @Published var storesVM: [StoreViewModel] = []
+    var stores: [(id: NSManagedObjectID, store: Store)] {
+        storesVM.map { storeCD in
+            (storeCD.id, storeCD.store)
+        }
+    }
     
     @Published var date: Date = Date()
     
     var isEdit: Bool = false
     
     var isChange: Bool {
-        if let price = price {
+        if let productPrice = productPrice {
             return (
-                self.priceValue != price.value ||
-                self.date != price.date
+                self.priceValue != productPrice.value ||
+                self.date != productPrice.date
             )
         }
         
         return false
     }
     
-    init(price: Price? = nil) {
-        if let price = price {
-            self.price = price
-            self.priceString = price.value.splitDigit(maximumFractionDigits: 2)
-            self.date = price.date
-            
-            if let locationIndex = locations.firstIndex(where: { location in
-                location.lowercased() == price.place.name.lowercased()
-            }) {
-                self.locationSelection = locationIndex
-            }
+    init(productTypeId: NSManagedObjectID, productPriceVM: ProductPriceViewModel? = nil) {
+        self.productTypeId = productTypeId
+        self.productPriceVM = productPriceVM
+        
+        if let productPriceVM = productPriceVM {
+            self.productPriceVM = productPriceVM
+            self.productPrice = productPriceVM.productPrice
+            self.priceString = productPriceVM.productPrice.value.splitDigit(maximumFractionDigits: 2)
+            self.date = productPriceVM.productPrice.date
             
             isEdit = true
-        } else {
-            self.price = Price()
         }
     }
     
-    func save(completion: (Price?) -> Void) {
+    func getStores() {
+        DispatchQueue.main.async {
+            self.storesVM = StoreCD.all().map(StoreViewModel.init)
+            
+            if self.storesVM.isEmpty {
+                self.setInitialStore()
+            }
+            
+            if let productPriceVM = self.productPriceVM,
+               let storeId = productPriceVM.store?.id {
+                if let locationIndex = self.stores.firstIndex(where: { (_, store) in
+                    storeId == store.id
+                }) {
+                    self.locationStore = locationIndex
+                }
+            }
+        }
+    }
+    
+    func setInitialStore() {
+        let stores: [Store] = [
+            Store(name: "Superindo"),
+            Store(name: "Indomaret"),
+            Store(name: "Food Hall"),
+        ]
+        
+        for store in stores {
+            let storeCD = StoreCD.initContext()
+            
+            storeCD.id = store.id
+            storeCD.name = store.name
+            
+            do {
+                try storeCD.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        getStores()
+    }
+    
+    //TODO: update data
+    
+    func save(completion: (ProductPrice?) -> Void) {
         if !priceString.isEmpty {
-            price?.value = priceValue
-            price?.date = date
-            price?.updatedDate = Date()
+            productPrice?.value = priceValue
+            productPrice?.date = date
+            productPrice?.updatedAt = Date()
             
             //TODO: Temp place
-            price?.place = Place(name: locations[locationSelection])
+            productPrice?.store = stores[locationStore].store
             
-            //TODO: save action
-            completion(price)
+            if let productTypeCD: ProductTypeCD = ProductTypeCD.byId(id: productTypeId) {
+                let productPriceCD = ProductPriceCD.initContext()
+                
+                productPriceCD.id = UUID()
+                productPriceCD.value = priceValue
+                productPriceCD.date = date
+                if !isEdit {
+                    productPriceCD.createdAt = Date()
+                }
+                productPriceCD.updatedAt = Date()
+                productPriceCD.store = storesVM[locationStore].getStoreCD()
+                
+                productTypeCD.addToProductPrices(productPriceCD)
+                
+                
+                do {
+                    try productPriceCD.save()
+                    
+                    completion(productPrice)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }
+

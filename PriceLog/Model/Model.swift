@@ -29,9 +29,9 @@ struct ProductType: Identifiable {
     var unit: Double = 0
     var unitType: UnitType = .kg
     var code: String?
-    var prices: [Price] = []
+    var prices: [ProductPrice] = []
     
-    var lowestPrice: Price? {
+    var lowestPrice: ProductPrice? {
         prices.sorted {
             $0.value < $1.value
         }.first
@@ -43,7 +43,7 @@ struct ProductType: Identifiable {
             String(unit),
             unitType.getTitle(by: Double(unit)),
             String(lowestPrice?.value ?? 0),
-            lowestPrice?.place.name ?? "",
+            lowestPrice?.store.name ?? "",
         ]
         .joinedWithComma()
         .lowercased()
@@ -93,17 +93,17 @@ enum UnitType: String, CaseIterable {
     }
 }
 
-struct Price: Identifiable {
+struct ProductPrice: Identifiable {
     var id: UUID = UUID()
-    var createdDate: Date = Date()
-    var updatedDate: Date = Date()
-    var place: Place = Place()
+    var createdAt: Date = Date()
+    var updatedAt: Date = Date()
+    var store: Store = Store()
     var value: Double = 0
     var date: Date = Date()
     
     var keywords: String {
         [
-            place.name,
+            store.name,
             String(value),
         ]
         .joinedWithComma()
@@ -111,7 +111,7 @@ struct Price: Identifiable {
     }
 }
 
-struct Place: Identifiable {
+struct Store: Identifiable {
     var id: UUID = UUID()
     var name: String = ""
 }
