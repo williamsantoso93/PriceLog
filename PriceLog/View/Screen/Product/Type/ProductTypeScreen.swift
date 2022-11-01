@@ -90,7 +90,7 @@ struct ProductTypeScreen: View {
 struct ProductDetailScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProductTypeScreen(viewModel: ProductTypeScreenViewModel(productVM: ProductViewModel(productCD: ProductCD.initContext())))
+            ProductTypeScreen(viewModel: ProductTypeScreenViewModel(productVM: ProductViewModel(productCD: ProductCD.init(context: ProductCD.viewContext))))
         }
     }
 }

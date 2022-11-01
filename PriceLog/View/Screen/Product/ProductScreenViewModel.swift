@@ -101,7 +101,7 @@ class ProductScreenViewModel: ObservableObject {
 }
 
 struct ProductViewModel {
-    private let productCD: ProductCD
+    let productCD: ProductCD
     
     init(productCD: ProductCD) {
         self.productCD = productCD
@@ -127,6 +127,7 @@ struct ProductViewModel {
     func getProductTypesVM() -> [ProductTypeViewModel] {
         ProductTypeCD.getProductTypes(by: id).map(ProductTypeViewModel.init)
     }
+    
     func getProductTypes() -> [ProductType] {
         getProductTypesVM().map { productTypeViewModel in
             productTypeViewModel.productType

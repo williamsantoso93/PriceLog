@@ -57,7 +57,7 @@ class AddProductDetailPriceViewModel: ObservableObject {
     
     func getStores() {
         DispatchQueue.main.async {
-            self.storesVM = StoreCD.all().map(StoreViewModel.init)
+            self.storesVM = StoreCD.getAllSortedByName().map(StoreViewModel.init)
             
             if self.storesVM.isEmpty {
                 self.setInitialStore()
@@ -82,7 +82,7 @@ class AddProductDetailPriceViewModel: ObservableObject {
         ]
         
         for store in stores {
-            let storeCD = StoreCD.initContext()
+            let storeCD = StoreCD.init(context: StoreCD.viewContext)
             
             storeCD.id = store.id
             storeCD.name = store.name
@@ -97,8 +97,6 @@ class AddProductDetailPriceViewModel: ObservableObject {
         getStores()
     }
     
-    //TODO: update data
-    
     func save(completion: (ProductPrice?) -> Void) {
         if !priceString.isEmpty {
             productPrice?.value = priceValue
@@ -109,19 +107,18 @@ class AddProductDetailPriceViewModel: ObservableObject {
             productPrice?.store = stores[locationStore].store
             
             if let productTypeCD: ProductTypeCD = ProductTypeCD.byId(id: productTypeId) {
-                let productPriceCD = ProductPriceCD.initContext()
+                let productPriceCD = getProductPriceCD()
                 
-                productPriceCD.id = UUID()
                 productPriceCD.value = priceValue
                 productPriceCD.date = date
                 if !isEdit {
+                    productPriceCD.id = UUID()
                     productPriceCD.createdAt = Date()
                 }
                 productPriceCD.updatedAt = Date()
-                productPriceCD.store = storesVM[locationStore].getStoreCD()
+                productPriceCD.store = storesVM[locationStore].storeCD
                 
                 productTypeCD.addToProductPrices(productPriceCD)
-                
                 
                 do {
                     try productPriceCD.save()
@@ -131,6 +128,14 @@ class AddProductDetailPriceViewModel: ObservableObject {
                     print(error.localizedDescription)
                 }
             }
+        }
+    }
+    
+    private func getProductPriceCD() -> ProductPriceCD {
+        if isEdit, let productPriceCD = productPriceVM?.productPriceCD {
+            return productPriceCD
+        } else {
+            return ProductPriceCD.init(context: ProductPriceCD.viewContext)
         }
     }
 }

@@ -114,35 +114,8 @@ class ProductDetailScreenPriceViewModel: ObservableObject {
     }
 }
 
-struct StoreViewModel {
-    private let storeCD: StoreCD
-    
-    init(storeCD: StoreCD) {
-        self.storeCD = storeCD
-    }
-    
-    var id: NSManagedObjectID {
-        storeCD.objectID
-    }
-    
-    var store: Store {
-        Store(
-            id: storeCD.id ?? UUID(),
-            name: storeCD.name ?? ""
-        )
-    }
-    
-    func delete() throws {
-        try storeCD.delete()
-    }
-    
-    func getStoreCD() -> StoreCD {
-        storeCD
-    }
-}
-
 struct ProductPriceViewModel {
-    private let productPriceCD: ProductPriceCD
+    let productPriceCD: ProductPriceCD
     
     init(productPriceCD: ProductPriceCD) {
         self.productPriceCD = productPriceCD

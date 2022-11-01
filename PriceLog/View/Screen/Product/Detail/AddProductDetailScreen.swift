@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AddProductDetailScreen: View {
     @Environment(\.dismiss) private var dismiss
@@ -31,13 +32,20 @@ struct AddProductDetailScreen: View {
                 Section {
                     NumberFieldLabel(label: "Price", text: $viewModel.priceString)
                     
-                    //TODO: fix delete when select picker
                     Picker("Store", selection: $viewModel.locationStore) {
                         ForEach(viewModel.storesVM.indices, id: \.self) { index in
                             Text(viewModel.storesVM[index].store.name)
                         }
                     }
+                    .pickerStyle(.menu)
                     DatePicker("Date", selection: $viewModel.date, displayedComponents: .date)
+                }
+                Section {
+                    NavigationLink {
+                        StoreScreen()
+                    } label: {
+                        Text("Stores")
+                    }
                 }
                 
                 if let onDelete = onDelete, viewModel.isEdit {
@@ -85,8 +93,8 @@ struct AddProductDetailScreen: View {
     }
 }
 
-//struct AddProductDetailScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddProductDetailScreen(viewModel: AddProductDetailPriceViewModel(productPrice: pricesMock[0][2]))
-//    }
-//}
+struct AddProductDetailScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        AddProductDetailScreen(viewModel: AddProductDetailPriceViewModel(productTypeId: NSManagedObjectID()))
+    }
+}

@@ -10,6 +10,7 @@ import CoreData
 
 class AddProductTypeViewModel: ObservableObject {
     private var productId: NSManagedObjectID
+    private var productTypeVM: ProductTypeViewModel?
     private var productType: ProductType?
     
     @Published var name: String = ""
@@ -36,6 +37,7 @@ class AddProductTypeViewModel: ObservableObject {
     
     init(productId: NSManagedObjectID, productTypeVM: ProductTypeViewModel? = nil) {
         self.productId = productId
+        self.productTypeVM = productTypeVM
         
         if let productType = productTypeVM?.productType {
             self.productType = productType
@@ -51,17 +53,17 @@ class AddProductTypeViewModel: ObservableObject {
         unitType.getTitle(by: unit)
     }
     
-    //TODO: update data
-    
     func save(completion: (ProductType?) -> Void) {
-        if !name.isEmpty, !unitString.isEmpty {
+        if !unitString.isEmpty {
             productType?.name = name
             productType?.unitType = unitType
             productType?.unit = unit
             
             if let productCD: ProductCD = ProductCD.byId(id: productId) {
-                let productTypeCD = ProductTypeCD.initContext()
-                productTypeCD.id  = UUID()
+                let productTypeCD = getProductTypeCD()
+                if !isEdit {
+                    productTypeCD.id  = UUID()
+                }
                 productTypeCD.name = name
                 productTypeCD.unit = unit
                 productTypeCD.unitType = unitType.rawValue
@@ -76,6 +78,14 @@ class AddProductTypeViewModel: ObservableObject {
                     print(error.localizedDescription)
                 }
             }
+        }
+    }
+    
+    private func getProductTypeCD() -> ProductTypeCD {
+        if isEdit, let productTypeCD = productTypeVM?.productTypeCD {
+            return productTypeCD
+        } else {
+            return ProductTypeCD.init(context: ProductTypeCD.viewContext)
         }
     }
 }

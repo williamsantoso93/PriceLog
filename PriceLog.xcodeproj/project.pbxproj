@@ -25,6 +25,8 @@
 		E04F8CA5290592EC0028B228 /* CategoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04F8CA4290592EC0028B228 /* CategoryCellView.swift */; };
 		E06D05C2286FF7E40081B70F /* AddProductTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */; };
 		E06D05C4286FF9410081B70F /* TextFieldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C3286FF9410081B70F /* TextFieldLabel.swift */; };
+		E0B4F1262910C88700347EC3 /* StoreScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B4F1252910C88700347EC3 /* StoreScreen.swift */; };
+		E0B4F1282910C8A500347EC3 /* StoreScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B4F1272910C8A500347EC3 /* StoreScreenViewModel.swift */; };
 		E0B99F3A2869E1610001ECCA /* AddCategoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B99F392869E1610001ECCA /* AddCategoryScreen.swift */; };
 		E0B99F3C2869E49D0001ECCA /* AddProductScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B99F3B2869E49D0001ECCA /* AddProductScreen.swift */; };
 		E0C42EF9286FFC69005FE0C9 /* AddProductDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C42EF8286FFC69005FE0C9 /* AddProductDetailScreen.swift */; };
@@ -91,6 +93,8 @@
 		E04F8CA4290592EC0028B228 /* CategoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellView.swift; sourceTree = "<group>"; };
 		E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductTypeScreen.swift; sourceTree = "<group>"; };
 		E06D05C3286FF9410081B70F /* TextFieldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLabel.swift; sourceTree = "<group>"; };
+		E0B4F1252910C88700347EC3 /* StoreScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreScreen.swift; sourceTree = "<group>"; };
+		E0B4F1272910C8A500347EC3 /* StoreScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreScreenViewModel.swift; sourceTree = "<group>"; };
 		E0B99F392869E1610001ECCA /* AddCategoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryScreen.swift; sourceTree = "<group>"; };
 		E0B99F3B2869E49D0001ECCA /* AddProductScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductScreen.swift; sourceTree = "<group>"; };
 		E0C42EF8286FFC69005FE0C9 /* AddProductDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductDetailScreen.swift; sourceTree = "<group>"; };
@@ -271,6 +275,15 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		E0B4F1242910C85A00347EC3 /* Strore */ = {
+			isa = PBXGroup;
+			children = (
+				E0B4F1252910C88700347EC3 /* StoreScreen.swift */,
+				E0B4F1272910C8A500347EC3 /* StoreScreenViewModel.swift */,
+			);
+			path = Strore;
+			sourceTree = "<group>";
+		};
 		E0C42EFC286FFEB7005FE0C9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +322,7 @@
 			children = (
 				E06D05BB286FF7120081B70F /* Category */,
 				E06D05BC286FF7230081B70F /* Product */,
+				E0B4F1242910C85A00347EC3 /* Strore */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -459,6 +473,7 @@
 				E022B2F62863705900E9437F /* Persistence.swift in Sources */,
 				E0C42F0628700064005FE0C9 /* ProductTypeCellView.swift in Sources */,
 				E0C42F08287001A1005FE0C9 /* ProductPricesCell.swift in Sources */,
+				E0B4F1262910C88700347EC3 /* StoreScreen.swift in Sources */,
 				E04F8CA5290592EC0028B228 /* CategoryCellView.swift in Sources */,
 				E022B2EF2863705800E9437F /* ContentView.swift in Sources */,
 				E0EC8CEF2868A065005CEB7B /* CategoryScreen.swift in Sources */,
@@ -466,6 +481,7 @@
 				E04A30F3290EB14C00B46EA4 /* ProductTypeCD+Extension.swift in Sources */,
 				E0C42F042870002E005FE0C9 /* ProductScreenViewModel.swift in Sources */,
 				E022B2F92863705900E9437F /* PriceLog.xcdatamodeld in Sources */,
+				E0B4F1282910C8A500347EC3 /* StoreScreenViewModel.swift in Sources */,
 				E022B2ED2863705800E9437F /* PriceLogApp.swift in Sources */,
 				E0261B93290646C300C4F9A2 /* Modifier+View.swift in Sources */,
 				E0E2ACCE290D1216000320B7 /* CoreDataManager.swift in Sources */,
