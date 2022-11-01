@@ -271,6 +271,13 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		E0B4F1242910C85A00347EC3 /* Strore */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Strore;
+			sourceTree = "<group>";
+		};
 		E0C42EFC286FFEB7005FE0C9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +316,7 @@
 			children = (
 				E06D05BB286FF7120081B70F /* Category */,
 				E06D05BC286FF7230081B70F /* Product */,
+				E0B4F1242910C85A00347EC3 /* Strore */,
 			);
 			path = Screen;
 			sourceTree = "<group>";

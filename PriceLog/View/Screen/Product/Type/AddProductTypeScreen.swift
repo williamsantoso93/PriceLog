@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AddProductTypeScreen: View {
     @Environment(\.dismiss) private var dismiss
@@ -31,12 +32,12 @@ struct AddProductTypeScreen: View {
             Form {
                 Section {
                     TextFieldLabel(label: "Name", text: $viewModel.name)
-                    //TODO: fix delete when select picker
                     Picker("Unit", selection: $viewModel.unitType) {
                         ForEach(UnitType.allCases, id: \.self) { unitType in
                             Text(viewModel.getUnitTitle(unitType: unitType))
                         }
                     }
+                    .pickerStyle(.menu)
                     TextFieldLabel(label: viewModel.unitType.getValueTitle(), text: $viewModel.unitString)
                 }
                 
@@ -82,8 +83,8 @@ struct AddProductTypeScreen: View {
     }
 }
 
-//struct AddProductTypeScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddProductTypeScreen(viewModel: AddProductTypeViewModel(type: productTypesMock[3]))
-//    }
-//}
+struct AddProductTypeScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        AddProductTypeScreen(viewModel: AddProductTypeViewModel(productId: NSManagedObjectID()))
+    }
+}
