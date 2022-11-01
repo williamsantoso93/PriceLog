@@ -23,7 +23,7 @@
     <entity name="ProductTypeCD" representedClassName="ProductTypeCD" syncable="YES" codeGenerationType="class">
         <attribute name="code" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="unit" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="unitType" attributeType="String"/>
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductCD" inverseName="productTypes" inverseEntity="ProductCD"/>

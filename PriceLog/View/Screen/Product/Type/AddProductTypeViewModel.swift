@@ -54,7 +54,7 @@ class AddProductTypeViewModel: ObservableObject {
     }
     
     func save(completion: (ProductType?) -> Void) {
-        if !name.isEmpty, !unitString.isEmpty {
+        if !unitString.isEmpty {
             productType?.name = name
             productType?.unitType = unitType
             productType?.unit = unit
