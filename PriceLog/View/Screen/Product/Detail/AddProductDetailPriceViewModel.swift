@@ -57,7 +57,7 @@ class AddProductDetailPriceViewModel: ObservableObject {
     
     func getStores() {
         DispatchQueue.main.async {
-            self.storesVM = StoreCD.all().map(StoreViewModel.init)
+            self.storesVM = StoreCD.getAllSortedByName().map(StoreViewModel.init)
             
             if self.storesVM.isEmpty {
                 self.setInitialStore()
@@ -116,7 +116,7 @@ class AddProductDetailPriceViewModel: ObservableObject {
                     productPriceCD.createdAt = Date()
                 }
                 productPriceCD.updatedAt = Date()
-                productPriceCD.store = storesVM[locationStore].getStoreCD()
+                productPriceCD.store = storesVM[locationStore].storeCD
                 
                 productTypeCD.addToProductPrices(productPriceCD)
                 

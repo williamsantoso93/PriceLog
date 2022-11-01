@@ -40,6 +40,13 @@ struct AddProductDetailScreen: View {
                     .pickerStyle(.menu)
                     DatePicker("Date", selection: $viewModel.date, displayedComponents: .date)
                 }
+                Section {
+                    NavigationLink {
+                        StoreScreen()
+                    } label: {
+                        Text("Stores")
+                    }
+                }
                 
                 if let onDelete = onDelete, viewModel.isEdit {
                     Section {
