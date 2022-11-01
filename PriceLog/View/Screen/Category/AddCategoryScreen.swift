@@ -11,10 +11,10 @@ struct AddCategoryScreen: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: AddCategoryViewModel
     
-    let onSave: ((Category?) -> Void)?
+    let onSave: (() -> Void)?
     let onDelete: (() -> Void)?
     
-    init(viewModel: AddCategoryViewModel = AddCategoryViewModel(), onSave: ((Category?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+    init(viewModel: AddCategoryViewModel = AddCategoryViewModel(), onSave: (() -> Void)? = nil, onDelete: (() -> Void)? = nil) {
         self.viewModel = viewModel
         self.onSave = onSave
         self.onDelete = onDelete
@@ -48,8 +48,8 @@ struct AddCategoryScreen: View {
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        viewModel.save { category in
-                            onSave?(category)
+                        viewModel.save {
+                            onSave?()
                             dismiss()
                         }
                     } label: {

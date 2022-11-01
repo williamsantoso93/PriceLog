@@ -62,22 +62,6 @@ class ProductTypeScreenViewModel: ObservableObject {
         }
     }
     
-    func setSavedType(type: ProductType) {
-//        if let selectedTypeIndex = selectedTypeIndex, productTypes.indices.contains(selectedTypeIndex) {
-//            product.productTypes[selectedTypeIndex] = type
-//        } else {
-//            product.types.append(type)
-//        }
-    }
-    
-    func deleteType() {
-//        guard let selectedTypeIndex = selectedTypeIndex, product.productTypes.indices.contains(selectedTypeIndex) else {
-//            return
-//        }
-//
-//        product.productTypes.remove(at: selectedTypeIndex)
-    }
-    
     func deleteProductType(by id: NSManagedObjectID) {
         if let productType: ProductTypeCD = ProductTypeCD.byId(id: id) {
             do {

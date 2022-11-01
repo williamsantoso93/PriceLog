@@ -69,22 +69,6 @@ class ProductDetailScreenPriceViewModel: ObservableObject {
         self._productTypeVM = productTypeVM
     }
     
-    func setSavedPrice(price: ProductPrice) {
-//        if let selectedPriceIndex = selectedPriceIndex, productPrices.indices.contains(selectedPriceIndex) {
-//            product.productTypes[selectedTypeIndex].prices[selectedPriceIndex] = price
-//        } else {
-//            product.productTypes[selectedTypeIndex].prices.append(price)
-//        }
-    }
-    
-    func deletePrice() {
-//        guard let selectedPriceIndex = selectedPriceIndex, product.productTypes.indices.contains(selectedPriceIndex) else {
-//            return
-//        }
-//        
-//        product.productTypes.remove(at: selectedPriceIndex)
-    }
-    
     func getProductPricesCD() {
         DispatchQueue.main.async {
             self._productPricesVM = self._productTypeVM.getProductPricesVM()

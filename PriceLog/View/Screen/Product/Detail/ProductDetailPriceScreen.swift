@@ -86,11 +86,7 @@ struct ProductDetailPriceScreen: View {
         }) {
             AddProductDetailScreen(
                 viewModel: AddProductDetailPriceViewModel(productTypeId: viewModel.productTypeId, productPriceVM: viewModel.selectedPriceVM),
-                onSave: { price in
-                    if let price = price {
-                        viewModel.setSavedPrice(price: price)
-                    }
-                },
+                onSave: { },
                 onDelete: {
                     if let id = viewModel.selectedPriceVM?.id {
                         viewModel.deleteProductPrice(by: id)

@@ -53,12 +53,8 @@ class AddProductTypeViewModel: ObservableObject {
         unitType.getTitle(by: unit)
     }
     
-    func save(completion: (ProductType?) -> Void) {
+    func save(completion: () -> Void) {
         if !unitString.isEmpty {
-            productType?.name = name
-            productType?.unitType = unitType
-            productType?.unit = unit
-            
             if let productCD: ProductCD = ProductCD.byId(id: productId) {
                 let productTypeCD = getProductTypeCD()
                 if !isEdit {
@@ -73,7 +69,7 @@ class AddProductTypeViewModel: ObservableObject {
                 do {
                     try productTypeCD.save()
                     
-                    completion(productType)
+                    completion()
                 } catch {
                     print(error.localizedDescription)
                 }

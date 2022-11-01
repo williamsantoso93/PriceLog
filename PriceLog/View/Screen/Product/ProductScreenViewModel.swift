@@ -61,22 +61,6 @@ class ProductScreenViewModel: ObservableObject {
         }
     }
     
-    func setSavedProduct(product: Product) {
-//        if let selectedProductIndex = selectedProductIndex, products.indices.contains(selectedProductIndex) {
-//            category.products[selectedProductIndex] = product
-//        } else {
-//            category.products.append(product)
-//        }
-    }
-    
-    func deleteProduct() {
-//        guard let selectedProductIndex = selectedProductIndex, category.products.indices.contains(selectedProductIndex) else {
-//            return
-//        }
-        
-//        category.products.remove(at: selectedProductIndex)
-    }
-    
     func deleteProduct(by id: NSManagedObjectID) {
         if let product: ProductCD = ProductCD.byId(id: id) {
             do {
