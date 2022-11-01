@@ -56,11 +56,7 @@ struct ProductTypeScreen: View {
         }) {
             AddProductTypeScreen(
                 viewModel: AddProductTypeViewModel(productId: viewModel.productId, productTypeVM: viewModel.selectedTypeVM),
-                onSave: { type in
-                    if let type = type {
-                        viewModel.setSavedType(type: type)
-                    }
-                },
+                onSave: { },
                 onDelete: {
                     if let id = viewModel.selectedTypeVM?.id {
                         viewModel.deleteProductType(by: id)

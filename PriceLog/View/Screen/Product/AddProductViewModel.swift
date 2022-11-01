@@ -17,11 +17,6 @@ class AddProductViewModel: ObservableObject {
     @Published var image: UIImage? = nil
     
     @Published var categorySelection: Int = 0
-    //TODO: change to actual data
-    let categories: [String] = [
-        "Drink",
-        "Food"
-    ]
     var isEdit: Bool = false
     
     var isChange: Bool {
@@ -49,11 +44,8 @@ class AddProductViewModel: ObservableObject {
         }
     }
     
-    func save(completion: (Product?) -> Void) {
+    func save(completion: () -> Void) {
         if !name.isEmpty {
-            product?.name = name
-            product?.image = image
-            
             if let categoryCD: CategoryCD = CategoryCD.byId(id: categoryId) {
                 let productCD = getProductCD()
                 if !isEdit {
@@ -65,11 +57,10 @@ class AddProductViewModel: ObservableObject {
                 
                 do {
                     try productCD.save()
+                    completion()
                 } catch {
                     print(error.localizedDescription)
                 }
-                
-                completion(product)
             }
         }
     }

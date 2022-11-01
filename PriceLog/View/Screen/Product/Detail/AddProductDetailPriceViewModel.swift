@@ -97,15 +97,8 @@ class AddProductDetailPriceViewModel: ObservableObject {
         getStores()
     }
     
-    func save(completion: (ProductPrice?) -> Void) {
-        if !priceString.isEmpty {
-            productPrice?.value = priceValue
-            productPrice?.date = date
-            productPrice?.updatedAt = Date()
-            
-            //TODO: Temp place
-            productPrice?.store = stores[locationStore].store
-            
+    func save(completion: () -> Void) {
+        if !priceString.isEmpty {            
             if let productTypeCD: ProductTypeCD = ProductTypeCD.byId(id: productTypeId) {
                 let productPriceCD = getProductPriceCD()
                 
@@ -123,7 +116,7 @@ class AddProductDetailPriceViewModel: ObservableObject {
                 do {
                     try productPriceCD.save()
                     
-                    completion(productPrice)
+                    completion()
                 } catch {
                     print(error.localizedDescription)
                 }

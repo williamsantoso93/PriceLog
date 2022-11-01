@@ -12,10 +12,10 @@ struct AddProductDetailScreen: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var viewModel: AddProductDetailPriceViewModel
     
-    let onSave: ((ProductPrice?) -> Void)?
+    let onSave: (() -> Void)?
     let onDelete: (() -> Void)?
     
-    init(viewModel: AddProductDetailPriceViewModel, onSave: ((ProductPrice?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+    init(viewModel: AddProductDetailPriceViewModel, onSave: (() -> Void)? = nil, onDelete: (() -> Void)? = nil) {
         self.viewModel = viewModel
         self.onSave = onSave
         self.onDelete = onDelete
@@ -65,8 +65,8 @@ struct AddProductDetailScreen: View {
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        viewModel.save { price in
-                            onSave?(price)
+                        viewModel.save {
+                            onSave?()
                             dismiss()
                         }
                     } label: {

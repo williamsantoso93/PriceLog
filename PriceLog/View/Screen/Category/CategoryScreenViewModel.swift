@@ -46,22 +46,6 @@ class CategoryScreenViewModel: ObservableObject {
         _categories.isEmpty ? "" : _categories[Int.random(in: _categories.indices)].name
     }
     
-    func setSavedCategory(category: Category) {
-//        if let selectedCategoryIndex = selectedCategoryIndex, _categories.indices.contains(selectedCategoryIndex) {
-//            _categories[selectedCategoryIndex] = category
-//        } else {
-//            _categories.append(category)
-//        }
-    }
-    
-    func deleteCategory() {
-//        guard let selectedCategoryIndex = selectedCategoryIndex, _categories.indices.contains(selectedCategoryIndex) else {
-//            return
-//        }
-//
-//        _categories.remove(at: selectedCategoryIndex)
-    }
-    
     func getCategoriesCD() {
         DispatchQueue.main.async {
             self._categoriesVM = CategoryCD.all().map(CategoryViewModel.init)

@@ -37,7 +37,6 @@ struct ProductScreen: View {
                                 isShowAddProduct.toggle()
                             }, onDelete: {
                                 viewModel.selectedProductIndex = index
-                                viewModel.deleteProduct()
                                 viewModel.deleteProduct(by: productVM.id)
                             }
                         )
@@ -59,11 +58,7 @@ struct ProductScreen: View {
         }) {
             AddProductScreen(
                 viewModel: AddProductViewModel(categoryId: viewModel.categoryId, productVM: viewModel.selectedProductVM),
-                onSave: { product in
-                    if let product = product {
-                        viewModel.setSavedProduct(product: product)
-                    }
-                },
+                onSave: { },
                 onDelete: {
                     if let id = viewModel.selectedProductVM?.id {
                         viewModel.deleteProduct(by: id)

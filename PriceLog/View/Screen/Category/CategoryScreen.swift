@@ -53,10 +53,7 @@ struct CategoryScreen: View {
             }) {
                 AddCategoryScreen(
                     viewModel: AddCategoryViewModel(categoryVM: viewModel.selectedCategoryVM),
-                    onSave: { category in
-                        if let category = category {
-                            viewModel.setSavedCategory(category: category)
-                        }
+                    onSave: {
                     },
                     onDelete: {
                         if let id = viewModel.selectedCategoryVM?.id {

@@ -34,10 +34,8 @@ class AddCategoryViewModel: ObservableObject {
         }
     }
     
-    func save(completion: (Category?) -> Void) {
+    func save(completion: () -> Void) {
         if !name.isEmpty {
-            category?.name = name
-            
             let categoryCD = getCategoryCD()
             if !isEdit {
                 categoryCD.id = UUID()
@@ -47,7 +45,7 @@ class AddCategoryViewModel: ObservableObject {
             do {
                 try categoryCD.save()
                 
-                completion(category)
+                completion()
             } catch {
                 print(error.localizedDescription)
             }

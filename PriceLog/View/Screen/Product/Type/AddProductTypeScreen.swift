@@ -12,10 +12,10 @@ struct AddProductTypeScreen: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var viewModel: AddProductTypeViewModel
     
-    let onSave: ((ProductType?) -> Void)?
+    let onSave: (() -> Void)?
     let onDelete: (() -> Void)?
     
-    init(viewModel: AddProductTypeViewModel, onSave: ((ProductType?) -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+    init(viewModel: AddProductTypeViewModel, onSave: (() -> Void)? = nil, onDelete: (() -> Void)? = nil) {
         self.viewModel = viewModel
         self.onSave = onSave
         self.onDelete = onDelete
@@ -55,8 +55,8 @@ struct AddProductTypeScreen: View {
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        viewModel.save { type in
-                            onSave?(type)
+                        viewModel.save {
+                            onSave?()
                             dismiss()
                         }
                     } label: {
