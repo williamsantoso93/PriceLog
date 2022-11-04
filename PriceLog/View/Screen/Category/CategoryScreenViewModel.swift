@@ -75,7 +75,7 @@ class CategoryScreenViewModel: ObservableObject {
     }
 }
 
-struct CategoryViewModel {
+struct CategoryViewModel: Hashable, Identifiable {
     let categoryCD: CategoryCD
     
     init(categoryCD: CategoryCD) {
@@ -100,6 +100,6 @@ struct CategoryViewModel {
     }
     
     func getProductsVM() -> [ProductViewModel] {
-        ProductCD.getProducts(by: id).map(ProductViewModel.init)
+        ProductCD.getProductsBy(categoryId: id).map(ProductViewModel.init)
     }
 }

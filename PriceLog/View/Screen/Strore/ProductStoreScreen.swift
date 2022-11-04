@@ -1,14 +1,14 @@
 //
-//  ProductScreen.swift
+//  ProductStoreScreen.swift
 //  PriceLog
 //
-//  Created by William Santoso on 26/06/22.
+//  Created by William Santoso on 04/11/22.
 //
 
 import SwiftUI
 
-struct ProductScreen: View {
-    @StateObject private var viewModel: ProductScreenViewModel
+struct ProductStoreScreen: View {
+    @StateObject private var viewModel: ProductStoreScreenViewModel
     @State private var isShowAddProduct: Bool = false
     
     private let gridColumns: [GridItem] = [
@@ -17,7 +17,7 @@ struct ProductScreen: View {
         GridItem(.flexible())
     ]
     
-    init(viewModel: ProductScreenViewModel) {
+    init(viewModel: ProductStoreScreenViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -54,13 +54,13 @@ struct ProductScreen: View {
             viewModel.getProductsCD()
         }
         .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
-        .navigationTitle(viewModel.categoryName)
+        .navigationTitle(viewModel.storeName)
         .sheet(isPresented: $isShowAddProduct, onDismiss: {
             viewModel.selectedProductIndex = nil
             viewModel.getProductsCD()
         }) {
             AddProductScreen(
-                viewModel: AddProductViewModel(categoryId: viewModel.categoryId, productVM: viewModel.selectedProductVM),
+                viewModel: AddProductViewModel(productVM: viewModel.selectedProductVM),
                 onSave: { },
                 onDelete: {
                     if let id = viewModel.selectedProductVM?.id {
@@ -70,13 +70,6 @@ struct ProductScreen: View {
             )
         }
         .toolbar {
-            ToolbarItemGroup(placement: .automatic) {
-                Button {
-                    isShowAddProduct.toggle()
-                } label: {
-                    Image(systemName: "plus")
-                }
-            }
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
                     viewModel.deleteAll()
@@ -88,10 +81,8 @@ struct ProductScreen: View {
     }
 }
 
-struct ProductScreen_Previews: PreviewProvider {
+struct ProductStoreScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            ProductScreen(viewModel: ProductScreenViewModel(categoryVM: CategoryViewModel(categoryCD: CategoryCD.init(context: CategoryCD.viewContext))))
-        }
+        ProductStoreScreen(viewModel: ProductStoreScreenViewModel(storeVM: StoreViewModel(storeCD: StoreCD.init(context: StoreCD.viewContext))))
     }
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E02235C42914A79600A7F753 /* AllProductScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02235C32914A79600A7F753 /* AllProductScreen.swift */; };
+		E02235C62914A7A900A7F753 /* AllProductScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02235C52914A7A900A7F753 /* AllProductScreenViewModel.swift */; };
+		E02235C82914B42F00A7F753 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02235C72914B42F00A7F753 /* AppTabView.swift */; };
 		E022B2ED2863705800E9437F /* PriceLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B2EC2863705800E9437F /* PriceLogApp.swift */; };
 		E022B2EF2863705800E9437F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B2EE2863705800E9437F /* ContentView.swift */; };
 		E022B2F12863705900E9437F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E022B2F02863705900E9437F /* Assets.xcassets */; };
@@ -23,6 +26,8 @@
 		E04A30F5290EC21200B46EA4 /* ProductPriceCD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A30F4290EC21200B46EA4 /* ProductPriceCD+Extension.swift */; };
 		E04A30F7290EC21900B46EA4 /* StoreCD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A30F6290EC21900B46EA4 /* StoreCD+Extension.swift */; };
 		E04F8CA5290592EC0028B228 /* CategoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04F8CA4290592EC0028B228 /* CategoryCellView.swift */; };
+		E065A3092914F29800332548 /* ProductStoreScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065A3082914F29800332548 /* ProductStoreScreenViewModel.swift */; };
+		E065A30B2914F2A500332548 /* ProductStoreScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065A30A2914F2A500332548 /* ProductStoreScreen.swift */; };
 		E06D05C2286FF7E40081B70F /* AddProductTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */; };
 		E06D05C4286FF9410081B70F /* TextFieldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C3286FF9410081B70F /* TextFieldLabel.swift */; };
 		E0B4F1262910C88700347EC3 /* StoreScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B4F1252910C88700347EC3 /* StoreScreen.swift */; };
@@ -72,6 +77,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E02235C32914A79600A7F753 /* AllProductScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllProductScreen.swift; sourceTree = "<group>"; };
+		E02235C52914A7A900A7F753 /* AllProductScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllProductScreenViewModel.swift; sourceTree = "<group>"; };
+		E02235C72914B42F00A7F753 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
 		E022B2E92863705800E9437F /* PriceLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PriceLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E022B2EC2863705800E9437F /* PriceLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogApp.swift; sourceTree = "<group>"; };
 		E022B2EE2863705800E9437F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +99,8 @@
 		E04A30F4290EC21200B46EA4 /* ProductPriceCD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductPriceCD+Extension.swift"; sourceTree = "<group>"; };
 		E04A30F6290EC21900B46EA4 /* StoreCD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoreCD+Extension.swift"; sourceTree = "<group>"; };
 		E04F8CA4290592EC0028B228 /* CategoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellView.swift; sourceTree = "<group>"; };
+		E065A3082914F29800332548 /* ProductStoreScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStoreScreenViewModel.swift; sourceTree = "<group>"; };
+		E065A30A2914F2A500332548 /* ProductStoreScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStoreScreen.swift; sourceTree = "<group>"; };
 		E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductTypeScreen.swift; sourceTree = "<group>"; };
 		E06D05C3286FF9410081B70F /* TextFieldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLabel.swift; sourceTree = "<group>"; };
 		E0B4F1252910C88700347EC3 /* StoreScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreScreen.swift; sourceTree = "<group>"; };
@@ -230,6 +240,8 @@
 		E06D05BC286FF7230081B70F /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				E02235C32914A79600A7F753 /* AllProductScreen.swift */,
+				E02235C52914A7A900A7F753 /* AllProductScreenViewModel.swift */,
 				E0EC8CF82868AFB9005CEB7B /* ProductScreen.swift */,
 				E0C42F032870002E005FE0C9 /* ProductScreenViewModel.swift */,
 				E0B99F3B2869E49D0001ECCA /* AddProductScreen.swift */,
@@ -280,6 +292,8 @@
 			children = (
 				E0B4F1252910C88700347EC3 /* StoreScreen.swift */,
 				E0B4F1272910C8A500347EC3 /* StoreScreenViewModel.swift */,
+				E065A30A2914F2A500332548 /* ProductStoreScreen.swift */,
+				E065A3082914F29800332548 /* ProductStoreScreenViewModel.swift */,
 			);
 			path = Strore;
 			sourceTree = "<group>";
@@ -320,6 +334,7 @@
 		E0EC8CF12868A074005CEB7B /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				E02235C72914B42F00A7F753 /* AppTabView.swift */,
 				E06D05BB286FF7120081B70F /* Category */,
 				E06D05BC286FF7230081B70F /* Product */,
 				E0B4F1242910C85A00347EC3 /* Strore */,
@@ -468,6 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0C42F0E2870024D005FE0C9 /* AddCategoryViewModel.swift in Sources */,
+				E02235C42914A79600A7F753 /* AllProductScreen.swift in Sources */,
 				E06D05C4286FF9410081B70F /* TextFieldLabel.swift in Sources */,
 				E0C42F132870027F005FE0C9 /* AddProductTypeViewModel.swift in Sources */,
 				E022B2F62863705900E9437F /* Persistence.swift in Sources */,
@@ -476,6 +492,7 @@
 				E0B4F1262910C88700347EC3 /* StoreScreen.swift in Sources */,
 				E04F8CA5290592EC0028B228 /* CategoryCellView.swift in Sources */,
 				E022B2EF2863705800E9437F /* ContentView.swift in Sources */,
+				E065A3092914F29800332548 /* ProductStoreScreenViewModel.swift in Sources */,
 				E0EC8CEF2868A065005CEB7B /* CategoryScreen.swift in Sources */,
 				E0B99F3A2869E1610001ECCA /* AddCategoryScreen.swift in Sources */,
 				E04A30F3290EB14C00B46EA4 /* ProductTypeCD+Extension.swift in Sources */,
@@ -486,6 +503,7 @@
 				E0261B93290646C300C4F9A2 /* Modifier+View.swift in Sources */,
 				E0E2ACCE290D1216000320B7 /* CoreDataManager.swift in Sources */,
 				E0EC8CFB2868B0EC005CEB7B /* ProductTypeScreen.swift in Sources */,
+				E065A30B2914F2A500332548 /* ProductStoreScreen.swift in Sources */,
 				E0C42F152870028E005FE0C9 /* AddProductDetailPriceViewModel.swift in Sources */,
 				E04A30F7290EC21900B46EA4 /* StoreCD+Extension.swift in Sources */,
 				E0B99F3C2869E49D0001ECCA /* AddProductScreen.swift in Sources */,
@@ -494,8 +512,10 @@
 				E0EC8CF72868A995005CEB7B /* MockData.swift in Sources */,
 				E0C42EFE286FFF25005FE0C9 /* Extension.swift in Sources */,
 				E06D05C2286FF7E40081B70F /* AddProductTypeScreen.swift in Sources */,
+				E02235C62914A7A900A7F753 /* AllProductScreenViewModel.swift in Sources */,
 				E04A30F5290EC21200B46EA4 /* ProductPriceCD+Extension.swift in Sources */,
 				E0EC8CFD2868BA90005CEB7B /* ProductDetailPriceScreen.swift in Sources */,
+				E02235C82914B42F00A7F753 /* AppTabView.swift in Sources */,
 				E0C42F0A2870020E005FE0C9 /* ProductDetailScreenPriceViewModel.swift in Sources */,
 				E0E2ACD1290D1291000320B7 /* BaseModel.swift in Sources */,
 				E0EC8CF52868A53E005CEB7B /* Model.swift in Sources */,

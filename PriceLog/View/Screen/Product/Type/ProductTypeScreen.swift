@@ -48,6 +48,9 @@ struct ProductTypeScreen: View {
         .onAppear {
             viewModel.getProductTypesCD()
         }
+        .refreshable {
+            viewModel.getProductTypesCD()
+        }
         .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
         .navigationTitle(viewModel.productName)
         .sheet(isPresented: $isShowAddProductType, onDismiss: {

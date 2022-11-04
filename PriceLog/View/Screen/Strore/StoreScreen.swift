@@ -22,7 +22,12 @@ struct StoreScreen: View {
             Section {
                 List {
                     ForEach(viewModel.storesVM) { storeVM in
-                        Text(storeVM.store.name)
+                        NavigationLink {
+                            ProductStoreScreen(viewModel: ProductStoreScreenViewModel(storeVM: storeVM))
+                        } label: {
+                            Text(storeVM.store.name)
+                        }
+
                     }
                     .onDelete { offsets in
                         viewModel.deleteStore(at: offsets)
@@ -31,6 +36,9 @@ struct StoreScreen: View {
             }
         }
         .onAppear {
+            viewModel.getStoreCD()
+        }
+        .refreshable {
             viewModel.getStoreCD()
         }
         .navigationTitle("Store")

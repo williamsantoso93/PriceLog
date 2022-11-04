@@ -45,6 +45,9 @@ struct CategoryScreen: View {
             .onAppear {
                 viewModel.getCategoriesCD()
             }
+            .refreshable {
+                viewModel.getCategoriesCD()
+            }
             .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
             .navigationTitle("Category")
             .sheet(isPresented: $isShowAddCategory, onDismiss: {

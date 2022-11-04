@@ -52,11 +52,12 @@ struct AddProductScreen: View {
                     .frame(height: 175)
                     
                     TextFieldLabel(label: "Name", text: $viewModel.name)
-//                    Picker("Category", selection: $viewModel.categorySelection) {
-//                        ForEach(viewModel.categories.indices, id: \.self) { index in
-//                            Text(viewModel.categories[index])
-//                        }
-//                    }
+                    Picker("Category", selection: $viewModel.selectedCategoryIndex) {
+                        ForEach(viewModel.categoriesVM.indices, id: \.self) { index in
+                            Text(viewModel.categoriesVM[index].category.name)
+                        }
+                    }
+                    .pickerStyle(.menu)
                 }
                 
                 if let onDelete = onDelete, viewModel.isEdit {
@@ -67,6 +68,9 @@ struct AddProductScreen: View {
                         }
                     }
                 }
+            }
+            .onAppear {
+                viewModel.getCategoriesCD()
             }
             .navigationTitle(screenTitle)
             .navigationBarTitleDisplayMode(.inline)
@@ -123,8 +127,8 @@ struct AddProductScreen: View {
 
 }
 
-//struct AddProductScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddProductScreen()
-//    }
-//}
+struct AddProductScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        AddProductScreen(viewModel: AddProductViewModel())
+    }
+}

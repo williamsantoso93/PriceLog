@@ -9,5 +9,16 @@ import Foundation
 import CoreData
 
 extension CategoryCD: BaseModel {
+    static func getAllSortedByName() -> [CategoryCD] {
+        let request: NSFetchRequest<CategoryCD> = CategoryCD.fetchRequest()
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sort]
+        
+        do {
+            return try Self.viewContext.fetch(request)
+        } catch {
+            return []
+        }
+    }
     
 }

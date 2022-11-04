@@ -38,7 +38,7 @@ struct AddProductTypeScreen: View {
                         }
                     }
                     .pickerStyle(.menu)
-                    TextFieldLabel(label: viewModel.unitType.getValueTitle(), text: $viewModel.unitString)
+                    NumberFieldLabel(label: viewModel.unitType.getValueTitle(), text: $viewModel.unitString)
                 }
                 
                 if let onDelete = onDelete, viewModel.isEdit {
