@@ -75,7 +75,7 @@ class CategoryScreenViewModel: ObservableObject {
     }
 }
 
-struct CategoryViewModel {
+struct CategoryViewModel: Hashable, Identifiable {
     let categoryCD: CategoryCD
     
     init(categoryCD: CategoryCD) {

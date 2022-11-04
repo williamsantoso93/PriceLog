@@ -64,6 +64,12 @@ struct CategoryScreen: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
+                    NavigationLink {
+                        AllProductScreen()
+                    } label: {
+                        Text("All Products")
+                    }
+                    
                     Button {
                         isShowAddCategory.toggle()
                     } label: {

@@ -9,14 +9,27 @@ import SwiftUI
 import CoreData
 
 class AddProductViewModel: ObservableObject {
-    private var categoryId: NSManagedObjectID
+    private var categoryId: NSManagedObjectID?
     private var productVM: ProductViewModel?
     private var product: Product?
     
     @Published var name: String = ""
     @Published var image: UIImage? = nil
     
-    @Published var categorySelection: Int = 0
+    @Published private var _categoriesVM: [CategoryViewModel] = []
+    var categoriesVM: [CategoryViewModel] {
+        _categoriesVM
+    }
+    @Published var selectedCategoryVM: CategoryViewModel?
+    @Published var selectedCategoryIndex: Int = 0 {
+        didSet {
+            guard categoriesVM.indices.contains(selectedCategoryIndex) else {
+                return
+            }
+            selectedCategoryVM = categoriesVM[selectedCategoryIndex]
+        }
+    }
+    
     var isEdit: Bool = false
     
     var isChange: Bool {
@@ -30,7 +43,7 @@ class AddProductViewModel: ObservableObject {
         return false
     }
     
-    init(categoryId: NSManagedObjectID, productVM: ProductViewModel? = nil) {
+    init(categoryId: NSManagedObjectID? = nil, productVM: ProductViewModel? = nil) {
         self.categoryId = categoryId
         self.productVM = productVM
         
@@ -44,9 +57,24 @@ class AddProductViewModel: ObservableObject {
         }
     }
     
+    func getCategoriesCD() {
+        DispatchQueue.main.async {
+            self._categoriesVM = CategoryCD.getAllSortedByName().map(CategoryViewModel.init)
+            
+            if let categoryId = self.categoryId {
+                if let selectedCategoryIndex = self._categoriesVM.firstIndex(where: { categoryVM in
+                    categoryId == categoryVM.id
+                }) {
+                    self.selectedCategoryIndex = selectedCategoryIndex
+                }
+            }
+        }
+    }
+    
     func save(completion: () -> Void) {
         if !name.isEmpty {
-            if let categoryCD: CategoryCD = CategoryCD.byId(id: categoryId) {
+            if let categoryId = selectedCategoryVM?.id,
+               let categoryCD: CategoryCD = CategoryCD.byId(id: categoryId) {
                 let productCD = getProductCD()
                 if !isEdit {
                     productCD.id = UUID()

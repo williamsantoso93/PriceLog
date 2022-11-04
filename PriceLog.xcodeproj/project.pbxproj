@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E02235C42914A79600A7F753 /* AllProductScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02235C32914A79600A7F753 /* AllProductScreen.swift */; };
+		E02235C62914A7A900A7F753 /* AllProductScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02235C52914A7A900A7F753 /* AllProductScreenViewModel.swift */; };
 		E022B2ED2863705800E9437F /* PriceLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B2EC2863705800E9437F /* PriceLogApp.swift */; };
 		E022B2EF2863705800E9437F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022B2EE2863705800E9437F /* ContentView.swift */; };
 		E022B2F12863705900E9437F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E022B2F02863705900E9437F /* Assets.xcassets */; };
@@ -72,6 +74,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E02235C32914A79600A7F753 /* AllProductScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllProductScreen.swift; sourceTree = "<group>"; };
+		E02235C52914A7A900A7F753 /* AllProductScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllProductScreenViewModel.swift; sourceTree = "<group>"; };
 		E022B2E92863705800E9437F /* PriceLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PriceLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E022B2EC2863705800E9437F /* PriceLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogApp.swift; sourceTree = "<group>"; };
 		E022B2EE2863705800E9437F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -232,6 +236,8 @@
 			children = (
 				E0EC8CF82868AFB9005CEB7B /* ProductScreen.swift */,
 				E0C42F032870002E005FE0C9 /* ProductScreenViewModel.swift */,
+				E02235C32914A79600A7F753 /* AllProductScreen.swift */,
+				E02235C52914A7A900A7F753 /* AllProductScreenViewModel.swift */,
 				E0B99F3B2869E49D0001ECCA /* AddProductScreen.swift */,
 				E0C42F1028700274005FE0C9 /* AddProductViewModel.swift */,
 				E06D05BE286FF7710081B70F /* Type */,
@@ -468,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0C42F0E2870024D005FE0C9 /* AddCategoryViewModel.swift in Sources */,
+				E02235C42914A79600A7F753 /* AllProductScreen.swift in Sources */,
 				E06D05C4286FF9410081B70F /* TextFieldLabel.swift in Sources */,
 				E0C42F132870027F005FE0C9 /* AddProductTypeViewModel.swift in Sources */,
 				E022B2F62863705900E9437F /* Persistence.swift in Sources */,
@@ -494,6 +501,7 @@
 				E0EC8CF72868A995005CEB7B /* MockData.swift in Sources */,
 				E0C42EFE286FFF25005FE0C9 /* Extension.swift in Sources */,
 				E06D05C2286FF7E40081B70F /* AddProductTypeScreen.swift in Sources */,
+				E02235C62914A7A900A7F753 /* AllProductScreenViewModel.swift in Sources */,
 				E04A30F5290EC21200B46EA4 /* ProductPriceCD+Extension.swift in Sources */,
 				E0EC8CFD2868BA90005CEB7B /* ProductDetailPriceScreen.swift in Sources */,
 				E0C42F0A2870020E005FE0C9 /* ProductDetailScreenPriceViewModel.swift in Sources */,
