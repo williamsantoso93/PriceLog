@@ -43,7 +43,7 @@ class AllProductScreenViewModel: ObservableObject {
     
     func getProductsCD() {
         DispatchQueue.main.async {
-            self._productsVM = ProductCD.all().map(ProductViewModel.init)
+            self._productsVM = ProductCD.getAllSortedByName().map(ProductViewModel.init)
         }
     }
     

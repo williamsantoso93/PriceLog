@@ -67,6 +67,8 @@ class AddProductViewModel: ObservableObject {
                 }) {
                     self.selectedCategoryIndex = selectedCategoryIndex
                 }
+            } else {
+                self.selectedCategoryVM = self.categoriesVM[self.selectedCategoryIndex]
             }
         }
     }

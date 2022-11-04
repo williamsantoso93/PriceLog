@@ -54,8 +54,7 @@ struct AddProductScreen: View {
                     TextFieldLabel(label: "Name", text: $viewModel.name)
                     Picker("Category", selection: $viewModel.selectedCategoryIndex) {
                         ForEach(viewModel.categoriesVM.indices, id: \.self) { index in
-                            let categoryVM = viewModel.categoriesVM[index]
-                            Text(categoryVM.category.name)
+                            Text(viewModel.categoriesVM[index].category.name)
                         }
                     }
                     .pickerStyle(.menu)

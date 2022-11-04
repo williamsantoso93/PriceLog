@@ -22,7 +22,7 @@ struct ProductScreen: View {
     }
     
     var body: some View {
-        VStack {
+        ScrollView {
             LazyVGrid(columns: gridColumns, alignment: .leading) {
                 ForEach(viewModel.productsVM.indices, id: \.self) { index in
                     let productVM = viewModel.productsVM[index]
