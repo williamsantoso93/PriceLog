@@ -100,6 +100,6 @@ struct CategoryViewModel: Hashable, Identifiable {
     }
     
     func getProductsVM() -> [ProductViewModel] {
-        ProductCD.getProducts(by: id).map(ProductViewModel.init)
+        ProductCD.getProductsBy(categoryId: id).map(ProductViewModel.init)
     }
 }

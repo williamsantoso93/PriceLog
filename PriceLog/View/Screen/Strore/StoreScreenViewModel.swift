@@ -8,7 +8,6 @@
 import Foundation
 import CoreData
 
-
 class StoreScreenViewModel: ObservableObject {
     @Published private var _storesVM: [StoreViewModel] = []
     var storesVM: [StoreViewModel] {
@@ -89,5 +88,9 @@ struct StoreViewModel: Identifiable {
     
     func delete() throws {
         try storeCD.delete()
+    }
+    
+    func getProductsVM() -> [ProductViewModel] {
+        ProductCD.getProductsBy(storeId: id).map(ProductViewModel.init)
     }
 }

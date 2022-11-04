@@ -14,10 +14,19 @@ struct AppTabView: View {
                 .tabItem {
                     Label("Product", systemImage: "bag")
                 }
+            
             CategoryScreen()
                 .tabItem {
                     Label("Category", systemImage: "tag")
                 }
+            
+            NavigationStack {
+                StoreScreen()
+                    .navigationTitle("Store")
+            }
+            .tabItem {
+                Label("Store", systemImage: "building.2")
+            }
         }
     }
 }
