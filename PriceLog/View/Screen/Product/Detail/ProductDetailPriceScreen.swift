@@ -80,6 +80,9 @@ struct ProductDetailPriceScreen: View {
         .onAppear {
             viewModel.getProductPricesCD()
         }
+        .refreshable {
+            viewModel.getProductPricesCD()
+        }
         .sheet(isPresented: $isShowAddProductDetail, onDismiss: {
             viewModel.selectedPriceIndex = nil
             viewModel.getProductPricesCD()

@@ -33,6 +33,9 @@ struct StoreScreen: View {
         .onAppear {
             viewModel.getStoreCD()
         }
+        .refreshable {
+            viewModel.getStoreCD()
+        }
         .navigationTitle("Store")
         .toolbar {
             EditButton()
