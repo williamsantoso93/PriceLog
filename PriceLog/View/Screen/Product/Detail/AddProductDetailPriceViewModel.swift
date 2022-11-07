@@ -18,12 +18,10 @@ class AddProductDetailPriceViewModel: ObservableObject {
         priceString.toDouble() ?? 0
     }
     
-    @Published var locationStore: Int = 0
-    @Published var storesVM: [StoreViewModel] = []
-    var stores: [(id: NSManagedObjectID, store: Store)] {
-        storesVM.map { storeCD in
-            (storeCD.id, storeCD.store)
-        }
+    @Published var selectedStoreIndex: Int = 0
+    @Published private var _storesVM: [StoreViewModel] = []
+    var storesVM: [StoreViewModel] {
+        _storesVM
     }
     
     @Published var date: Date = Date()
@@ -57,18 +55,18 @@ class AddProductDetailPriceViewModel: ObservableObject {
     
     func getStores() {
         DispatchQueue.main.async {
-            self.storesVM = StoreCD.getAllSortedByName().map(StoreViewModel.init)
+            self._storesVM = StoreCD.getAllSortedByName().map(StoreViewModel.init)
             
-            if self.storesVM.isEmpty {
+            if self._storesVM.isEmpty {
                 self.setInitialStore()
             }
             
             if let productPriceVM = self.productPriceVM,
                let storeId = productPriceVM.store?.id {
-                if let locationIndex = self.stores.firstIndex(where: { (_, store) in
-                    storeId == store.id
+                if let selectedStoreIndex = self._storesVM.firstIndex(where: { storeVM in
+                    storeId == storeVM.store.id
                 }) {
-                    self.locationStore = locationIndex
+                    self.selectedStoreIndex = selectedStoreIndex
                 }
             }
         }
@@ -109,7 +107,7 @@ class AddProductDetailPriceViewModel: ObservableObject {
                     productPriceCD.createdAt = Date()
                 }
                 productPriceCD.updatedAt = Date()
-                productPriceCD.store = storesVM[locationStore].storeCD
+                productPriceCD.store = _storesVM[selectedStoreIndex].storeCD
                 
                 productTypeCD.addToProductPrices(productPriceCD)
                 

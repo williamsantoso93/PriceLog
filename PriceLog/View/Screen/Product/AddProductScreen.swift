@@ -14,7 +14,7 @@ struct AddProductScreen: View {
     let onSave: (() -> Void)?
     let onDelete: (() -> Void)?
     
-    init(viewModel: AddProductViewModel, onSave: (() -> Void)? = nil, onDelete: (() -> Void)? = nil) {
+    init(viewModel: AddProductViewModel = AddProductViewModel(), onSave: (() -> Void)? = nil, onDelete: (() -> Void)? = nil) {
         self.viewModel = viewModel
         self.onSave = onSave
         self.onDelete = onDelete

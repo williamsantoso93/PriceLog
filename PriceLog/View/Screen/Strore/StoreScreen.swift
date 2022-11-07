@@ -46,6 +46,7 @@ struct StoreScreen: View {
             .toolbar {
                 EditButton()
             }
+            .hideKeyboardOnTapped()
         }
     }
 }

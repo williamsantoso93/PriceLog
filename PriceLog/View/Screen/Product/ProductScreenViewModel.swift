@@ -23,6 +23,9 @@ class ProductScreenViewModel: ObservableObject {
         }
         return "Product"
     }
+    var isFullProduct: Bool {
+        _categoryVM == nil && _storeVM == nil
+    }
     
     @Published var searchText: String = ""
     

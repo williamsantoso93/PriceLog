@@ -60,15 +60,19 @@ struct ProductScreen: View {
                 viewModel.selectedProductIndex = nil
                 viewModel.getProductsCD()
             }) {
-                AddProductScreen(
-                    viewModel: AddProductViewModel(categoryId: viewModel.categoryId, productVM: viewModel.selectedProductVM),
-                    onSave: { },
-                    onDelete: {
-                        if let id = viewModel.selectedProductVM?.id {
-                            viewModel.deleteProduct(by: id)
+                if viewModel.isFullProduct {
+                    AddFullProductScreen()
+                } else {
+                    AddProductScreen(
+                        viewModel: AddProductViewModel(categoryId: viewModel.categoryId, productVM: viewModel.selectedProductVM),
+                        onSave: { },
+                        onDelete: {
+                            if let id = viewModel.selectedProductVM?.id {
+                                viewModel.deleteProduct(by: id)
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
             .toolbar {
                 ToolbarItemGroup(placement: .automatic) {
@@ -78,14 +82,14 @@ struct ProductScreen: View {
                         Image(systemName: "plus")
                     }
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        viewModel.deleteAll()
-                    } label: {
-                        Text("Delete All")
-                    }
-                }
-        }
+    //                ToolbarItem(placement: .navigationBarLeading) {
+    //                    Button {
+    //                        viewModel.deleteAll()
+    //                    } label: {
+    //                        Text("Delete All")
+    //                    }
+    //                }
+            }
         }
     }
 }

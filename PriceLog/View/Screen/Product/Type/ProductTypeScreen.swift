@@ -75,13 +75,13 @@ struct ProductTypeScreen: View {
                     Image(systemName: "plus")
                 }
             }
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    viewModel.deleteAll()
-                } label: {
-                    Text("Delete All")
-                }
-            }
+//            ToolbarItem(placement: .navigationBarLeading) {
+//                Button {
+//                    viewModel.deleteAll()
+//                } label: {
+//                    Text("Delete All")
+//                }
+//            }
         }
     }
 }

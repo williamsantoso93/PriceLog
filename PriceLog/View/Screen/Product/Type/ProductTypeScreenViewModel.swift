@@ -30,17 +30,12 @@ class ProductTypeScreenViewModel: ObservableObject {
             searchText.isEmpty ? true : productTypeViewModel.productType.keywords.contains(searchText.lowercased())
         }
     }
-    var productTypes: [(id: NSManagedObjectID, productType: ProductType)] {
-        productTypesVM.map { productTypeViewModel in
-            (productTypeViewModel.id, productTypeViewModel.productType)
-        }
-    }
     var selectedTypeIndex: Int?
     var selectedType: ProductType? {
-        guard let selectedTypeIndex = selectedTypeIndex, productTypes.indices.contains(selectedTypeIndex) else {
+        guard let selectedTypeIndex = selectedTypeIndex, productTypesVM.indices.contains(selectedTypeIndex) else {
             return nil
         }
-        return productTypes[selectedTypeIndex].productType
+        return productTypesVM[selectedTypeIndex].productType
     }
     var selectedTypeVM: ProductTypeViewModel? {
         guard let selectedProductTypeIndex = selectedTypeIndex, productTypesVM.indices.contains(selectedProductTypeIndex) else {
@@ -106,6 +101,14 @@ struct ProductTypeViewModel {
             code: productTypeCD.code,
             prices: getProductPrices()
         )
+    }
+    
+    var name: String {
+        let unit = "\(productType.unit.splitDigit(maximumFractionDigits: 2)) \(productType.unitType.getTitle(by: productType.unit))"
+        if productType.name.isEmpty {
+            return unit
+        }
+        return "\(productType.name) - \(unit)"
     }
     
     func delete() throws {

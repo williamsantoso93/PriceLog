@@ -23,18 +23,13 @@ class CategoryScreenViewModel: ObservableObject {
             searchText.isEmpty ? true : categoryViewModel.category.name.lowercased().contains(searchText.lowercased())
         }
     }
-    var categories: [(id: NSManagedObjectID, category: Category)] {
-        categoriesVM.map { categoryViewModel in
-            (categoryViewModel.id, categoryViewModel.category)
-        }
-    }
     
     var selectedCategoryIndex: Int?
     var selectedCategory: Category? {
-        guard let selectedCategoryIndex = selectedCategoryIndex, _categories.indices.contains(selectedCategoryIndex) else {
+        guard let selectedCategoryIndex = selectedCategoryIndex, categoriesVM.indices.contains(selectedCategoryIndex) else {
             return nil
         }
-        return _categories[selectedCategoryIndex]
+        return categoriesVM[selectedCategoryIndex].category
     }
     var selectedCategoryVM: CategoryViewModel? {
         guard let selectedCategoryVMIndex = selectedCategoryIndex, categoriesVM.indices.contains(selectedCategoryVMIndex) else {
@@ -48,7 +43,7 @@ class CategoryScreenViewModel: ObservableObject {
     
     func getCategoriesCD() {
         DispatchQueue.main.async {
-            self._categoriesVM = CategoryCD.all().map(CategoryViewModel.init)
+            self._categoriesVM = CategoryCD.getAllSortedByName().map(CategoryViewModel.init)
         }
     }
     
