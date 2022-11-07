@@ -42,17 +42,12 @@ class ProductDetailScreenPriceViewModel: ObservableObject {
     var productPricesVM: [ProductPriceViewModel] {
         _productPricesVM.sorted(by: { $0.productPrice.updatedAt > $1.productPrice.updatedAt })
     }
-    var productPrices: [(id: NSManagedObjectID, productPrice: ProductPrice)] {
-        productPricesVM.map{ productPriceViewModel in
-            (productPriceViewModel.id, productPriceViewModel.productPrice)
-        }
-    }
     var selectedPriceIndex: Int?
     var selectedPrice: ProductPrice? {
-        guard let selectedPriceIndex = selectedPriceIndex, productPrices.indices.contains(selectedPriceIndex) else {
+        guard let selectedPriceIndex = selectedPriceIndex, productPricesVM.indices.contains(selectedPriceIndex) else {
             return nil
         }
-        return productPrices[selectedPriceIndex].productPrice
+        return productPricesVM[selectedPriceIndex].productPrice
     }
     var selectedPriceVM: ProductPriceViewModel? {
         guard let selectedPriceIndex = selectedPriceIndex, productPricesVM.indices.contains(selectedPriceIndex) else {

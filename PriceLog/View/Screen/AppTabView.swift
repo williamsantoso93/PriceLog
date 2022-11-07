@@ -10,7 +10,7 @@ import SwiftUI
 struct AppTabView: View {
     var body: some View {
         TabView {
-            AllProductScreen()
+            ProductScreen()
                 .tabItem {
                     Label("Product", systemImage: "bag")
                 }
@@ -20,13 +20,10 @@ struct AppTabView: View {
                     Label("Category", systemImage: "tag")
                 }
             
-            NavigationStack {
-                StoreScreen()
-                    .navigationTitle("Store")
-            }
-            .tabItem {
-                Label("Store", systemImage: "building.2")
-            }
+            StoreScreen()
+                .tabItem {
+                    Label("Store", systemImage: "building.2")
+                }
         }
     }
 }

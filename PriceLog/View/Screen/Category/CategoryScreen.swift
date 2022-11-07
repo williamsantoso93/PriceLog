@@ -34,7 +34,7 @@ struct CategoryScreen: View {
                                     isShowAddCategory.toggle()
                                 }, onDelete: {
                                     viewModel.selectedCategoryIndex = index
-                                    viewModel.deleteCategory(by: viewModel.categories[index].id)
+                                    viewModel.deleteCategory(by: categoryVM.id)
                                 }
                             )
                         }
@@ -73,13 +73,13 @@ struct CategoryScreen: View {
                         Image(systemName: "plus")
                     }
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        viewModel.deleteAll()
-                    } label: {
-                        Text("Delete All")
-                    }
-                }
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button {
+//                        viewModel.deleteAll()
+//                    } label: {
+//                        Text("Delete All")
+//                    }
+//                }
             }
         }
     }

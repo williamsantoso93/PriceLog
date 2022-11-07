@@ -17,72 +17,78 @@ struct ProductScreen: View {
         GridItem(.flexible())
     ]
     
-    init(viewModel: ProductScreenViewModel) {
+    init(viewModel: ProductScreenViewModel = ProductScreenViewModel()) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: gridColumns, alignment: .leading) {
-                ForEach(viewModel.productsVM.indices, id: \.self) { index in
-                    let productVM = viewModel.productsVM[index]
-                    
-                    NavigationLink {
-                        ProductTypeScreen(viewModel: ProductTypeScreenViewModel(productVM: productVM))
-                    } label: {
-                        CategoryCellView(
-                            title: productVM.product.name,
-                            onEdit: {
-                                viewModel.selectedProductIndex = index
-                                isShowAddProduct.toggle()
-                            }, onDelete: {
-                                viewModel.selectedProductIndex = index
-                                viewModel.deleteProduct(by: productVM.id)
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: gridColumns, alignment: .leading) {
+                    ForEach(viewModel.productsVM.indices, id: \.self) { index in
+                        let productVM = viewModel.productsVM[index]
+                        
+                        NavigationLink {
+                            ProductTypeScreen(viewModel: ProductTypeScreenViewModel(productVM: productVM))
+                        } label: {
+                            CategoryCellView(
+                                title: productVM.product.name,
+                                onEdit: {
+                                    viewModel.selectedProductIndex = index
+                                    isShowAddProduct.toggle()
+                                }, onDelete: {
+                                    viewModel.selectedProductIndex = index
+                                    viewModel.deleteProduct(by: productVM.id)
+                                }
+                            )
+                        }
+                    }
+                }
+                .padding(.horizontal, 12)
+                
+                Spacer(minLength: 0)
+            }
+            .onAppear {
+                viewModel.getProductsCD()
+            }
+            .refreshable {
+                viewModel.getProductsCD()
+            }
+            .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
+            .navigationTitle(viewModel.titleName)
+            .sheet(isPresented: $isShowAddProduct, onDismiss: {
+                viewModel.selectedProductIndex = nil
+                viewModel.getProductsCD()
+            }) {
+                if viewModel.isFullProduct {
+                    AddFullProductScreen()
+                } else {
+                    AddProductScreen(
+                        viewModel: AddProductViewModel(categoryId: viewModel.categoryId, productVM: viewModel.selectedProductVM),
+                        onSave: { },
+                        onDelete: {
+                            if let id = viewModel.selectedProductVM?.id {
+                                viewModel.deleteProduct(by: id)
                             }
-                        )
-                    }
+                        }
+                    )
                 }
             }
-            .padding(.horizontal, 12)
-            
-            Spacer(minLength: 0)
-        }
-        .onAppear {
-            viewModel.getProductsCD()
-        }
-        .refreshable {
-            viewModel.getProductsCD()
-        }
-        .searchable(text: $viewModel.searchText, placement: .automatic, prompt: viewModel.randomSearchPrompt)
-        .navigationTitle(viewModel.categoryName)
-        .sheet(isPresented: $isShowAddProduct, onDismiss: {
-            viewModel.selectedProductIndex = nil
-            viewModel.getProductsCD()
-        }) {
-            AddProductScreen(
-                viewModel: AddProductViewModel(categoryId: viewModel.categoryId, productVM: viewModel.selectedProductVM),
-                onSave: { },
-                onDelete: {
-                    if let id = viewModel.selectedProductVM?.id {
-                        viewModel.deleteProduct(by: id)
+            .toolbar {
+                ToolbarItemGroup(placement: .automatic) {
+                    Button {
+                        isShowAddProduct.toggle()
+                    } label: {
+                        Image(systemName: "plus")
                     }
                 }
-            )
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .automatic) {
-                Button {
-                    isShowAddProduct.toggle()
-                } label: {
-                    Image(systemName: "plus")
-                }
-            }
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    viewModel.deleteAll()
-                } label: {
-                    Text("Delete All")
-                }
+    //                ToolbarItem(placement: .navigationBarLeading) {
+    //                    Button {
+    //                        viewModel.deleteAll()
+    //                    } label: {
+    //                        Text("Delete All")
+    //                    }
+    //                }
             }
         }
     }
