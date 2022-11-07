@@ -9,16 +9,19 @@ import Foundation
 import CoreData
 
 class ProductScreenViewModel: ObservableObject {
-    @Published private var _categoryVM: CategoryViewModel
+    @Published private var _categoryVM: CategoryViewModel?
+    @Published private var _storeVM: StoreViewModel?
     @Published private var _productsVM: [ProductViewModel] = []
-    var categoryId: NSManagedObjectID {
-        _categoryVM.id
+    var categoryId: NSManagedObjectID? {
+        _categoryVM?.id
     }
-    var category: Category {
-        _categoryVM.category
-    }
-    var categoryName: String {
-        category.name
+    var titleName: String {
+        if let _categoryVM = _categoryVM {
+            return _categoryVM.category.name
+        } else if let _storeVM = _storeVM {
+            return _storeVM.store.name
+        }
+        return "Product"
     }
     
     @Published var searchText: String = ""
@@ -28,19 +31,8 @@ class ProductScreenViewModel: ObservableObject {
             searchText.isEmpty ? true : productViewModel.product.name.lowercased().contains(searchText.lowercased())
         }
     }
-    var products: [(id: NSManagedObjectID, product: Product)] {
-        productsVM.map { productViewModel in
-            (productViewModel.id, productViewModel.product)
-        }
-    }
-                    
+    
     var selectedProductIndex: Int?
-    var selectedProduct: Product? {
-        guard let selectedProductIndex = selectedProductIndex, products.indices.contains(selectedProductIndex) else {
-            return nil
-        }
-        return products[selectedProductIndex].product
-    }
     var selectedProductVM: ProductViewModel? {
         guard let selectedProductVMIndex = selectedProductIndex, productsVM.indices.contains(selectedProductVMIndex) else {
             return nil
@@ -48,16 +40,23 @@ class ProductScreenViewModel: ObservableObject {
         return productsVM[selectedProductVMIndex]
     }
     var randomSearchPrompt: String {
-        products.isEmpty ? "" : products[Int.random(in: products.indices)].product.name
+        productsVM.isEmpty ? "" : productsVM[Int.random(in: productsVM.indices)].product.name
     }
     
-    init(categoryVM: CategoryViewModel) {
+    init(categoryVM: CategoryViewModel? = nil, storeVM: StoreViewModel? = nil) {
         self._categoryVM = categoryVM
+        self._storeVM = storeVM
     }
     
     func getProductsCD() {
         DispatchQueue.main.async {
-            self._productsVM = self._categoryVM.getProductsVM()
+            if let _categoryVM = self._categoryVM {
+                self._productsVM = _categoryVM.getProductsVM()
+            } else if let _storeVM = self._storeVM {
+                self._productsVM = _storeVM.getProductsVM()
+            } else {
+                self._productsVM = ProductCD.getAllSortedByName().map(ProductViewModel.init)
+            }
         }
     }
     
