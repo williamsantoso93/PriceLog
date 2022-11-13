@@ -15,9 +15,14 @@ struct AppTabView: View {
                     Label("Product", systemImage: "bag")
                 }
             
+            BrandScreen()
+                .tabItem {
+                    Label("Brand", systemImage: "tag")
+                }
+            
             CategoryScreen()
                 .tabItem {
-                    Label("Category", systemImage: "tag")
+                    Label("Category", systemImage: "rectangle.grid.2x2")
                 }
             
             StoreScreen()

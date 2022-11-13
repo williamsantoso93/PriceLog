@@ -21,6 +21,16 @@ extension ProductCD: BaseModel {
         }
     }
     
+    static func getProductsBy(brandId: NSManagedObjectID) -> [ProductCD] {
+        guard let brand = BrandCD.byId(id: brandId) as? BrandCD,
+              let products = brand.products
+        else {
+            return []
+        }
+        
+        return products.allObjects as? [ProductCD] ?? []
+    }
+    
     static func getProductsBy(categoryId: NSManagedObjectID) -> [ProductCD] {
         guard let category = CategoryCD.byId(id: categoryId) as? CategoryCD,
               let products = category.products

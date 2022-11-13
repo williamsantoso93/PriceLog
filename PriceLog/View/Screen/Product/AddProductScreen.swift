@@ -58,6 +58,12 @@ struct AddProductScreen: View {
                         }
                     }
                     .pickerStyle(.menu)
+                    Picker("Brand", selection: $viewModel.selectedBrandIndex) {
+                        ForEach(viewModel.brandsVM.indices, id: \.self) { index in
+                            Text(viewModel.brandsVM[index].brand.name)
+                        }
+                    }
+                    .pickerStyle(.menu)
                 }
                 
                 if let onDelete = onDelete, viewModel.isEdit {
@@ -70,7 +76,7 @@ struct AddProductScreen: View {
                 }
             }
             .onAppear {
-                viewModel.getCategoriesCD()
+                viewModel.getDataCD()
             }
             .navigationTitle(screenTitle)
             .navigationBarTitleDisplayMode(.inline)

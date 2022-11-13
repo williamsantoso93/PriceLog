@@ -15,9 +15,16 @@ struct Category: Identifiable {
     var products: [Product] = []
 }
 
+struct Brand: Identifiable {
+    var id: UUID = UUID()
+    var name: String = ""
+    var products: [Product] = []
+}
+
 struct Product: Identifiable {
     var id: UUID = UUID()
     var name: String = ""
+    var brand: Brand? = nil
     var image: UIImage?
     var types: [ProductType] = []
 }

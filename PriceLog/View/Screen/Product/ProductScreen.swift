@@ -21,6 +21,15 @@ struct ProductScreen: View {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
+    private func getProductName(product: String, brand: String?) -> String {
+        var productName = product
+        if let brandName = brand {
+            productName = "\(brandName) - \(productName)"
+        }
+        
+        return productName
+    }
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -32,7 +41,7 @@ struct ProductScreen: View {
                             ProductTypeScreen(viewModel: ProductTypeScreenViewModel(productVM: productVM))
                         } label: {
                             CategoryCellView(
-                                title: productVM.product.name,
+                                title: getProductName(product: productVM.product.name, brand: productVM.product.brand?.name),
                                 onEdit: {
                                     viewModel.selectedProductIndex = index
                                     isShowAddProduct.toggle()
@@ -64,7 +73,7 @@ struct ProductScreen: View {
                     AddFullProductScreen()
                 } else {
                     AddProductScreen(
-                        viewModel: AddProductViewModel(categoryId: viewModel.categoryId, productVM: viewModel.selectedProductVM),
+                        viewModel: AddProductViewModel(categoryId: viewModel.categoryId, brandId: viewModel.brandId, productVM: viewModel.selectedProductVM),
                         onSave: { },
                         onDelete: {
                             if let id = viewModel.selectedProductVM?.id {

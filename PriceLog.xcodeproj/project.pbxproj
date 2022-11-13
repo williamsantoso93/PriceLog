@@ -24,6 +24,11 @@
 		E04A30F5290EC21200B46EA4 /* ProductPriceCD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A30F4290EC21200B46EA4 /* ProductPriceCD+Extension.swift */; };
 		E04A30F7290EC21900B46EA4 /* StoreCD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A30F6290EC21900B46EA4 /* StoreCD+Extension.swift */; };
 		E04F8CA5290592EC0028B228 /* CategoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04F8CA4290592EC0028B228 /* CategoryCellView.swift */; };
+		E062A6BC29208DA000A79882 /* BrandCD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E062A6BB29208DA000A79882 /* BrandCD+Extension.swift */; };
+		E06859B429208F8000D496BF /* BrandScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C033D29208DE600B3FF54 /* BrandScreen.swift */; };
+		E06859B529208F8000D496BF /* AddBrandViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C033E29208DE600B3FF54 /* AddBrandViewModel.swift */; };
+		E06859B629208F8000D496BF /* BrandScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C033C29208DE600B3FF54 /* BrandScreenViewModel.swift */; };
+		E06859B729208F8000D496BF /* AddBrandScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C033F29208DE600B3FF54 /* AddBrandScreen.swift */; };
 		E06D05C2286FF7E40081B70F /* AddProductTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */; };
 		E06D05C4286FF9410081B70F /* TextFieldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D05C3286FF9410081B70F /* TextFieldLabel.swift */; };
 		E0B4F1262910C88700347EC3 /* StoreScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B4F1252910C88700347EC3 /* StoreScreen.swift */; };
@@ -89,12 +94,17 @@
 		E022B30C2863705900E9437F /* PriceLogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogUITests.swift; sourceTree = "<group>"; };
 		E022B30E2863705900E9437F /* PriceLogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLogUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E0261B92290646C300C4F9A2 /* Modifier+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modifier+View.swift"; sourceTree = "<group>"; };
+		E02C033C29208DE600B3FF54 /* BrandScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandScreenViewModel.swift; sourceTree = "<group>"; };
+		E02C033D29208DE600B3FF54 /* BrandScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandScreen.swift; sourceTree = "<group>"; };
+		E02C033E29208DE600B3FF54 /* AddBrandViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBrandViewModel.swift; sourceTree = "<group>"; };
+		E02C033F29208DE600B3FF54 /* AddBrandScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBrandScreen.swift; sourceTree = "<group>"; };
 		E030F8D52906C461009DA8C6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		E030F8D72906C66F009DA8C6 /* RequestAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAccess.swift; sourceTree = "<group>"; };
 		E04A30F2290EB14C00B46EA4 /* ProductTypeCD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductTypeCD+Extension.swift"; sourceTree = "<group>"; };
 		E04A30F4290EC21200B46EA4 /* ProductPriceCD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductPriceCD+Extension.swift"; sourceTree = "<group>"; };
 		E04A30F6290EC21900B46EA4 /* StoreCD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoreCD+Extension.swift"; sourceTree = "<group>"; };
 		E04F8CA4290592EC0028B228 /* CategoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellView.swift; sourceTree = "<group>"; };
+		E062A6BB29208DA000A79882 /* BrandCD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrandCD+Extension.swift"; sourceTree = "<group>"; };
 		E06D05C1286FF7E40081B70F /* AddProductTypeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductTypeScreen.swift; sourceTree = "<group>"; };
 		E06D05C3286FF9410081B70F /* TextFieldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLabel.swift; sourceTree = "<group>"; };
 		E0B4F1252910C88700347EC3 /* StoreScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreScreen.swift; sourceTree = "<group>"; };
@@ -222,6 +232,17 @@
 			path = Modifier;
 			sourceTree = "<group>";
 		};
+		E02C033B29208DD900B3FF54 /* Brand */ = {
+			isa = PBXGroup;
+			children = (
+				E02C033D29208DE600B3FF54 /* BrandScreen.swift */,
+				E02C033C29208DE600B3FF54 /* BrandScreenViewModel.swift */,
+				E02C033F29208DE600B3FF54 /* AddBrandScreen.swift */,
+				E02C033E29208DE600B3FF54 /* AddBrandViewModel.swift */,
+			);
+			path = Brand;
+			sourceTree = "<group>";
+		};
 		E06D05BB286FF7120081B70F /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +328,7 @@
 			children = (
 				E0E2ACD0290D1291000320B7 /* BaseModel.swift */,
 				E0E2ACD2290D12D9000320B7 /* CategoryCD+Extension.swift */,
+				E062A6BB29208DA000A79882 /* BrandCD+Extension.swift */,
 				E0EDCD06290D27AC002BF80B /* ProductCD+Extension.swift */,
 				E04A30F2290EB14C00B46EA4 /* ProductTypeCD+Extension.swift */,
 				E04A30F4290EC21200B46EA4 /* ProductPriceCD+Extension.swift */,
@@ -329,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				E02235C72914B42F00A7F753 /* AppTabView.swift */,
+				E02C033B29208DD900B3FF54 /* Brand */,
 				E06D05BB286FF7120081B70F /* Category */,
 				E06D05BC286FF7230081B70F /* Product */,
 				E0B4F1242910C85A00347EC3 /* Strore */,
@@ -479,16 +502,20 @@
 				E0C42F0E2870024D005FE0C9 /* AddCategoryViewModel.swift in Sources */,
 				E06D05C4286FF9410081B70F /* TextFieldLabel.swift in Sources */,
 				E0C42F132870027F005FE0C9 /* AddProductTypeViewModel.swift in Sources */,
+				E06859B629208F8000D496BF /* BrandScreenViewModel.swift in Sources */,
 				E022B2F62863705900E9437F /* Persistence.swift in Sources */,
 				E0C42F0628700064005FE0C9 /* ProductTypeCellView.swift in Sources */,
 				E0C42F08287001A1005FE0C9 /* ProductPricesCell.swift in Sources */,
 				E0B4F1262910C88700347EC3 /* StoreScreen.swift in Sources */,
+				E06859B429208F8000D496BF /* BrandScreen.swift in Sources */,
 				E04F8CA5290592EC0028B228 /* CategoryCellView.swift in Sources */,
 				E022B2EF2863705800E9437F /* ContentView.swift in Sources */,
 				E0EC8CEF2868A065005CEB7B /* CategoryScreen.swift in Sources */,
 				E0B99F3A2869E1610001ECCA /* AddCategoryScreen.swift in Sources */,
 				E04A30F3290EB14C00B46EA4 /* ProductTypeCD+Extension.swift in Sources */,
 				E0C42F042870002E005FE0C9 /* ProductScreenViewModel.swift in Sources */,
+				E06859B729208F8000D496BF /* AddBrandScreen.swift in Sources */,
+				E06859B529208F8000D496BF /* AddBrandViewModel.swift in Sources */,
 				E022B2F92863705900E9437F /* PriceLog.xcdatamodeld in Sources */,
 				E0B4F1282910C8A500347EC3 /* StoreScreenViewModel.swift in Sources */,
 				E022B2ED2863705800E9437F /* PriceLogApp.swift in Sources */,
@@ -496,6 +523,7 @@
 				E0E2ACCE290D1216000320B7 /* CoreDataManager.swift in Sources */,
 				E0EC8CFB2868B0EC005CEB7B /* ProductTypeScreen.swift in Sources */,
 				E0C42F152870028E005FE0C9 /* AddProductDetailPriceViewModel.swift in Sources */,
+				E062A6BC29208DA000A79882 /* BrandCD+Extension.swift in Sources */,
 				E04A30F7290EC21900B46EA4 /* StoreCD+Extension.swift in Sources */,
 				E0B99F3C2869E49D0001ECCA /* AddProductScreen.swift in Sources */,
 				E0C42F1128700274005FE0C9 /* AddProductViewModel.swift in Sources */,
@@ -687,6 +715,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortraitUpsideDown;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -718,6 +747,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortraitUpsideDown;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
